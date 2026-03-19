@@ -1,0 +1,51 @@
+# ===============================
+# ANDROID / JAVA
+# ===============================
+
+# Build
+/build/
+/app/build/
+
+# Gradle
+.gradle/
+local.properties
+
+# Logs
+*.log
+
+# APK / AAB
+*.apk
+*.aab
+
+# ===============================
+# ANDROID STUDIO / INTELLIJ
+# ===============================
+
+# Ignora TUDO da .idea
+.idea/
+
+# Arquivos de módulo
+*.iml
+
+# ===============================
+# EXCEÇÕES IMPORTANTES
+# (NÃO IGNORAR - arquivos do app)
+# ===============================
+
+# Esses NÃO entram no gitignore automaticamente,
+# então não precisa escrever nada pra eles
+
+# AndroidManifest.xml
+# res/layout/*.xml
+# res/values/*.xml
+# res/navigation/*.xml
+
+# ===============================
+# SISTEMA
+# ===============================
+
+# Windows
+Thumbs.db
+
+# Mac
+.DS_Store
