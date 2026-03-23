@@ -1,24 +1,44 @@
 package com.example.projeto;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    BottomNavigationView nav;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        nav = findViewById(R.id.bottomNav);
+
+        // abre cardápio por padrão
+        trocarFragment(new CardapioFragment());
+
+        nav.setOnItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.nav_cardapio) {
+                trocarFragment(new CardapioFragment());
+                return true;
+
+            } else {
+                Toast.makeText(this, "Tela em desenvolvimento", Toast.LENGTH_SHORT).show();
+                return true;
+            }
         });
+    }
+
+    private void trocarFragment(Fragment f) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame, f)
+                .commit();
     }
 }
