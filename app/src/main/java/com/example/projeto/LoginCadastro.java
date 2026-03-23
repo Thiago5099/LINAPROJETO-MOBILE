@@ -34,8 +34,8 @@ public class LoginCadastro extends AppCompatActivity {
 
         layoutLogin = findViewById(R.id.layoutLogin);
         layoutCadastro = findViewById(R.id.layoutCadastro);
-        btnLoginTab = findViewById(R.id.btnLoginTab);
-        btnCadastroTab = findViewById(R.id.btnCadastroTab);
+        btnLoginTab = findViewById(R.id.buttonLoginTab);
+        btnCadastroTab = findViewById(R.id.buttonCadastroTab);
 
         btnLoginTab.setOnClickListener(v -> {
             layoutLogin.setVisibility(View.VISIBLE);
@@ -51,20 +51,25 @@ public class LoginCadastro extends AppCompatActivity {
         ///TextView textViewMensagem = findViewById(R.id.textViewMensagem);
         ///textViewMensagem.setText("Novo texto exibido!");
 ///Text Edit
-        ///EditText editText1 = findViewById(R.id.editTextNome);
-        ///editText.setHint("Digite o seu Nome!");
-        ///EditText editText2 = findViewById(R.id.editTextNome);
-        ///editText.setHint("Digite o seu Nome!");
+        ///EditText editText1 = findViewById(R.id.editTextLoginEmail);
+        ///editText.setHint("Digite o seu e-mail!");
+        ///EditText editText2 = findViewById(R.id.editTextLoginSenha);
+        ///editText.setHint("Digite o sua senha!");
         ///EditText editText3 = findViewById(R.id.editTextNome);
-        ///editText.setHint("Digite o seu Nome!");
-        ///EditText editText4 = findViewById(R.id.editTextNome);
-        ///editText.setHint("Digite o seu Nome!");
-        ///EditText editText5 = findViewById(R.id.editTextNome);
-        ///editText.setHint("Digite o seu Nome!");
+        ///editText.setHint("Digite o seu nome!");
+        ///EditText editText4 = findViewById(R.id.editTextCadastroEmail);
+        ///editText.setHint("Digite o seu e-mail!");
+        ///EditText editText5 = findViewById(R.id.editTextCadastroSenha);
+        ///editText.setHint("Digite o sua senha!");
 ///Botão dinâminco
-        ///Button buttonEnviar = findViewById(R.id.buttonEnviar);
-        ///buttonEnviar.setOnClickListener(v -> {
-            ///Toast.makeText(getApplicationContext(), "Botão pressionado!",
+        ///Button buttonEntrar = findViewById(R.id.buttonLogar);
+        ///buttonEntrar.setOnClickListener(v -> {
+            ///Toast.makeText(getApplicationContext(), "Você entrou!",
+                    ///Toast.LENGTH_SHORT).show();
+        ///});
+        ///Button buttonResgistrar = findViewById(R.id.buttonRegistrar);
+        ///buttonRegistrar.setOnClickListener(v -> {
+            ///Toast.makeText(getApplicationContext(), "Você se registrou!",
                     ///Toast.LENGTH_SHORT).show();
         ///});
 ///ImageView
@@ -104,7 +109,13 @@ public class LoginCadastro extends AppCompatActivity {
         Log.d("CicloDeVida", "onDestroy() chamado");
     }
 ///Botão
-    ///public void carregarActivityNova(View view)
+    ///public void logar(View view)
+    ///{
+        ///Intent intent = new Intent(MainActivity.this, NovaActivity.class);
+        ///startActivity(intent); ///Esse método abre uma nova activity
+    ///}
+///Botão
+    ///public void registrar(View view)
     ///{
         ///Intent intent = new Intent(MainActivity.this, NovaActivity.class);
         ///startActivity(intent); ///Esse método abre uma nova activity
