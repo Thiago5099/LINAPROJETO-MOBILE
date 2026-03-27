@@ -32,7 +32,7 @@ public class LoginCadastro extends AppCompatActivity {
             return insets;
         });
 
-        layoutLogin = findViewById(R.id.layoutLogin);
+       /* layoutLogin = findViewById(R.id.layoutLogin);
         layoutCadastro = findViewById(R.id.layoutCadastro);
         btnLoginTab = findViewById(R.id.buttonLoginTab);
         btnCadastroTab = findViewById(R.id.buttonCadastroTab);
@@ -45,7 +45,10 @@ public class LoginCadastro extends AppCompatActivity {
         btnCadastroTab.setOnClickListener(v -> {
             layoutCadastro.setVisibility(View.VISIBLE);
             layoutLogin.setVisibility(View.GONE);
-        });
+        });*/
+
+
+
 ///Text View
         ///Log.d("CicloDeVida", "onCreate() chamado");
         ///TextView textViewMensagem = findViewById(R.id.textViewMensagem);
@@ -78,7 +81,7 @@ public class LoginCadastro extends AppCompatActivity {
 
     }
 ///Todos os modos
-    @Override
+    /*@Override
     protected void onStart(){
         super.onStart();
         Log.d("CicloDeVida", "onStart() chamado");
@@ -107,7 +110,7 @@ public class LoginCadastro extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         Log.d("CicloDeVida", "onDestroy() chamado");
-    }
+    }*/
 ///Botão
     ///public void logar(View view)
     ///{

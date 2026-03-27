@@ -9,12 +9,43 @@
     tools:layout_editor_absoluteX="14dp"
     tools:layout_editor_absoluteY="0dp">
 
+    <TextView
+        android:id="@+id/textViewLina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lina"
+        android:textColor="#0078FF"
+        android:textSize="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <TextView
+        android:id="@+id/textViewText"
+        android:layout_width="178dp"
+        android:layout_height="38dp"
+        android:text="Planejamento alimentar para uma vida mais saudável"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.215" />
+
     <!-- Botões para alternar -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/buttonLoginTab"
@@ -24,10 +55,10 @@
             android:text="Login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.21"
+            app:layout_constraintHorizontal_bias="0.218"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.301" />
+            app:layout_constraintVertical_bias="0.274" />
 
         <Button
             android:id="@+id/buttonCadastroTab"
@@ -37,11 +68,10 @@
             android:text="Cadastro"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintHorizontal_bias="0.793"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.301" />
-
+            app:layout_constraintVertical_bias="0.274" />
     </LinearLayout>
 
     <!-- Layout de Login -->
@@ -52,7 +82,12 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/buttonLoginTab">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.408" >
 
         <!-- Campos de login -->
         <EditText
@@ -76,6 +111,7 @@
             android:id="@+id/buttonLogar"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:backgroundTint="#0078FF"
             android:text="Entrar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +130,12 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/buttonCadastroTab">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.408" >
 
         <!-- Campos de cadastro -->
         <EditText
@@ -160,5 +201,18 @@
             app:layout_constraintVertical_bias="0.767" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewText2"
+        android:layout_width="210dp"
+        android:layout_height="33dp"
+        android:text="Organize suas refeições e cuide da sua saúde com Lina"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
