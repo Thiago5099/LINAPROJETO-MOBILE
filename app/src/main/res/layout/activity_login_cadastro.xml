@@ -9,6 +9,7 @@
     tools:layout_editor_absoluteX="14dp"
     tools:layout_editor_absoluteY="0dp">
 
+
     <TextView
         android:id="@+id/textViewLina"
         android:layout_width="wrap_content"
@@ -18,17 +19,19 @@
         android:textSize="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <TextView
         android:id="@+id/textViewText"
-        android:layout_width="178dp"
-        android:layout_height="38dp"
+        android:layout_width="331dp"
+        android:layout_height="60dp"
         android:text="Planejamento alimentar para uma vida mais saudável"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -37,182 +40,194 @@
         app:layout_constraintVertical_bias="0.215" />
 
     <!-- Botões para alternar -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCard"
+        android:layout_width="329dp"
+        android:layout_height="264dp"
+        android:layout_marginHorizontal="24dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
 
-        <Button
-            android:id="@+id/buttonLoginTab"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.218"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.274" />
-
-        <Button
-            android:id="@+id/buttonCadastroTab"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Cadastro"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.793"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.274" />
-    </LinearLayout>
-
-    <!-- Layout de Login -->
-    <LinearLayout
-        android:id="@+id/layoutLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" >
-
-        <!-- Campos de login -->
-        <EditText
-            android:id="@+id/editTextLoginEmail"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Email"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="267dp" />
-
-        <EditText
-            android:id="@+id/editTextLoginSenha"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Senha"
-            android:inputType="textPassword"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="317dp" />
-
-        <Button
-            android:id="@+id/buttonLogar"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#0078FF"
-            android:text="Entrar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.574" />
-
-    </LinearLayout>
-
-    <!-- Layout de Cadastro -->
-    <LinearLayout
-        android:id="@+id/layoutCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" >
-
-        <!-- Campos de cadastro -->
-        <EditText
-            android:id="@+id/editTextNome"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Nome Completo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.408" />
-
-        <EditText
-            android:id="@+id/editTextCadastroEmail"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
-
-        <EditText
-            android:id="@+id/editTextCadastroSenha"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:hint="Senha"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.588" />
-
-        <CheckBox
-            android:id='@+id/checkBoxDiabetico'
+        <LinearLayout
+            android:id="@+id/linearLayoutLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:text="Diabético(a)"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.183"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.597" />
+            app:layout_constraintBottom_toBottomOf="@+id/cardBnts"
+            app:layout_constraintEnd_toEndOf="@+id/cardBnts"
+            app:layout_constraintStart_toStartOf="@+id/cardBnts"
+            app:layout_constraintTop_toTopOf="@+id/cardBnts">
 
-        <Button
-            android:id="@+id/buttonRegistrar"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="Registrar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.767" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBnts"
+                android:layout_width="287.52dp"
+                android:layout_height="40.62dp"
+                android:layout_marginHorizontal="24dp"
+                android:backgroundTint="#CBCBCB"
+                app:cardCornerRadius="9999dp"
+                app:cardElevation="4dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayoutBnts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardBnts"
+                    app:layout_constraintEnd_toEndOf="@+id/cardBnts"
+                    app:layout_constraintStart_toStartOf="@+id/cardBnts"
+                    app:layout_constraintTop_toTopOf="@+id/cardBnts">
+
+                    <Button
+                        android:id="@+id/buttonEntrarTab"
+                        android:layout_width="138.04dp"
+                        android:layout_height="41dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:minWidth="138dp"
+                        android:radius="9999dp"
+                        android:text="Entrar"
+                        android:textColor="#0F172A"
+                        android:textSize="16dp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBnts"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayoutBnts"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayoutBnts"
+                        app:layout_constraintTop_toTopOf="@+id/linearLayoutBnts" />
+
+                    <Button
+                        android:id="@+id/buttonRegistrarTab"
+                        android:layout_width="138.04dp"
+                        android:layout_height="41dp"
+                        android:backgroundTint="#CBCBCB"
+                        android:minWidth="138dp"
+                        android:radius="9999dp"
+                        android:text="Registrar"
+                        android:textColor="#0F172A"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBnts"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayoutBnts"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayoutBnts"
+                        app:layout_constraintTop_toTopOf="@+id/linearLayoutBnts" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <!-- Campos de login -->
+            <LinearLayout
+                android:id="@+id/linearLayoutLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Campos de login -->
+                <EditText
+                    android:id="@+id/editTextLoginEmail"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:hint="Email"
+                    tools:layout_editor_absoluteX="55dp"
+                    tools:layout_editor_absoluteY="267dp" />
+
+                <EditText
+                    android:id="@+id/editTextLoginSenha"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    tools:layout_editor_absoluteX="55dp"
+                    tools:layout_editor_absoluteY="317dp" />
+
+                <Button
+                    android:id="@+id/buttonEntrar"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#0078FF"
+                    android:text="Entrar" />
+            </LinearLayout>
+            <!-- Layout de Cadastro -->
+            <LinearLayout
+                android:id="@+id/linearLayoutCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <!-- Campos de cadastro -->
+                <EditText
+                    android:id="@+id/editTextNome"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:hint="Nome Completo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.408" />
+
+                <EditText
+                    android:id="@+id/editTextCadastroEmail"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:hint="Email"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.499" />
+
+                <EditText
+                    android:id="@+id/editTextCadastroSenha"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="0.588" />
+
+                <CheckBox
+                    android:id='@+id/checkBoxDiabetico'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="116dp"
+                    android:text="Diabético(a)"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.183"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="0.597" />
+
+                <Button
+                    android:id="@+id/buttonRegistrar"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="Registrar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.767" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textViewText2"
-        android:layout_width="210dp"
-        android:layout_height="33dp"
+        android:layout_width="291dp"
+        android:layout_height="35dp"
         android:text="Organize suas refeições e cuide da sua saúde com Lina"
         android:textAlignment="center"
+        android:textColor="#111827"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+        app:layout_constraintVertical_bias="0.61" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
