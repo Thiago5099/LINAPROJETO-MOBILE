@@ -44,7 +44,8 @@ public class ComprasFragment extends Fragment {
         txtProgresso = view.findViewById(R.id.txtProgresso);
 
         // Pega dados do Repository
-        List<Refeicao> refeicoes = RefeicaoRepository.getSelecionadas();
+        //List<Refeicao> refeicoes = RefeicaoRepository.getSelecionadas();
+        List<Refeicao> refeicoes = gerarDadosFake();
 
         View root = view;
 
@@ -159,5 +160,37 @@ public class ComprasFragment extends Fragment {
 
         progressBar.setProgress(progresso);
         txtProgresso.setText(comprados + " de " + total + " itens comprados");
+    }
+
+    private List<Refeicao> gerarDadosFake() {
+
+        List<Refeicao> lista = new ArrayList<>();
+
+        // Ingredientes
+        List<Ingrediente> ingredientes1 = new ArrayList<>();
+        ingredientes1.add(new Ingrediente("Alface", 4, "Frutas e Vegetais"));
+        ingredientes1.add(new Ingrediente("Brócolis", 2, "Frutas e Vegetais"));
+        ingredientes1.add(new Ingrediente("Tomate", 5, "Frutas e Vegetais"));
+
+        List<Ingrediente> ingredientes2 = new ArrayList<>();
+        ingredientes2.add(new Ingrediente("Leite de Amêndoa", 3, "Laticínios"));
+        ingredientes2.add(new Ingrediente("Leite desnatado", 2, "Laticínios"));
+
+        List<Ingrediente> ingredientes3 = new ArrayList<>();
+        ingredientes3.add(new Ingrediente("Pão Integral", 8, "Grãos e Cereais"));
+        ingredientes3.add(new Ingrediente("Quinoa", 5, "Grãos e Cereais"));
+
+        List<Ingrediente> ingredientes4 = new ArrayList<>();
+        ingredientes4.add(new Ingrediente("Ovos", 8, "Proteínas"));
+        ingredientes4.add(new Ingrediente("Peito de Frango", 5, "Proteínas"));
+        ingredientes4.add(new Ingrediente("Atum em Lata", 5, "Proteínas"));
+
+        // Refeições fake
+        lista.add(new Refeicao("Refeição 1", ingredientes1, true));
+        lista.add(new Refeicao("Refeição 2", ingredientes2, true));
+        lista.add(new Refeicao("Refeição 3", ingredientes3, true));
+        lista.add(new Refeicao("Refeição 4", ingredientes4, true));
+
+        return lista;
     }
 }

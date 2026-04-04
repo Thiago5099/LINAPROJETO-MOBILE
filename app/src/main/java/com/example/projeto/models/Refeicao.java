@@ -15,4 +15,9 @@ public class Refeicao implements Serializable {
     public boolean isSelecionada() {
         return selecionada;
     }
+    public Refeicao(String nome, List<Ingrediente> ingredientes, boolean selecionada) {
+        this.nome = nome;
+        this.ingredientes = ingredientes;
+        this.selecionada = selecionada;
+    }
 }

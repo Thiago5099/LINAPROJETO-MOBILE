@@ -78,10 +78,10 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             // ícones simples
             switch (item.getCategoria()) {
-                case "Frutas":
+                case "Frutas e Vegetais":
                     icon.setImageResource(R.drawable.ic_frutas);
                     break;
-                case "Graos":
+                case "Grãos e Cereais":
                     icon.setImageResource(R.drawable.ic_graos);
                     break;
                 case "Laticínios":
