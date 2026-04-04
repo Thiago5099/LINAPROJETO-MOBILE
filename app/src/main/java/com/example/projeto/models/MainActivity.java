@@ -21,22 +21,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Tela inicial
         loadFragment(new ComprasFragment());
+        // loadFragment(new LoginFragment()); *?*
 
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment selected = null;
 
             if (item.getItemId() == R.id.nav_cardapio) {
-                selected = new CardapioFragment();
+                selected = new PlaceholderFragment("Cardápio (em desenvolvimento)");
+                // if (item.getItemId() == R.id.nav_cardapio) {
+                //   selected = new CardapioFragment();
 
             } else if (item.getItemId() == R.id.nav_compras) {
                 selected = new ComprasFragment();
 
             } else if (item.getItemId() == R.id.nav_nutri) {
-                selected = new NutriFragment();
+                selected = new PlaceholderFragment("Nutri (em desenvolvimento)");
+                // } else if (item.getItemId() == R.id.nav_nutri) {
+                //     selected = new NutriFragment();
 
             } else if (item.getItemId() == R.id.nav_perfil) {
-                selected = new PerfilFragment();
+                selected = new PlaceholderFragment("Perfil (em desenvolvimento)");
+                // } else if (item.getItemId() == R.id.nav_perfil) {
+                //     selected = new PerfilFragment();
             }
 
             return loadFragment(selected);

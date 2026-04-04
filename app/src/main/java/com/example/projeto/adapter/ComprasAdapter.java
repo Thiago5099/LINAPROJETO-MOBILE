@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,11 +81,17 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 case "Frutas":
                     icon.setImageResource(R.drawable.ic_frutas);
                     break;
+                case "Graos":
+                    icon.setImageResource(R.drawable.ic_graos);
+                    break;
+                case "Laticínios":
+                    icon.setImageResource(R.drawable.ic_laticionios);
+                    break;
                 case "Proteínas":
-                    icon.setImageResource(R.drawable.ic_proteina);
+                    icon.setImageResource(R.drawable.ic_proteinas);
                     break;
                 default:
-                    icon.setImageResource(R.drawable.ic_default);
+                    icon.setImageResource(R.drawable.ic_proteinas);
             }
         }
     }

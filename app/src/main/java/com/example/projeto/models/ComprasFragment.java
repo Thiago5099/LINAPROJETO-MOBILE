@@ -46,6 +46,22 @@ public class ComprasFragment extends Fragment {
         // Pega dados do Repository
         List<Refeicao> refeicoes = RefeicaoRepository.getSelecionadas();
 
+        View root = view;
+
+        root.setOnApplyWindowInsetsListener((v, insets) -> {
+
+            int topInset = insets.getSystemWindowInsetTop();
+
+            v.setPadding(
+                    v.getPaddingLeft(),
+                    topInset,
+                    v.getPaddingRight(),
+                    v.getPaddingBottom()
+            );
+
+            return insets;
+        });
+
         if (refeicoes != null && !refeicoes.isEmpty()) {
             processarIngredientes(refeicoes);
             montarListaComCategorias(listaFinal);
