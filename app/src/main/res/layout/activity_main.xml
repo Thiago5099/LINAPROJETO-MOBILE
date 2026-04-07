@@ -35,7 +35,7 @@
         android:layout_width="366dp"
         android:layout_height="141dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/caixa_redonda"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +55,17 @@
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             android:src="@drawable/circle" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:text="Giovana@gmail.com"
+
+            android:textSize="19dp" />
     </FrameLayout>
 
     <!-- IMAGEM CENTRALIZADA SOBRE O CARD -->
@@ -99,13 +110,52 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tint="#FF11AAD4"
-        android:text="Button"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="287dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_width="366dp"
+        android:layout_height="62.58dp"
+        android:layout_marginTop="10dp"
+        android:text="Assine o Lina Premium \nTenha acesso a todas as funcionalidades"
+        android:background="@drawable/caixa_redonda"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:tint="#F0F0F0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp" />
+
+    <FrameLayout
+        android:layout_width="366dp"
+        android:layout_height="290dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/caixa_redonda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="17dp"
+            app:srcCompat="@drawable/estrela" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="17dp"
+            android:text="Plano Premium"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
