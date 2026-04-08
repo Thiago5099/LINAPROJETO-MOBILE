@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0">
+    android:background="#F5F5F5">
 
     <!-- TOPO -->
     <FrameLayout
@@ -25,25 +24,18 @@
             android:text="Perfil"
             android:textSize="20sp"
             android:textStyle="bold" />
-
     </FrameLayout>
 
-    <!-- CARD CENTRALIZADO -->
-
+    <!-- CARD PERFIL -->
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="366dp"
-        android:layout_height="141dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="365dp"
+        android:layout_height="112dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/caixa_redonda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
-
-        />
-
 
         <ImageView
             android:id="@+id/imagePerfil"
@@ -57,19 +49,99 @@
             android:src="@drawable/circle" />
 
         <TextView
+            android:id="@+id/textViewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="127dp"
+            android:layout_marginTop="33dp"
+            android:text="Giovana@gmail.com"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="213dp"
+            android:layout_marginTop="70dp"
+            app:srcCompat="@drawable/ic_bloqueio" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="131dp"
+            android:layout_marginTop="70dp"
+            app:srcCompat="@drawable/ic_bolo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="159dp"
+            android:layout_marginTop="75dp"
+            android:text="22 Anos"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="30dp"
-            android:textStyle="bold"
-            android:text="Giovana@gmail.com"
-
-            android:textSize="19dp" />
+            android:layout_marginStart="242dp"
+            android:layout_marginTop="75dp"
+            android:text="Celíaco"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
     </FrameLayout>
 
-    <!-- IMAGEM CENTRALIZADA SOBRE O CARD -->
+    <!-- PLANO PREMIUM -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
 
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- BOTÃO PREMIUM -->
+
+    <!-- BARRA INFERIOR -->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plano"
+        app:srcCompat="@drawable/degrade_botao" />
+
+    <Button
+        android:id="@+id/buttonPremium"
+        android:layout_width="366dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/botao_gradiente"
+        android:text="Assine o Lina Premium\nTenha acesso a todas as funcionalidades"
+        android:textSize="14sp"
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plano" />
 
     <LinearLayout
         android:id="@+id/bottomBar"
@@ -108,54 +180,118 @@
             android:src="@drawable/ic_perfil" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="366dp"
-        android:layout_height="62.58dp"
-        android:layout_marginTop="10dp"
-        android:text="Assine o Lina Premium \nTenha acesso a todas as funcionalidades"
+    <LinearLayout
+        android:id="@+id/plano"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/caixa_redonda"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:tint="#F0F0F0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="23dp" />
-
-    <FrameLayout
-        android:layout_width="366dp"
-        android:layout_height="290dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/caixa_redonda"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <!-- Título com ícone -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Ícone estrela"
+                android:src="@drawable/estrela" />
+
+            <TextView
+                android:id="@+id/textPlano"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Plano Premium"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Preço -->
+        <TextView
+            android:id="@+id/textPreco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="17dp"
-            app:srcCompat="@drawable/estrela" />
+            android:layout_marginTop="4dp"
+            android:text="R$ 5,99 /mês"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="DuplicateIds" />
+
+
+        <!-- Cancelamento -->
+        <TextView
+            android:id="@+id/textCancelamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Cancele quando quiser"
+            android:textSize="14sp"
+            tools:ignore="DuplicateIds" />
+
+        <!-- Lista de benefícios -->
+        <TextView
+            android:id="@+id/beneficio1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Crie cardápios semanais personalizados"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/beneficio3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Acesse receitas com quantidades detalhadas"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/beneficio5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Receitas adaptadas para suas restrições"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/beneficio6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Acesso à lista de nutricionistas"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/beneficio7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Atualizações constantes de receitas"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <!-- Segurança -->
+        <TextView
+            android:id="@+id/textSeguro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="17dp"
-            android:text="Plano Premium"
-            android:textSize="19dp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            android:text="🔒 Pagamento 100% seguro"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
