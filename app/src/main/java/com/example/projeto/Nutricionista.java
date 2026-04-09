@@ -9,4 +9,7 @@ public class Nutricionista {
         this.cidade = cidade;
         this.telefone = telefone;
     }
+
+    public Nutricionista(int anInt, String string, String string1, String string2, String string3) {
+    }
 }

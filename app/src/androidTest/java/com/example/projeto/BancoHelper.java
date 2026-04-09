@@ -4,12 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.*;
+import java.util.ArrayList;
 
 public class BancoHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "nutricionistas.db";
     private static final int DB_VERSION = 1;
-    private static final String TABLE = "nutricionistas";
+    private static final String TABLE_NUTRICIONISTAS = "nutricionistas";
 
     public BancoHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -17,7 +18,7 @@ public class BancoHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE + " (" +
+        db.execSQL("CREATE TABLE " + TABLE_NUTRICIONISTAS + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nome TEXT," +
                 "especialidade TEXT," +
@@ -27,46 +28,44 @@ public class BancoHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NUTRICIONISTAS);
         onCreate(db);
     }
 
-    public long inserir(String nome, String esp, String cidade, String tel) {
+    // 🔹 INSERIR DADOS
+    public void inserir(String nome, String especialidade, String cidade, String telefone) {
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues cv = new ContentValues();
 
-        cv.put("nome", nome);
-        cv.put("especialidade", esp);
-        cv.put("cidade", cidade);
-        cv.put("telefone", tel);
+        ContentValues values = new ContentValues();
+        values.put("nome", nome);
+        values.put("especialidade", especialidade);
+        values.put("cidade", cidade);
+        values.put("telefone", telefone);
 
-        return db.insert(TABLE, null, cv);
+        db.insert(TABLE_NUTRICIONISTAS, null, values);
+        db.close();
     }
 
-    public Cursor listar() {
+    // 🔹 LISTAR TODOS
+    public ArrayList<Nutricionista> listarTodos() {
+        ArrayList<Nutricionista> lista = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE, null);
-    }
 
-    public Cursor buscarPorId(int id) {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE + " WHERE id=?", new String[]{String.valueOf(id)});
-    }
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NUTRICIONISTAS, null);
 
-    public int atualizar(int id, String nome, String esp, String cidade, String tel) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(new Nutricionista(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4)
+                ));
+            } while (cursor.moveToNext());
+        }
 
-        cv.put("nome", nome);
-        cv.put("especialidade", esp);
-        cv.put("cidade", cidade);
-        cv.put("telefone", tel);
-
-        return db.update(TABLE, cv, "id=?", new String[]{String.valueOf(id)});
-    }
-
-    public int excluir(int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        return db.delete(TABLE, "id=?", new String[]{String.valueOf(id)});
+        cursor.close();
+        return lista;
     }
 }
