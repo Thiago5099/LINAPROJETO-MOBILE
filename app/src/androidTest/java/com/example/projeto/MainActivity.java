@@ -18,20 +18,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 🔗 Conecta com o RecyclerView do XML
         recyclerView = findViewById(R.id.recyclerView);
+
+        // 💾 Inicializa o banco
         banco = new BancoHelper(this);
 
-        // Inserir exemplo (executa só uma vez idealmente)
-        banco.inserir(new Nutricionista(
-                "Dra. Mariana Costa",
-                "Intolerâncias Alimentares",
-                "Belo Horizonte, MG",
-                "(31) 99876-5432"
-        ));
-
+        // 📋 Busca os dados do banco
         ArrayList<Nutricionista> lista = banco.listar();
 
+        // 📐 Define o tipo de lista (vertical)
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new NutricionistaAdapter(lista));
+
+        // 🔄 Liga os dados ao RecyclerView
+        NutricionistaAdapter adapter = new NutricionistaAdapter(lista);
+        recyclerView.setAdapter(adapter);
     }
 }
