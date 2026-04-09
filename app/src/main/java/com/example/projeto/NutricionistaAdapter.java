@@ -1,65 +1,61 @@
 package com.example.projeto;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.projeto.Nutricionista;
-import com.example.projeto.R;
-
 import java.util.ArrayList;
 
 public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdapter.ViewHolder> {
 
-    ArrayList<Nutricionista> lista;
+    private ArrayList<Nutricionista> lista;
 
     public NutricionistaAdapter(ArrayList<Nutricionista> lista) {
         this.lista = lista;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nome, especialidade, cidade, telefone;
-        Button btn;
-
-        public ViewHolder(View v) {
-            super(v);
-            nome = v.findViewById(R.id.txtNome);
-            especialidade = v.findViewById(R.id.txtEspecialidade);
-            cidade = v.findViewById(R.id.txtCidade);
-            telefone = v.findViewById(R.id.txtTelefone);
-            btn = v.findViewById(R.id.btnContato);
-        }
-    }
-
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_nutricionista, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Nutricionista n = lista.get(position);
+        holder.txtNome.setText(n.getNome());
+        holder.txtEspecialidade.setText(n.getEspecialidade());
+        holder.txtCidade.setText(n.getCidade());
+        holder.txtTelefone.setText(n.getTelefone());
 
-        holder.nome.setText(n.nome);
-        holder.especialidade.setText(n.especialidade);
-        holder.cidade.setText(n.cidade);
-        holder.telefone.setText(n.telefone);
-
-        holder.btn.setOnClickListener(v ->
-                Toast.makeText(v.getContext(),
-                        "Contato: " + n.telefone,
-                        Toast.LENGTH_SHORT).show());
+        holder.btnContato.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + n.getTelefone()));
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
-    public int getItemCount() {
-        return lista.size();
+    public int getItemCount() { return lista.size(); }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txtNome, txtEspecialidade, txtCidade, txtTelefone;
+        Button btnContato;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txtNome = itemView.findViewById(R.id.txtNome);
+            txtEspecialidade = itemView.findViewById(R.id.txtEspecialidade);
+            txtCidade = itemView.findViewById(R.id.txtCidade);
+            txtTelefone = itemView.findViewById(R.id.txtTelefone);
+            btnContato = itemView.findViewById(R.id.btnContato);
+        }
     }
 }

@@ -1,15 +1,20 @@
 package com.example.projeto;
 
 public class Nutricionista {
-    String nome, especialidade, cidade, telefone;
+    private int id;
+    private String nome, especialidade, cidade, telefone;
 
-    public Nutricionista(String nome, String especialidade, String cidade, String telefone) {
+    public Nutricionista(int id, String nome, String especialidade, String cidade, String telefone) {
+        this.id = id;
         this.nome = nome;
         this.especialidade = especialidade;
         this.cidade = cidade;
         this.telefone = telefone;
     }
 
-    public Nutricionista(int anInt, String string, String string1, String string2, String string3) {
-    }
+    public int getId() { return id; }
+    public String getNome() { return nome; }
+    public String getEspecialidade() { return especialidade; }
+    public String getCidade() { return cidade; }
+    public String getTelefone() { return telefone; }
 }
