@@ -71,6 +71,7 @@
                         android:layout_weight="1"
                         android:backgroundTint="#FFFFFF"
                         android:text="Entrar"
+                        android:textStyle="bold"
                         android:textColor="#0F172A"
                         android:textSize="16sp"/>
 
