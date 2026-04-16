@@ -1,12 +1,13 @@
 package com.example.projeto.adapter;
 
-import android.app.Activity;
 import android.content.*;
 import android.view.*;
 import android.widget.*;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projeto.*;
+import com.example.projeto.R;
+import com.example.projeto.ReceitaActivity;
 import com.example.projeto.models.*;
 
 import java.util.List;
@@ -16,9 +17,17 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
     Context context;
     List<Refeicao> lista;
 
-    public RefeicaoAdapter(Context c, List<Refeicao> l) {
+    // INTERFACE PARA CLIQUE
+    public interface OnMudarClick {
+        void onMudar(int posicao, String tipo);
+    }
+
+    OnMudarClick listener;
+
+    public RefeicaoAdapter(Context c, List<Refeicao> l, OnMudarClick listener) {
         context = c;
         lista = l;
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,17 +67,12 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
             context.startActivity(it);
         });
 
-        // MUDAR PRATO
+        // MUDAR
         h.mudar.setOnClickListener(v -> {
-
             int pos = h.getAdapterPosition();
-
-            if (pos == RecyclerView.NO_POSITION) return;
-
-            ((CardapioFragment)((MainActivity)context)
-                    .getSupportFragmentManager()
-                    .findFragmentById(R.id.frame))
-                    .abrirSelecao(pos, r.tipo);
+            if (pos != RecyclerView.NO_POSITION && listener != null) {
+                listener.onMudar(pos, r.tipo);
+            }
         });
     }
 

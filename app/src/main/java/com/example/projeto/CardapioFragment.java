@@ -18,11 +18,9 @@ import java.util.*;
 public class CardapioFragment extends Fragment {
 
     RecyclerView recycler;
+    TextView txtStatus;
 
-    // cardápio por dia
     Map<String, List<Refeicao>> cardapios = new HashMap<>();
-
-    // pratos disponíveis por tipo
     Map<String, List<Prato>> pratosPorTipo = new HashMap<>();
 
     String diaAtual = "Segunda";
@@ -36,67 +34,67 @@ public class CardapioFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_tela_cardapio, container, false);
 
         recycler = view.findViewById(R.id.recycler);
+        txtStatus = view.findViewById(R.id.txtStatus);
+
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         criarDados();
         criarBotoesDias(view);
         atualizarLista();
+        atualizarStatus();
 
         return view;
     }
 
-    // 🔥 método que o adapter chama
+    // CHAMADO PELO ADAPTER
     public void abrirSelecao(int posicao, String tipo) {
-
         Intent it = new Intent(getContext(), SelecionarPratoActivity.class);
-
         it.putExtra("posicao", posicao);
         it.putExtra("tipo", tipo);
-
         startActivityForResult(it, 1);
     }
 
     private void criarDados() {
 
-        List<Prato> cafe = new ArrayList<>();
-        cafe.add(new Prato("Omelete","Ovos e queijo","Frite tudo",250,10));
-        cafe.add(new Prato("Torrada","Pão","Toste o pão",150,5));
+        List<Prato> cafe = Arrays.asList(
+                new Prato("Omelete","Ovos","Frite",250,10),
+                new Prato("Torrada","Pão","Toste",150,5)
+        );
 
-        List<Prato> almoco = new ArrayList<>();
-        almoco.add(new Prato("Arroz e Feijão","Arroz, feijão","Cozinhe",400,25));
-        almoco.add(new Prato("Frango","Frango","Grelhe",350,20));
+        List<Prato> almoco = Arrays.asList(
+                new Prato("Arroz e Feijão","Arroz","Cozinhe",400,25),
+                new Prato("Frango","Frango","Grelhe",350,20)
+        );
 
-        List<Prato> lanche = new ArrayList<>();
-        lanche.add(new Prato("Sanduíche","Pão e recheio","Monte",300,5));
-        lanche.add(new Prato("Salada","Verduras","Misture",150,5));
+        List<Prato> lanche = Arrays.asList(
+                new Prato("Sanduíche","Pão","Monte",300,5),
+                new Prato("Salada","Verduras","Misture",150,5)
+        );
 
-        List<Prato> jantar = new ArrayList<>();
-        jantar.add(new Prato("Macarrão","Massa e molho","Cozinhe",500,20));
-        jantar.add(new Prato("Sopa","Legumes","Cozinhe",200,15));
+        List<Prato> jantar = Arrays.asList(
+                new Prato("Macarrão","Massa","Cozinhe",500,20),
+                new Prato("Sopa","Legumes","Cozinhe",200,15)
+        );
 
         pratosPorTipo.put("Café da manhã", cafe);
         pratosPorTipo.put("Almoço", almoco);
         pratosPorTipo.put("Lanche", lanche);
         pratosPorTipo.put("Jantar", jantar);
 
-        List<Refeicao> base = new ArrayList<>();
+        List<Refeicao> base = Arrays.asList(
+                new Refeicao("Café da manhã", cafe.get(0)),
+                new Refeicao("Almoço", almoco.get(0)),
+                new Refeicao("Lanche", lanche.get(0)),
+                new Refeicao("Jantar", jantar.get(0))
+        );
 
-        base.add(new Refeicao("Café da manhã", cafe.get(0)));
-        base.add(new Refeicao("Almoço", almoco.get(0)));
-        base.add(new Refeicao("Lanche", lanche.get(0)));
-        base.add(new Refeicao("Jantar", jantar.get(0)));
-
-        String[] dias = {
-                "Segunda","Terça","Quarta",
-                "Quinta","Sexta","Sábado","Domingo"
-        };
+        String[] dias = {"Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"};
 
         for (String dia : dias) {
 
             List<Refeicao> copia = new ArrayList<>();
 
             for (Refeicao r : base) {
-
                 Prato p = new Prato(
                         r.prato.nome,
                         r.prato.ingredientes,
@@ -104,7 +102,6 @@ public class CardapioFragment extends Fragment {
                         r.prato.calorias,
                         r.prato.tempo
                 );
-
                 copia.add(new Refeicao(r.tipo, p));
             }
 
@@ -116,27 +113,28 @@ public class CardapioFragment extends Fragment {
 
         LinearLayout layout = view.findViewById(R.id.layoutDias);
 
-        String[] dias = {
-                "Segunda","Terça","Quarta",
-                "Quinta","Sexta","Sábado","Domingo"
-        };
+        String[] dias = {"Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"};
 
         for (String dia : dias) {
 
             Button btn = new Button(getContext());
             btn.setText(dia);
 
-            btn.setBackgroundColor(0xFFE0E0E0);
+            btn.setBackgroundResource(R.drawable.bg_dia_normal);
+            btn.setTextColor(0xFF000000);
+            btn.setPadding(40,15,40,15);
 
             botoesDias.add(btn);
 
             btn.setOnClickListener(v -> {
 
                 for (Button b : botoesDias) {
-                    b.setBackgroundColor(0xFFE0E0E0);
+                    b.setBackgroundResource(R.drawable.bg_dia_normal);
+                    b.setTextColor(0xFF000000);
                 }
 
-                btn.setBackgroundColor(0xFF4CAF50);
+                btn.setBackgroundResource(R.drawable.bg_dia_selecionado);
+                btn.setTextColor(0xFFFFFFFF);
 
                 diaAtual = dia;
                 atualizarLista();
@@ -149,10 +147,31 @@ public class CardapioFragment extends Fragment {
     }
 
     private void atualizarLista() {
-        recycler.setAdapter(new RefeicaoAdapter(getContext(), cardapios.get(diaAtual)));
+        recycler.setAdapter(new RefeicaoAdapter(
+                getContext(),
+                cardapios.get(diaAtual),
+                (posicao, tipo) -> abrirSelecao(posicao, tipo)
+        ));
     }
 
-    // RECEBER RESULTADO DA SELEÇÃO
+    private void atualizarStatus() {
+
+        int total = 0;
+        int preenchidos = 0;
+
+        for (List<Refeicao> lista : cardapios.values()) {
+            total += lista.size();
+
+            for (Refeicao r : lista) {
+                if (r.prato != null) {
+                    preenchidos++;
+                }
+            }
+        }
+
+        txtStatus.setText(preenchidos + "/" + total + " refeições planejadas");
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -183,6 +202,7 @@ public class CardapioFragment extends Fragment {
                 }
 
                 atualizarLista();
+                atualizarStatus();
             }
         }
     }
