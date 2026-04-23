@@ -49,7 +49,7 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
     public int getItemCount() { return lista.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNome, txtEspecialidade, txtCidade, txtTelefone, txtEmail, txtPacientes; // ← adicione txtEmail e txtPacientes
+        TextView txtNome, txtEspecialidade, txtCidade, txtTelefone, txtEmail, txtPacientes; //
         Button btnContato;
 
         public ViewHolder(@NonNull View itemView) {
@@ -58,7 +58,7 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
             txtEspecialidade = itemView.findViewById(R.id.txtEspecialidade);
             txtCidade = itemView.findViewById(R.id.txtCidade);
             txtTelefone = itemView.findViewById(R.id.txtTelefone);
-            txtEmail = itemView.findViewById(R.id.txtEmail);         // ← adicione
+            txtEmail = itemView.findViewById(R.id.txtEmail);
             txtPacientes = itemView.findViewById(R.id.txtPacientes);
             btnContato = itemView.findViewById(R.id.btnContato);
         }

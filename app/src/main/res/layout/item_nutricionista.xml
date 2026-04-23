@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -29,6 +30,34 @@
             android:textColor="#4CAF50" />
 
 
+        <LinearLayout
+            android:id="@+id/layoutEstrelas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="ExtraText">
+
+        <ImageView
+            android:id="@+id/imgEstrelaCheia"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            app:srcCompat="@drawable/estrela_cheia" />
+
+            <ImageView
+            android:id="@+id/imgEstrelaVazia"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            app:srcCompat="@drawable/estrela_vazia" />
+
+            <TextView
+                android:id="@+id/EstrelaNumero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textSize="12sp"
+               />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtCidade"
