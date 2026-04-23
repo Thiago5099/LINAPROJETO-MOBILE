@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class BancoHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "nutricionistas.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String TABLE_NUTRICIONISTAS = "nutricionistas";
 
     public BancoHelper(Context context) {
@@ -23,7 +23,10 @@ public class BancoHelper extends SQLiteOpenHelper {
                 "nome TEXT," +
                 "especialidade TEXT," +
                 "cidade TEXT," +
-                "telefone TEXT)");
+                "telefone TEXT," +
+                "email TEXT," +
+                "pacientes TEXT)"
+        );
     }
 
     @Override
@@ -33,7 +36,7 @@ public class BancoHelper extends SQLiteOpenHelper {
     }
 
     // 🔹 INSERIR DADOS
-    public void inserir(String nome, String especialidade, String cidade, String telefone) {
+    public void inserir(String nome, String especialidade, String cidade, String telefone, String email, String pacientes) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -41,6 +44,9 @@ public class BancoHelper extends SQLiteOpenHelper {
         values.put("especialidade", especialidade);
         values.put("cidade", cidade);
         values.put("telefone", telefone);
+        values.put("email", email);
+        values.put("pacientes", pacientes);
+
 
         db.insert(TABLE_NUTRICIONISTAS, null, values);
         db.close();
@@ -60,7 +66,9 @@ public class BancoHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getString(4)
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6)
                 ));
             } while (cursor.moveToNext());
         }

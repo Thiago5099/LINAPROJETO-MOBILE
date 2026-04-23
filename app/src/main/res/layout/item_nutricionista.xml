@@ -8,46 +8,60 @@
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="221dp"
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/txtNome"
-            android:text="Nome"
-            android:textStyle="bold"
-            android:textSize="16sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Nome"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtEspecialidade"
-            android:text="Especialidade"
-            android:textColor="#4CAF50"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Especialidade"
+            android:textColor="#4CAF50" />
+
+
 
         <TextView
             android:id="@+id/txtCidade"
-            android:text="Cidade"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Cidade" />
 
         <TextView
             android:id="@+id/txtTelefone"
-            android:text="Telefone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Telefone" />
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email" />
+
+        <TextView
+            android:id="@+id/txtPacientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pacientes" />
 
         <Button
             android:id="@+id/btnContato"
-            android:text="Entrar em Contato"
-            android:backgroundTint="#2E7D32"
-            android:textColor="#FFF"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#2E7D32"
+            android:text="Entrar em Contato"
+            android:textColor="#FFF" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
