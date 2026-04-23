@@ -72,7 +72,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
@@ -87,7 +86,6 @@
         tools:layout_editor_absoluteX="16dp">
 
     </androidx.cardview.widget.CardView>
-
 
     <!-- BOTÃO PREMIUM -->
 
@@ -113,7 +111,6 @@
         android:text="Assine o Lina Premium\nTenha acesso a todas as funcionalidades"
         android:textSize="14sp"
         android:textStyle="bold"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,11 +157,12 @@
         android:id="@+id/plano"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/caixa_redonda"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:ignore="MissingConstraints">
@@ -205,7 +203,6 @@
             android:textStyle="bold"
             tools:ignore="DuplicateIds" />
 
-
         <!-- Cancelamento -->
         <TextView
             android:id="@+id/textCancelamento"
@@ -217,45 +214,125 @@
             tools:ignore="DuplicateIds" />
 
         <!-- Lista de benefícios -->
-        <TextView
-            android:id="@+id/beneficio1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="✅ Crie cardápios semanais personalizados"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/beneficio3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✅ Acesse receitas com quantidades detalhadas"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="check"
+                android:src="@drawable/check" />
 
-        <TextView
-            android:id="@+id/beneficio5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✅ Receitas adaptadas para suas restrições"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/beneficio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:text="Crie cardápios semanais personalizados"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/beneficio6"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="✅ Acesso à lista de nutricionistas"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/beneficio7"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="check"
+                android:src="@drawable/check" />
+
+            <TextView
+                android:id="@+id/beneficio3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:text="Acesse receitas com quantidades detalhadas"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="✅ Atualizações constantes de receitas"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="check"
+                android:src="@drawable/check" />
+
+            <TextView
+                android:id="@+id/beneficio5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:text="Receitas adaptadas para suas restrições"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="check"
+                android:src="@drawable/check" />
+
+            <TextView
+                android:id="@+id/beneficio6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:text="Acesso à lista de nutricionistas"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="check"
+                android:src="@drawable/check" />
+
+            <TextView
+                android:id="@+id/beneficio7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:text="Atualizações constantes de receitas"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <!-- Segurança -->
         <TextView
@@ -267,7 +344,7 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="italic" />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
