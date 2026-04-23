@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,26 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
         holder.txtEmail.setText(n.getEmail());
         holder.txtPacientes.setText(n.getPacientes());
 
+        // Estrelas dinâmicas
+        LinearLayout layoutEstrelas = holder.itemView.findViewById(R.id.layoutEstrelas);
+        layoutEstrelas.removeAllViews();
+        int estrelas = Math.round(n.getAvaliacao());
+        for (int i = 0; i < 5; i++) {
+            ImageView img = new ImageView(holder.itemView.getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(40, 40);
+            params.setMargins(2, 0, 2, 0);
+            img.setLayoutParams(params);
+            if (i < estrelas) {
+                img.setImageResource(R.drawable.estrela_cheia);
+            } else {
+                img.setImageResource(R.drawable.estrela_vazia);
+            }
+            layoutEstrelas.addView(img);
+        }
+
+        // Texto da avaliação
+        TextView txtAvaliacao = holder.itemView.findViewById(R.id.EstrelaNumero);
+        txtAvaliacao.setText(n.getAvaliacao() + ".0");
 
         holder.btnContato.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);
