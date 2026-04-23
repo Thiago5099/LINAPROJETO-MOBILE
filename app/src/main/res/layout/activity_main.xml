@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <!-- Título -->
+    <!-- TÍTULO -->
     <TextView
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
@@ -14,97 +14,120 @@
         android:text="Monte seu Cardápio Semanal"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#333333"
+        android:textColor="#333"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Chips (dias da semana) -->
+    <!-- CONTADOR -->
+    <TextView
+        android:id="@+id/txtContador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/4 refeições"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- SUBTÍTULO -->
+    <TextView
+        android:id="@+id/subtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione as refeições para cada dia"
+        android:textSize="14sp"
+        android:textColor="#777"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/titulo"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- CHIPS DIAS -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupDias"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:singleSelection="true"
         app:chipSpacing="8dp"
-        app:layout_constraintTop_toBottomOf="@id/titulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/subtitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- SEGUNDA -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSeg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SEGUNDA"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="SEG"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- TERÇA -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TERÇA"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="TER"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- QUARTA -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipQua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QUARTA"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="QUA"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- QUINTA -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipQui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QUINTA"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="QUI"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- SEXTA -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SEXTA"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="SEX"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- SÁBADO -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SÁBADO"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="SAB"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
-        <!-- DOMINGO -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipDom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DOMINGO"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipBackgroundColor="#E0E0E0"/>
+            android:text="DOM"
+            style="@style/Widget.MaterialComponents.Chip.Choice"/>
 
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- Lista de refeições -->
+    <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRefeicoes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/chipGroupDias"
+        app:layout_constraintBottom_toTopOf="@id/btnProximo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- BOTÃO -->
+    <Button
+        android:id="@+id/btnProximo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Próximo dia"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#4CAF50"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
