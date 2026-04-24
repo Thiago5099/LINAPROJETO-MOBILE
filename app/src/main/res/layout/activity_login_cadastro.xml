@@ -2,11 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp">
 
     <!-- Logo -->
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="74dp"
+        android:layout_height="64dp"
+        android:contentDescription="Logo Lina"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textViewLina"
         android:layout_width="wrap_content"
@@ -108,13 +123,13 @@
                     android:id="@+id/editTextLoginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Maria Silva"
+                    android:hint="seu@email.com"
                     android:inputType="textEmailAddress"
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
                     android:background="#f3f3f5"
-                    android:drawableStart="@android:drawable/ic_dialog_email"
+                    android:drawableStart="@drawable/ic_mail"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -136,7 +151,7 @@
                     android:textColor="#0F172A"
                     android:textSize="16sp"
                     android:background="#f3f3f5"
-                    android:drawableStart="@android:drawable/ic_lock_lock"
+                    android:drawableStart="@drawable/ic_senha"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -176,7 +191,7 @@
                     android:textColor="#0F172A"
                     android:textSize="16sp"
                     android:background="#f3f3f5"
-                    android:drawableStart="@android:drawable/ic_menu_edit"
+                    android:drawableStart="@drawable/ic_nome"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -198,7 +213,7 @@
                     android:textColor="#0F172A"
                     android:textSize="16sp"
                     android:background="#f3f3f5"
-                    android:drawableStart="@android:drawable/ic_dialog_email"
+                    android:drawableStart="@drawable/ic_mail"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -220,17 +235,40 @@
                     android:textColor="#0F172A"
                     android:textSize="16sp"
                     android:background="#f3f3f5"
-                    android:drawableStart="@android:drawable/ic_lock_lock"
+                    android:drawableStart="@drawable/ic_senha"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
-                <CheckBox
-                    android:id="@+id/checkBoxDiabetico"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Diabético(a)"
+                    android:text="Gênero"
                     android:textColor="#475569"
+                    android:textSize="14sp"
                     android:layout_marginTop="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerGenero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#f3f3f5"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restrições Alimentares"
+                    android:textColor="#475569"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerRestricoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#f3f3f5"
+                    android:padding="8dp" />
+
 
                 <Button
                     android:id="@+id/buttonRegistrar"
