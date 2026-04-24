@@ -12,24 +12,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/txtNome"
+        <!-- Foto + Nome + Especialidade -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txtEspecialidade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Especialidade"
-            android:textColor="#4CAF50" />
+            <ImageView
+                android:id="@+id/imgFotoPerfil"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/foto_perfil_1" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/txtNome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtEspecialidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Especialidade"
+                    android:textColor="#4CAF50" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Estrelas -->
         <LinearLayout
             android:id="@+id/layoutEstrelas"
             android:layout_width="wrap_content"
@@ -37,45 +59,115 @@
             android:orientation="horizontal"
             tools:ignore="ExtraText">
 
-        <ImageView
-            android:id="@+id/imgEstrelaCheia"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            app:srcCompat="@drawable/estrela_cheia" />
 
             <ImageView
-            android:id="@+id/imgEstrelaVazia"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            app:srcCompat="@drawable/estrela_vazia" />
+                android:id="@+id/imgEstrelaVazia"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                app:srcCompat="@drawable/estrela_vazia" />
 
         </LinearLayout>
 
+            <ImageView
+                android:id="@+id/imgLinha"
+                android:layout_width="400dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/linha" />
 
-        <TextView
-            android:id="@+id/txtCidade"
+        <!-- Cidade -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cidade" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txtTelefone"
+            <ImageView
+                android:id="@+id/imgLocal"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/local" />
+
+            <TextView
+                android:id="@+id/txtCidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade" />
+
+        </LinearLayout>
+
+        <!-- Telefone -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Telefone" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txtEmail"
+            <ImageView
+                android:id="@+id/imgTelefone"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/telefone" />
+
+            <TextView
+                android:id="@+id/txtTelefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone" />
+
+        </LinearLayout>
+
+        <!-- Email -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txtPacientes"
+            <ImageView
+                android:id="@+id/imgemail"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/email" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <!-- Pacientes -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pacientes" />
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imgpacientes"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/pacientes" />
+
+            <TextView
+                android:id="@+id/txtPacientes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pacientes" />
+
+        </LinearLayout>
+
+        <!-- Botão -->
         <Button
             android:id="@+id/btnContato"
             android:layout_width="match_parent"
@@ -84,6 +176,7 @@
             android:backgroundTint="#2E7D32"
             android:text="Entrar em Contato"
             android:textColor="#FFF" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
