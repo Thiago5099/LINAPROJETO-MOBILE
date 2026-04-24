@@ -292,56 +292,80 @@
                     android:backgroundTint="#0078FF"
                     android:layout_marginTop="16dp"/>
             </LinearLayout>
-            <!-- Layout de Esqueci a Senha -->
-            <LinearLayout
-                android:id="@+id/layoutEsqueciSenha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Recuperar Senha"
-                    android:textColor="#475569"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Digite seu email para redefinir a senha"
-                    android:textColor="#475569"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"/>
-
-                <EditText
-                    android:id="@+id/editTextRecuperarEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="seu@email.com"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#0F172A"
-                    android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_mail"
-                    android:drawablePadding="8dp"
-                    android:layout_marginTop="4dp"/>
-
-                <Button
-                    android:id="@+id/buttonRecuperarSenha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enviar link de recuperação"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:backgroundTint="#0078FF"
-                    android:layout_marginTop="16dp"/>
-            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <!-- Card de Esqueci a Senha -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardEsqueciSenha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textViewSlogan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuperar Senha"
+                android:textColor="#475569"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Digite seu email para redefinir a senha"
+                android:textColor="#475569"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/editTextRecuperarEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="seu@email.com"
+                android:inputType="textEmailAddress"
+                android:textColor="#0F172A"
+                android:textSize="16sp"
+                android:background="@drawable/bg_edit_spinner"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <Button
+                android:id="@+id/buttonRecuperarSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enviar link de recuperação"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:backgroundTint="#0078FF"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Botão voltar -->
+            <Button
+                android:id="@+id/buttonVoltarLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voltar"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:backgroundTint="#475569"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <!-- Rodapé -->
     <TextView

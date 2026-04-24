@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -107,21 +108,22 @@ public class LoginCadastro extends AppCompatActivity {
                     "Registrado: " + nome + " (" + email + ") - Gênero: " + genero + " - Restrição: " + restricao,
                     Toast.LENGTH_LONG).show();
         });
-        LinearLayout layoutEsqueciSenha = findViewById(R.id.layoutEsqueciSenha);
-        TextView textViewEsqueciSenha = findViewById(R.id.textViewEsqueciSenha); // aquele link abaixo do botão Entrar
-        Button buttonRecuperarSenha = findViewById(R.id.buttonRecuperarSenha);
+        CardView cardForm = findViewById(R.id.cardForm);
+        CardView cardEsqueciSenha = findViewById(R.id.cardEsqueciSenha);
+        TextView textViewEsqueciSenha = findViewById(R.id.textViewEsqueciSenha);
+        Button buttonVoltarLogin = findViewById(R.id.buttonVoltarLogin);
 
         // Quando clicar em "Esqueci minha senha"
         textViewEsqueciSenha.setOnClickListener(v -> {
-            layoutLogin.setVisibility(View.GONE);
-            layoutCadastro.setVisibility(View.GONE);
-            layoutEsqueciSenha.setVisibility(View.VISIBLE);
+            cardForm.setVisibility(View.GONE);
+            cardEsqueciSenha.setVisibility(View.VISIBLE);
         });
 
-        // Botão de recuperação
-        buttonRecuperarSenha.setOnClickListener(v -> {
-            String emailRecuperar = ((EditText) findViewById(R.id.editTextRecuperarEmail)).getText().toString();
-            Toast.makeText(getApplicationContext(), "Link enviado para: " + emailRecuperar, Toast.LENGTH_SHORT).show();
+        // Botão voltar
+        buttonVoltarLogin.setOnClickListener(v -> {
+            cardEsqueciSenha.setVisibility(View.GONE);
+            cardForm.setVisibility(View.VISIBLE);
         });
+
     }
 }
