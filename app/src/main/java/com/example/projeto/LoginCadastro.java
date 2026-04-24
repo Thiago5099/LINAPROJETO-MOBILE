@@ -3,11 +3,13 @@ package com.example.projeto;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -104,6 +106,22 @@ public class LoginCadastro extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "Registrado: " + nome + " (" + email + ") - Gênero: " + genero + " - Restrição: " + restricao,
                     Toast.LENGTH_LONG).show();
+        });
+        LinearLayout layoutEsqueciSenha = findViewById(R.id.layoutEsqueciSenha);
+        TextView textViewEsqueciSenha = findViewById(R.id.textViewEsqueciSenha); // aquele link abaixo do botão Entrar
+        Button buttonRecuperarSenha = findViewById(R.id.buttonRecuperarSenha);
+
+        // Quando clicar em "Esqueci minha senha"
+        textViewEsqueciSenha.setOnClickListener(v -> {
+            layoutLogin.setVisibility(View.GONE);
+            layoutCadastro.setVisibility(View.GONE);
+            layoutEsqueciSenha.setVisibility(View.VISIBLE);
+        });
+
+        // Botão de recuperação
+        buttonRecuperarSenha.setOnClickListener(v -> {
+            String emailRecuperar = ((EditText) findViewById(R.id.editTextRecuperarEmail)).getText().toString();
+            Toast.makeText(getApplicationContext(), "Link enviado para: " + emailRecuperar, Toast.LENGTH_SHORT).show();
         });
     }
 }
