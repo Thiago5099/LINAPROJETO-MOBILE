@@ -1,16 +1,13 @@
 package com.example.projeto;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,7 +19,11 @@ import androidx.core.view.WindowInsetsCompat;
 public class LoginCadastro extends AppCompatActivity {
 
     private LinearLayout layoutLogin, layoutCadastro;
-    private Button btnLoginTab, btnCadastroTab;
+    private Button btnEntrarTab, btnRegistrarTab;
+    private Button btnEntrar, btnRegistrar;
+    private EditText editTextLoginEmail, editTextLoginSenha;
+    private EditText editTextNome, editTextCadastroEmail, editTextCadastroSenha;
+    private Spinner spinnerGenero, spinnerRestricoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +36,53 @@ public class LoginCadastro extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         // Referências
-        LinearLayout layoutLogin = findViewById(R.id.layoutLogin);
-        LinearLayout layoutCadastro = findViewById(R.id.layoutCadastro);
-        Button btnEntrarTab = findViewById(R.id.buttonEntrarTab);
-        Button btnRegistrarTab = findViewById(R.id.buttonRegistrarTab);
+        layoutLogin = findViewById(R.id.layoutLogin);
+        layoutCadastro = findViewById(R.id.layoutCadastro);
+        btnEntrarTab = findViewById(R.id.buttonEntrarTab);
+        btnRegistrarTab = findViewById(R.id.buttonRegistrarTab);
 
-        Button btnEntrar = findViewById(R.id.buttonEntrar);
-        Button btnRegistrar = findViewById(R.id.buttonRegistrar);
+        btnEntrar = findViewById(R.id.buttonEntrar);
+        btnRegistrar = findViewById(R.id.buttonRegistrar);
 
-        EditText editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
-        EditText editTextLoginSenha = findViewById(R.id.editTextLoginSenha);
-        EditText editTextNome = findViewById(R.id.editTextNome);
-        EditText editTextCadastroEmail = findViewById(R.id.editTextCadastroEmail);
-        EditText editTextCadastroSenha = findViewById(R.id.editTextCadastroSenha);
-        CheckBox checkBoxDiabetico = findViewById(R.id.checkBoxDiabetico);
+        editTextLoginEmail = findViewById(R.id.editTextLoginEmail);
+        editTextLoginSenha = findViewById(R.id.editTextLoginSenha);
+        editTextNome = findViewById(R.id.editTextNome);
+        editTextCadastroEmail = findViewById(R.id.editTextCadastroEmail);
+        editTextCadastroSenha = findViewById(R.id.editTextCadastroSenha);
+
+        spinnerGenero = findViewById(R.id.spinnerGenero);
+        spinnerRestricoes = findViewById(R.id.spinnerRestricoes);
+
+        // Popula os spinners com arrays do strings.xml
+        ArrayAdapter<CharSequence> adapterGenero = ArrayAdapter.createFromResource(
+                this,
+                R.array.opcoes_genero,
+                android.R.layout.simple_spinner_item
+        );
+        adapterGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGenero.setAdapter(adapterGenero);
+
+        ArrayAdapter<CharSequence> adapterRestricoes = ArrayAdapter.createFromResource(
+                this,
+                R.array.opcoes_restricoes,
+                android.R.layout.simple_spinner_item
+        );
+        adapterRestricoes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRestricoes.setAdapter(adapterRestricoes);
 
         // Alternar abas
         btnEntrarTab.setOnClickListener(v -> {
-            layoutLogin.setVisibility(View.VISIBLE);
-            layoutCadastro.setVisibility(View.GONE);
+            layoutLogin.setVisibility(LinearLayout.VISIBLE);
+            layoutCadastro.setVisibility(LinearLayout.GONE);
             btnEntrarTab.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
             btnRegistrarTab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#CBCBCB")));
         });
 
         btnRegistrarTab.setOnClickListener(v -> {
-            layoutCadastro.setVisibility(View.VISIBLE);
-            layoutLogin.setVisibility(View.GONE);
+            layoutCadastro.setVisibility(LinearLayout.VISIBLE);
+            layoutLogin.setVisibility(LinearLayout.GONE);
             btnRegistrarTab.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
             btnEntrarTab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#CBCBCB")));
         });
@@ -77,9 +98,12 @@ public class LoginCadastro extends AppCompatActivity {
             String nome = editTextNome.getText().toString();
             String email = editTextCadastroEmail.getText().toString();
             String senha = editTextCadastroSenha.getText().toString();
-            boolean diabetico = checkBoxDiabetico.isChecked();
-            Toast.makeText(getApplicationContext(), "Registrado: " + nome + " (" + email + ")", Toast.LENGTH_SHORT).show();
-        });
+            String genero = spinnerGenero.getSelectedItem().toString();
+            String restricao = spinnerRestricoes.getSelectedItem().toString();
 
+            Toast.makeText(getApplicationContext(),
+                    "Registrado: " + nome + " (" + email + ") - Gênero: " + genero + " - Restrição: " + restricao,
+                    Toast.LENGTH_LONG).show();
+        });
     }
 }
