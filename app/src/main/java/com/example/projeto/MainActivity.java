@@ -9,22 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tela.RefeicaoAdapter;
-import com.google.android.material.chip.Chip;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycler;
-    TextView contador;
+    TextView contador, txtDia;
     Button btnProximo;
 
     int diaAtual = 0;
 
-    List<String> dias = Arrays.asList("Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom");
+    List<String> dias = Arrays.asList(
+            "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"
+    );
 
     List<List<Refeicao>> cardapio;
+    List<Set<Integer>> selecoesPorDia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,49 +34,61 @@ public class MainActivity extends AppCompatActivity {
 
         recycler = findViewById(R.id.recyclerRefeicoes);
         contador = findViewById(R.id.txtContador);
+        txtDia = findViewById(R.id.txtDia);
         btnProximo = findViewById(R.id.btnProximo);
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        // 5 refeições
-        List<Refeicao> base1 = Arrays.asList(
-                new Refeicao("Omelete", "15 min", "280 kcal"),
-                new Refeicao("Frango", "20 min", "320 kcal"),
-                new Refeicao("Sopa", "25 min", "200 kcal"),
-                new Refeicao("Panqueca", "10 min", "250 kcal"),
-                new Refeicao("Salada", "15 min", "220 kcal")
+        // 🔥 SEGUNDA
+        List<Refeicao> seg = Arrays.asList(
+                new Refeicao("Café da manhã", "Pão com ovo", "10 min", "250 kcal"),
+                new Refeicao("Café da manhã", "Vitamina de banana", "8 min", "200 kcal"),
+
+                new Refeicao("Almoço", "Frango grelhado", "20 min", "320 kcal"),
+                new Refeicao("Almoço", "Arroz + feijão", "25 min", "350 kcal"),
+
+                new Refeicao("Lanche da tarde", "Iogurte", "5 min", "180 kcal"),
+                new Refeicao("Lanche da tarde", "Sanduíche natural", "10 min", "220 kcal"),
+
+                new Refeicao("Jantar", "Sopa de legumes", "20 min", "200 kcal"),
+                new Refeicao("Jantar", "Omelete leve", "15 min", "180 kcal")
         );
 
-        List<Refeicao> base2 = Arrays.asList(
-                new Refeicao("Macarrão", "20 min", "300 kcal"),
-                new Refeicao("Tilápia", "25 min", "280 kcal"),
-                new Refeicao("Wrap", "15 min", "260 kcal"),
-                new Refeicao("Omelete Fit", "10 min", "230 kcal"),
-                new Refeicao("Batata Doce", "30 min", "350 kcal")
+        // 🔥 TERÇA
+        List<Refeicao> ter = Arrays.asList(
+                new Refeicao("Café da manhã", "Café + pão", "10 min", "220 kcal"),
+                new Refeicao("Café da manhã", "Aveia com frutas", "8 min", "210 kcal"),
+
+                new Refeicao("Almoço", "Carne assada", "30 min", "400 kcal"),
+                new Refeicao("Almoço", "Macarrão", "20 min", "350 kcal"),
+
+                new Refeicao("Lanche da tarde", "Fruta", "5 min", "120 kcal"),
+                new Refeicao("Lanche da tarde", "Barra de cereal", "5 min", "150 kcal"),
+
+                new Refeicao("Jantar", "Sopa", "20 min", "180 kcal"),
+                new Refeicao("Jantar", "Salada com frango", "15 min", "200 kcal")
         );
 
-        cardapio = Arrays.asList(base1, base2, base1, base2, base1, base2, base1);
+        // 🔁 repetir padrão
+        cardapio = Arrays.asList(seg, ter, seg, ter, seg, ter, seg);
+
+        // 🔥 salvar seleção por dia
+        selecoesPorDia = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            selecoesPorDia.add(new HashSet<>());
+        }
 
         atualizarTela();
 
         // CHIPS
-        Chip seg = findViewById(R.id.chipSeg);
-        Chip ter = findViewById(R.id.chipTer);
-        Chip qua = findViewById(R.id.chipQua);
-        Chip qui = findViewById(R.id.chipQui);
-        Chip sex = findViewById(R.id.chipSex);
-        Chip sab = findViewById(R.id.chipSab);
-        Chip dom = findViewById(R.id.chipDom);
+        findViewById(R.id.chipSeg).setOnClickListener(v -> trocar(0));
+        findViewById(R.id.chipTer).setOnClickListener(v -> trocar(1));
+        findViewById(R.id.chipQua).setOnClickListener(v -> trocar(2));
+        findViewById(R.id.chipQui).setOnClickListener(v -> trocar(3));
+        findViewById(R.id.chipSex).setOnClickListener(v -> trocar(4));
+        findViewById(R.id.chipSab).setOnClickListener(v -> trocar(5));
+        findViewById(R.id.chipDom).setOnClickListener(v -> trocar(6));
 
-        seg.setOnClickListener(v -> trocar(0));
-        ter.setOnClickListener(v -> trocar(1));
-        qua.setOnClickListener(v -> trocar(2));
-        qui.setOnClickListener(v -> trocar(3));
-        sex.setOnClickListener(v -> trocar(4));
-        sab.setOnClickListener(v -> trocar(5));
-        dom.setOnClickListener(v -> trocar(6));
-
-        // BOTÃO PRÓXIMO DIA
         btnProximo.setOnClickListener(v -> {
             diaAtual++;
             if (diaAtual > 6) diaAtual = 0;
@@ -89,8 +102,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void atualizarTela() {
+        txtDia.setText(dias.get(diaAtual));
+
         recycler.setAdapter(new RefeicaoAdapter(
                 cardapio.get(diaAtual),
+                selecoesPorDia.get(diaAtual),
                 total -> contador.setText(total + "/4 refeições")
         ));
     }
