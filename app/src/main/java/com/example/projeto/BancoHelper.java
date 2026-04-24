@@ -25,7 +25,8 @@ public class BancoHelper extends SQLiteOpenHelper {
                 "cidade TEXT," +
                 "telefone TEXT," +
                 "email TEXT," +
-                "pacientes TEXT)"
+                "pacientes TEXT," +
+                "avaliacao REAL)"
         );
     }
 
@@ -36,7 +37,8 @@ public class BancoHelper extends SQLiteOpenHelper {
     }
 
     // 🔹 INSERIR DADOS
-    public void inserir(String nome, String especialidade, String cidade, String telefone, String email, String pacientes) {
+    public void inserir(String nome, String especialidade, String cidade, String telefone,
+                        String email, String pacientes,float avaliacao ) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -46,6 +48,7 @@ public class BancoHelper extends SQLiteOpenHelper {
         values.put("telefone", telefone);
         values.put("email", email);
         values.put("pacientes", pacientes);
+        values.put("avaliacao", avaliacao);
 
 
         db.insert(TABLE_NUTRICIONISTAS, null, values);
@@ -68,7 +71,8 @@ public class BancoHelper extends SQLiteOpenHelper {
                         cursor.getString(3),
                         cursor.getString(4),
                         cursor.getString(5),
-                        cursor.getString(6)
+                        cursor.getString(6),
+                        cursor.getFloat(7)
                 ));
             } while (cursor.moveToNext());
         }

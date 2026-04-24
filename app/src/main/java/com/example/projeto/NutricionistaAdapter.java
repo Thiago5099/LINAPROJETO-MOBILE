@@ -57,8 +57,6 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
         }
 
         // Texto da avaliação
-        TextView txtAvaliacao = holder.itemView.findViewById(R.id.EstrelaNumero);
-        txtAvaliacao.setText(n.getAvaliacao() + ".0");
 
         holder.btnContato.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);

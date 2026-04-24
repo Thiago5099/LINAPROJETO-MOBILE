@@ -19,15 +19,15 @@ public class MainActivity extends AppCompatActivity {
         if (banco.listarTodos().isEmpty()) {
             banco.inserir
                     ("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678",
-                            "marina@gmail.com", "150 + pacientes antendidos");
+                            "marina@gmail.com", "150 + pacientes antendidos", 5.0f);
 
             banco.inserir
                     ("Carlos Souza", "Clínica", "Campinas", "(19) 98765-4321",
-                            "carlos@gmail.com", "50 + pacientes antendidos");
+                            "carlos@gmail.com", "50 + pacientes antendidos", 4.0f);
 
             banco.inserir
                     ("Maria Silva", "Infantil", "Santos", "(13) 99876-5432",
-                            "maria@gmail.com", "200 + pacientes antendidos");
+                            "maria@gmail.com", "200 + pacientes antendidos",3.0f);
         }
 
 

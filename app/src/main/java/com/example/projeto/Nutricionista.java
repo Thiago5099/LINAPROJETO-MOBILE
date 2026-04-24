@@ -4,7 +4,7 @@ public class Nutricionista {
     private int id;
     private String nome, especialidade, cidade, telefone, email, pacientes;
     private float avaliacao;
-    public Nutricionista(int id, String nome, String especialidade, String cidade, String telefone, String email, String pacientes) {
+    public Nutricionista(int id, String nome, String especialidade, String cidade, String telefone, String email, String pacientes, float avaliacao) {
         this.id = id;
         this.nome = nome;
         this.especialidade = especialidade;
