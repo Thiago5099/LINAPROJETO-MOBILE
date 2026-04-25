@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         banco = new BancoHelper(this);
 
         if (banco.listarTodos().isEmpty()) {
-            banco.inserir("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678", "ana@gmail.com", "150 + pacientes atendidos", 5.0f);
-            banco.inserir("Carlos Souza", "Clínica", "Campinas", "(19) 98765-4321", "carlos@gmail.com", "50 + pacientes atendidos", 4.0f);
+            banco.inserir("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678", "ana@gmail.com", "150 + pacientes atendidos", 1.0f);
+            banco.inserir("Carlos Souza", "Clínica", "Campinas", "(19) 98765-4321", "carlos@gmail.com", "50 + pacientes atendidos", 2.0f);
             banco.inserir("Maria Silva", "Infantil", "Santos", "(13) 99876-5432", "maria@gmail.com", "200 + pacientes atendidos", 3.0f);
-            banco.inserir("João Santos", "Clínica", "São Paulo", "(11) 91234-5678", "joao@gmail.com", "100 + pacientes atendidos", 4.5f);
-            banco.inserir("Maria Oliveira", "Infantil", "Campinas", "(19) 98765-4321", "maria2@gmail.com", "50 + pacientes atendidos", 3.8f);
-            banco.inserir("Pedro Almeida", "Clínica", "Santos", "(13) 99876-5432", "pedro@gmail.com", "200 + pacientes atendidos", 4.2f);
+            banco.inserir("João Santos", "Clínica", "São Paulo", "(11) 91234-5678", "joao@gmail.com", "100 + pacientes atendidos", 4.0f);
+            banco.inserir("Maria Oliveira", "Infantil", "Campinas", "(19) 98765-4321", "maria2@gmail.com", "50 + pacientes atendidos", 3.0f);
+            banco.inserir("Pedro Almeida", "Clínica", "Santos", "(13) 99876-5432", "pedro@gmail.com", "200 + pacientes atendidos", 4.0f);
             banco.inserir("Ana Pereira", "Esportiva", "São Paulo", "(11) 91234-5678", "anap@gmail.com", "150 + pacientes atendidos", 5.0f);
-            banco.inserir("Carlos Silva", "Clínica", "Campinas", "(19) 98765-4321", "carlosp@gmail.com", "50 + pacientes atendidos", 4.0f);
+            banco.inserir("Carlos Silva", "Clínica", "Campinas", "(19) 98765-4321", "carlosp@gmail.com", "50 + pacientes atendidos", 5.0f);
             banco.inserir("Maria Santos", "Infantil", "Santos", "(13) 99876-5432", "marias@gmail.com", "200 + pacientes atendidos", 3.0f);
         }
 
