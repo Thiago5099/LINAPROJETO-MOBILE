@@ -70,7 +70,7 @@
             <!-- Abas -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:backgroundTint="#CBCBCB"
                 app:cardCornerRadius="9999dp"
                 app:cardElevation="2dp">
@@ -89,7 +89,9 @@
                         android:text="Entrar"
                         android:textStyle="bold"
                         android:textColor="#0F172A"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:layout_marginLeft="4dp"
+                        />
 
                     <Button
                         android:id="@+id/buttonRegistrarTab"
@@ -100,7 +102,9 @@
                         android:text="Registrar"
                         android:textColor="#0F172A"
                         android:textStyle="bold"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:layout_marginRight= "4dp"/>
+                        />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -111,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="visible"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
