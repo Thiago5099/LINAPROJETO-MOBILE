@@ -1,5 +1,6 @@
 package com.example.projeto;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -16,8 +17,10 @@ import java.util.ArrayList;
 public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdapter.ViewHolder> {
 
     private ArrayList<Nutricionista> lista;
+    private Context context;
 
-    public NutricionistaAdapter(ArrayList<Nutricionista> lista) {
+    public NutricionistaAdapter(Context context, ArrayList<Nutricionista> lista) {
+        this.context = context;
         this.lista = lista;
     }
 
@@ -56,8 +59,6 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
             layoutEstrelas.addView(img);
         }
 
-        // Texto da avaliação
-
         holder.btnContato.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + n.getTelefone()));
@@ -69,7 +70,7 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
     public int getItemCount() { return lista.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNome, txtEspecialidade, txtCidade, txtTelefone, txtEmail, txtPacientes; //
+        TextView txtNome, txtEspecialidade, txtCidade, txtTelefone, txtEmail, txtPacientes;
         Button btnContato;
 
         public ViewHolder(@NonNull View itemView) {
