@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:andorid="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <!-- Cabeçalho -->
@@ -12,11 +13,17 @@
         app:cardCornerRadius="0dp"
         app:cardElevation="4dp">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_gravity="center"
+            android:paddingTop="60dp"
+            android:paddingBottom="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,6 +48,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="11dp"
+        />
 
 </LinearLayout>
