@@ -256,6 +256,17 @@
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
+                <Button
+                    android:id="@+id/buttonFotoPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Foto de Perfil"
+                    android:textStyle="bold"
+                    android:textColor="#0F172A"
+                    android:textSize="16sp"
+                    android:backgroundTint="#D9D9D9"
+                    android:layout_marginTop="12dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -374,15 +385,18 @@
     <!-- Rodapé -->
     <TextView
         android:id="@+id/textViewRodape"
-        android:layout_width="0dp"
+        android:layout_width="363dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
         android:text="Organize suas refeições e cuide da sua saúde com Lina"
         android:textAlignment="center"
-        android:textSize="14sp"
         android:textColor="#717182"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardForm"
+        app:layout_constraintVertical_bias="0.333" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

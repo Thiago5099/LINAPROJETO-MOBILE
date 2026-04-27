@@ -124,6 +124,11 @@ public class LoginCadastro extends AppCompatActivity {
             cardEsqueciSenha.setVisibility(View.GONE);
             cardForm.setVisibility(View.VISIBLE);
         });
+        Button buttonFotoPerfil = findViewById(R.id.buttonFotoPerfil);
 
+        buttonFotoPerfil.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),
+                    "Função de adicionar foto em breve!", Toast.LENGTH_SHORT).show();
+        });
     }
 }
