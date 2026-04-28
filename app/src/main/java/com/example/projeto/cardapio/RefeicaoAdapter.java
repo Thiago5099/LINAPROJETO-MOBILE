@@ -1,4 +1,4 @@
-package com.example.projeto.adapter;
+package com.example.projeto.cardapio;
 
 import android.content.*;
 import android.view.*;
@@ -7,8 +7,6 @@ import android.widget.*;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.ReceitaActivity;
-import com.example.projeto.models.*;
 
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup p, int v) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_refeicao, p, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_cardapio_item_refeicao, p, false);
         return new ViewHolder(view);
     }
 

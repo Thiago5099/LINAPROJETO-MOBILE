@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.cardapio;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -6,16 +6,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.projeto.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class CardapioMainActivity extends AppCompatActivity {
 
     BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cardapio_main);
 
         nav = findViewById(R.id.bottomNav);
 

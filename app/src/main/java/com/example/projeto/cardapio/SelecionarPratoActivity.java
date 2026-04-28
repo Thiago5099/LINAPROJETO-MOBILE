@@ -1,11 +1,11 @@
-package com.example.projeto;
+package com.example.projeto.cardapio;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projeto.models.Prato;
+import com.example.projeto.R;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class SelecionarPratoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        setContentView(R.layout.activity_selecionar_prato);
+        setContentView(R.layout.activity_cardapio_selecionar_prato);
 
         listaView = findViewById(R.id.lista);
 

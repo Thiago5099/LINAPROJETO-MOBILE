@@ -13,12 +13,12 @@
         android:theme="@style/Theme.Projeto">
 
         <!-- TELAS QUE AINDA SÃO ACTIVITY -->
-        <activity android:name=".ReceitaActivity"/>
-        <activity android:name=".SelecionarPratoActivity"/>
+        <activity android:name=".cardapio.ReceitaActivity"/>
+        <activity android:name=".cardapio.SelecionarPratoActivity"/>
 
         <!-- PRINCIPAL -->
         <activity
-            android:name=".MainActivity"
+            android:name=".cardapio.CardapioMainActivity"
             android:exported="true">
 
             <intent-filter>

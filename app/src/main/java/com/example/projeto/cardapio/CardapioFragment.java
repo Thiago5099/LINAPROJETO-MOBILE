@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.cardapio;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
-import com.example.projeto.adapter.RefeicaoAdapter;
-import com.example.projeto.models.*;
+import com.example.projeto.R;
 
 import java.util.*;
 
@@ -31,7 +30,7 @@ public class CardapioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b) {
 
-        View view = inflater.inflate(R.layout.activity_tela_cardapio, container, false);
+        View view = inflater.inflate(R.layout.activity_cardapio_tela, container, false);
 
         recycler = view.findViewById(R.id.recycler);
         txtStatus = view.findViewById(R.id.txtStatus);
@@ -120,7 +119,7 @@ public class CardapioFragment extends Fragment {
             Button btn = new Button(getContext());
             btn.setText(dia);
 
-            btn.setBackgroundResource(R.drawable.bg_dia_normal);
+            btn.setBackgroundResource(R.drawable.bg_cardapio_dia_nao_selecionado);
             btn.setTextColor(0xFF000000);
             btn.setPadding(40,15,40,15);
 
@@ -129,11 +128,11 @@ public class CardapioFragment extends Fragment {
             btn.setOnClickListener(v -> {
 
                 for (Button b : botoesDias) {
-                    b.setBackgroundResource(R.drawable.bg_dia_normal);
+                    b.setBackgroundResource(R.drawable.bg_cardapio_dia_nao_selecionado);
                     b.setTextColor(0xFF000000);
                 }
 
-                btn.setBackgroundResource(R.drawable.bg_dia_selecionado);
+                btn.setBackgroundResource(R.drawable.bg_cardapio_dia_selecionado);
                 btn.setTextColor(0xFFFFFFFF);
 
                 diaAtual = dia;

@@ -1,15 +1,17 @@
-package com.example.projeto;
+package com.example.projeto.cardapio;
 
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projeto.R;
 
 public class ReceitaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        setContentView(R.layout.activity_receita);
+        setContentView(R.layout.activity_cardapio_receita);
 
         ((TextView)findViewById(R.id.nome)).setText(getIntent().getStringExtra("nome"));
         ((TextView)findViewById(R.id.ingredientes)).setText(getIntent().getStringExtra("ingredientes"));
