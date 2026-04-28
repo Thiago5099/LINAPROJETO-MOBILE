@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projeto">
         <activity
-            android:name=".models.MainActivity"
+            android:name=".Compras.models.ComprasMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

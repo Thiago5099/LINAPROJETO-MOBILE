@@ -1,4 +1,4 @@
-package com.example.projeto.adapter;
+package com.example.projeto.Compras.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.models.Ingrediente;
-import com.example.projeto.models.ItemLista;
+import com.example.projeto.Compras.models.ComprasIngrediente;
+import com.example.projeto.Compras.models.ComprasItemLista;
 
 import java.util.List;
 
 public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ItemLista> lista;
+    private List<ComprasItemLista> lista;
     private Runnable onCheckChanged;
 
-    public ComprasAdapter(List<ItemLista> lista, Runnable callback) {
+    public ComprasAdapter(List<ComprasItemLista> lista, Runnable callback) {
         this.lista = lista;
         this.onCheckChanged = callback;
     }
@@ -33,13 +33,13 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        if (viewType == ItemLista.TIPO_HEADER) {
+        if (viewType == ComprasItemLista.TIPO_HEADER) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_header, parent, false);
+                    .inflate(R.layout.item_header_compras, parent, false);
             return new HeaderViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_compra, parent, false);
+                    .inflate(R.layout.item_compras, parent, false);
             return new ItemViewHolder(v);
         }
     }
@@ -47,7 +47,7 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ItemLista item = lista.get(position);
+        ComprasItemLista item = lista.get(position);
 
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).bind(item);
@@ -73,25 +73,25 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             icon = itemView.findViewById(R.id.iconCategoria);
         }
 
-        void bind(ItemLista item) {
+        void bind(ComprasItemLista item) {
             txtCategoria.setText(item.getCategoria());
 
             // ícones simples
             switch (item.getCategoria()) {
                 case "Frutas e Vegetais":
-                    icon.setImageResource(R.drawable.ic_frutas);
+                    icon.setImageResource(R.drawable.ic_compras_frutas);
                     break;
                 case "Grãos e Cereais":
-                    icon.setImageResource(R.drawable.ic_graos);
+                    icon.setImageResource(R.drawable.ic_compras_graos);
                     break;
                 case "Laticínios":
-                    icon.setImageResource(R.drawable.ic_laticionios);
+                    icon.setImageResource(R.drawable.ic_compras_laticionios);
                     break;
                 case "Proteínas":
-                    icon.setImageResource(R.drawable.ic_proteinas);
+                    icon.setImageResource(R.drawable.ic_compras_proteinas);
                     break;
                 default:
-                    icon.setImageResource(R.drawable.ic_proteinas);
+                    icon.setImageResource(R.drawable.ic_compras_proteinas);
             }
         }
     }
@@ -109,7 +109,7 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             qtd = v.findViewById(R.id.txtQuantidade);
         }
 
-        void bind(Ingrediente i) {
+        void bind(ComprasIngrediente i) {
             nome.setText(i.getNome());
             qtd.setText("(x" + i.getQuantidade() + ")");
             check.setChecked(i.isComprado());

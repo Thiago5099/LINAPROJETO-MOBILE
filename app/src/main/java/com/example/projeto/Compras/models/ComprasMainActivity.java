@@ -1,4 +1,4 @@
-package com.example.projeto.models;
+package com.example.projeto.Compras.models;
 
 import android.os.Bundle;
 
@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment;
 import com.example.projeto.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class ComprasMainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_compras);
 
         bottomNav = findViewById(R.id.bottomNav);
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment selected = null;
 
             if (item.getItemId() == R.id.nav_cardapio) {
-                selected = new PlaceholderFragment("Cardápio (em desenvolvimento)");
+                selected = new ComprasPlaceholderFragment("Cardápio (em desenvolvimento)");
                 // if (item.getItemId() == R.id.nav_cardapio) {
                 //   selected = new CardapioFragment();
 
@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 selected = new ComprasFragment();
 
             } else if (item.getItemId() == R.id.nav_nutri) {
-                selected = new PlaceholderFragment("Nutri (em desenvolvimento)");
+                selected = new ComprasPlaceholderFragment("Nutri (em desenvolvimento)");
                 // } else if (item.getItemId() == R.id.nav_nutri) {
                 //     selected = new NutriFragment();
 
             } else if (item.getItemId() == R.id.nav_perfil) {
-                selected = new PlaceholderFragment("Perfil (em desenvolvimento)");
+                selected = new ComprasPlaceholderFragment("Perfil (em desenvolvimento)");
                 // } else if (item.getItemId() == R.id.nav_perfil) {
                 //     selected = new PerfilFragment();
             }

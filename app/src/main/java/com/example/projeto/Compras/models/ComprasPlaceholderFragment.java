@@ -1,4 +1,4 @@
-package com.example.projeto.models;
+package com.example.projeto.Compras.models;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.projeto.R;
 
-public class PlaceholderFragment extends Fragment {
+public class ComprasPlaceholderFragment extends Fragment {
 
     private String texto;
 
-    public PlaceholderFragment(String texto) {
-        super(R.layout.fragment_placeholder);
+    public ComprasPlaceholderFragment(String texto) {
+        super(R.layout.fragment_placeholder_compras);
         this.texto = texto;
     }
 

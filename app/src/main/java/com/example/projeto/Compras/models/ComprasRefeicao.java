@@ -1,21 +1,21 @@
-package com.example.projeto.models;
+package com.example.projeto.Compras.models;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Refeicao implements Serializable {
+public class ComprasRefeicao implements Serializable {
     private String nome;
-    private List<Ingrediente> ingredientes;
+    private List<ComprasIngrediente> ingredientes;
     private boolean selecionada;
 
-    public List<Ingrediente> getIngredientes() {
+    public List<ComprasIngrediente> getIngredientes() {
         return ingredientes;
     }
 
     public boolean isSelecionada() {
         return selecionada;
     }
-    public Refeicao(String nome, List<Ingrediente> ingredientes, boolean selecionada) {
+    public ComprasRefeicao(String nome, List<ComprasIngrediente> ingredientes, boolean selecionada) {
         this.nome = nome;
         this.ingredientes = ingredientes;
         this.selecionada = selecionada;

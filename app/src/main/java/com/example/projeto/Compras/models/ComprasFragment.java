@@ -1,4 +1,4 @@
-package com.example.projeto.models;
+package com.example.projeto.Compras.models;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.projeto.R;
-import com.example.projeto.adapter.ComprasAdapter;
-import com.example.projeto.repository.RefeicaoRepository;
+import com.example.projeto.Compras.adapter.ComprasAdapter;
 
 import java.util.*;
 
@@ -24,10 +23,10 @@ public class ComprasFragment extends Fragment {
     private TextView txtProgresso;
 
     // Lista lógica
-    private List<Ingrediente> listaFinal = new ArrayList<>();
+    private List<ComprasIngrediente> listaFinal = new ArrayList<>();
 
     // Lista para exibição (com categorias)
-    private List<ItemLista> listaExibicao = new ArrayList<>();
+    private List<ComprasItemLista> listaExibicao = new ArrayList<>();
 
     private ComprasAdapter adapter;
 
@@ -45,7 +44,7 @@ public class ComprasFragment extends Fragment {
 
         // Pega dados do Repository
         //List<Refeicao> refeicoes = RefeicaoRepository.getSelecionadas();
-        List<Refeicao> refeicoes = gerarDadosFake();
+        List<ComprasRefeicao> refeicoes = gerarDadosFake();
 
         View root = view;
 
@@ -77,18 +76,18 @@ public class ComprasFragment extends Fragment {
     }
 
     // Processa ingredientes (remove duplicados)
-    private void processarIngredientes(List<Refeicao> refeicoes) {
+    private void processarIngredientes(List<ComprasRefeicao> refeicoes) {
 
-        Map<String, Ingrediente> mapa = new HashMap<>();
+        Map<String, ComprasIngrediente> mapa = new HashMap<>();
 
-        for (Refeicao r : refeicoes) {
+        for (ComprasRefeicao r : refeicoes) {
             if (!r.isSelecionada()) continue;
 
-            for (Ingrediente i : r.getIngredientes()) {
+            for (ComprasIngrediente i : r.getIngredientes()) {
 
                 if (mapa.containsKey(i.getNome())) {
 
-                    Ingrediente existente = mapa.get(i.getNome());
+                    ComprasIngrediente existente = mapa.get(i.getNome());
 
                     existente.setQuantidade(
                             existente.getQuantidade() + i.getQuantidade()
@@ -97,7 +96,7 @@ public class ComprasFragment extends Fragment {
                 } else {
 
                     mapa.put(i.getNome(),
-                            new Ingrediente(
+                            new ComprasIngrediente(
                                     i.getNome(),
                                     i.getQuantidade(),
                                     i.getCategoria()
@@ -111,11 +110,11 @@ public class ComprasFragment extends Fragment {
     }
 
     // AGRUPA POR CATEGORIA
-    private void montarListaComCategorias(List<Ingrediente> ingredientes) {
+    private void montarListaComCategorias(List<ComprasIngrediente> ingredientes) {
 
-        Map<String, List<Ingrediente>> agrupado = new HashMap<>();
+        Map<String, List<ComprasIngrediente>> agrupado = new HashMap<>();
 
-        for (Ingrediente i : ingredientes) {
+        for (ComprasIngrediente i : ingredientes) {
 
             if (!agrupado.containsKey(i.getCategoria())) {
                 agrupado.put(i.getCategoria(), new ArrayList<>());
@@ -129,11 +128,11 @@ public class ComprasFragment extends Fragment {
         for (String categoria : agrupado.keySet()) {
 
             // HEADER
-            listaExibicao.add(new ItemLista(categoria));
+            listaExibicao.add(new ComprasItemLista(categoria));
 
             // ITENS
-            for (Ingrediente i : agrupado.get(categoria)) {
-                listaExibicao.add(new ItemLista(i));
+            for (ComprasIngrediente i : agrupado.get(categoria)) {
+                listaExibicao.add(new ComprasItemLista(i));
             }
         }
     }
@@ -144,9 +143,9 @@ public class ComprasFragment extends Fragment {
         int total = 0;
         int comprados = 0;
 
-        for (ItemLista item : listaExibicao) {
+        for (ComprasItemLista item : listaExibicao) {
 
-            if (item.getTipo() == ItemLista.TIPO_ITEM) {
+            if (item.getTipo() == ComprasItemLista.TIPO_ITEM) {
 
                 total++;
 
@@ -162,34 +161,34 @@ public class ComprasFragment extends Fragment {
         txtProgresso.setText(comprados + " de " + total + " itens comprados");
     }
 
-    private List<Refeicao> gerarDadosFake() {
+    private List<ComprasRefeicao> gerarDadosFake() {
 
-        List<Refeicao> lista = new ArrayList<>();
+        List<ComprasRefeicao> lista = new ArrayList<>();
 
         // Ingredientes
-        List<Ingrediente> ingredientes1 = new ArrayList<>();
-        ingredientes1.add(new Ingrediente("Alface", 4, "Frutas e Vegetais"));
-        ingredientes1.add(new Ingrediente("Brócolis", 2, "Frutas e Vegetais"));
-        ingredientes1.add(new Ingrediente("Tomate", 5, "Frutas e Vegetais"));
+        List<ComprasIngrediente> ingredientes1 = new ArrayList<>();
+        ingredientes1.add(new ComprasIngrediente("Alface", 4, "Frutas e Vegetais"));
+        ingredientes1.add(new ComprasIngrediente("Brócolis", 2, "Frutas e Vegetais"));
+        ingredientes1.add(new ComprasIngrediente("Tomate", 5, "Frutas e Vegetais"));
 
-        List<Ingrediente> ingredientes2 = new ArrayList<>();
-        ingredientes2.add(new Ingrediente("Leite de Amêndoa", 3, "Laticínios"));
-        ingredientes2.add(new Ingrediente("Leite desnatado", 2, "Laticínios"));
+        List<ComprasIngrediente> ingredientes2 = new ArrayList<>();
+        ingredientes2.add(new ComprasIngrediente("Leite de Amêndoa", 3, "Laticínios"));
+        ingredientes2.add(new ComprasIngrediente("Leite desnatado", 2, "Laticínios"));
 
-        List<Ingrediente> ingredientes3 = new ArrayList<>();
-        ingredientes3.add(new Ingrediente("Pão Integral", 8, "Grãos e Cereais"));
-        ingredientes3.add(new Ingrediente("Quinoa", 5, "Grãos e Cereais"));
+        List<ComprasIngrediente> ingredientes3 = new ArrayList<>();
+        ingredientes3.add(new ComprasIngrediente("Pão Integral", 8, "Grãos e Cereais"));
+        ingredientes3.add(new ComprasIngrediente("Quinoa", 5, "Grãos e Cereais"));
 
-        List<Ingrediente> ingredientes4 = new ArrayList<>();
-        ingredientes4.add(new Ingrediente("Ovos", 8, "Proteínas"));
-        ingredientes4.add(new Ingrediente("Peito de Frango", 5, "Proteínas"));
-        ingredientes4.add(new Ingrediente("Atum em Lata", 5, "Proteínas"));
+        List<ComprasIngrediente> ingredientes4 = new ArrayList<>();
+        ingredientes4.add(new ComprasIngrediente("Ovos", 8, "Proteínas"));
+        ingredientes4.add(new ComprasIngrediente("Peito de Frango", 5, "Proteínas"));
+        ingredientes4.add(new ComprasIngrediente("Atum em Lata", 5, "Proteínas"));
 
         // Refeições fake
-        lista.add(new Refeicao("Refeição 1", ingredientes1, true));
-        lista.add(new Refeicao("Refeição 2", ingredientes2, true));
-        lista.add(new Refeicao("Refeição 3", ingredientes3, true));
-        lista.add(new Refeicao("Refeição 4", ingredientes4, true));
+        lista.add(new ComprasRefeicao("Refeição 1", ingredientes1, true));
+        lista.add(new ComprasRefeicao("Refeição 2", ingredientes2, true));
+        lista.add(new ComprasRefeicao("Refeição 3", ingredientes3, true));
+        lista.add(new ComprasRefeicao("Refeição 4", ingredientes4, true));
 
         return lista;
     }

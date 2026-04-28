@@ -1,12 +1,12 @@
-package com.example.projeto.models;
+package com.example.projeto.Compras.models;
 
-public class Ingrediente {
+public class ComprasIngrediente {
     private String nome;
     private int quantidade;
     private String categoria;
     private boolean comprado;
 
-    public Ingrediente(String nome, int quantidade, String categoria) {
+    public ComprasIngrediente(String nome, int quantidade, String categoria) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.categoria = categoria;
