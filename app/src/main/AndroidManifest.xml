@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Perfil">
         <activity
+            android:name="com.example.perfil.Tela_premium"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

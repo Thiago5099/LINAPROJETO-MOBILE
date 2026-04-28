@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="degrade1">#FF11AAD4</color>
     <color name="degrade2">#FF14B8A6</color>
+    <color name="premium">#FF11AAD4</color>
 </resources>
