@@ -1,4 +1,4 @@
 package com.example.projeto;
 
-public class main {
+public class MainActivity {
 }
