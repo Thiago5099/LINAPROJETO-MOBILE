@@ -26,6 +26,9 @@
         <!-- Criar Cardápio -->
         <activity android:name=".feture.CriarCardapio.CriarCardapioMainActivity"/>
 
+        <!-- Compras -->
+        <activity android:name=".Compras.models.ComprasMainActivity"/>
+
     </application>
 
 </manifest>
