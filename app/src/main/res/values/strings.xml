@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Projeto</string>
+    <string name="nome_app">Lina</string>
+
+    <!-- Opções de gênero -->
+    <string-array name="opcoes_genero">
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outros</item>
+    </string-array>
+
+    <!-- Opções de restrições alimentares -->
+    <string-array name="opcoes_restricoes">
+        <item>Celíacos</item>
+    </string-array>
 </resources>
