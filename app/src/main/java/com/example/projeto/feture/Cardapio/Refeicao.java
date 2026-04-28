@@ -1,4 +1,4 @@
-package com.example.projeto.feture.cardapio;
+package com.example.projeto.feture.Cardapio;
 
 public class Refeicao {
     public String tipo;

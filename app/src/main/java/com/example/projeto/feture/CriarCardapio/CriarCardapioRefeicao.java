@@ -1,4 +1,4 @@
-package com.example.projeto.CriarCardapio;
+package com.example.projeto.feture.CriarCardapio;
 
 public class CriarCardapioRefeicao {
     public String tipo;
