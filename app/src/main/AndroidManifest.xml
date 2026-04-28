@@ -10,7 +10,7 @@
 
         <!-- Principal -->
         <activity
-            android:name=".feture.login.LoginCadastro"
+            android:name=".feture.Login.LoginCadastro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,12 +19,12 @@
         </activity>
 
         <!-- Cardápio -->
-        <activity android:name=".feture.cardapio.CardapioMainActivity"/>
-        <activity android:name=".feture.cardapio.ReceitaActivity"/>
-        <activity android:name=".feture.cardapio.SelecionarPratoActivity"/>
+        <activity android:name=".feture.Cardapio.CardapioMainActivity"/>
+        <activity android:name=".feture.Cardapio.ReceitaActivity"/>
+        <activity android:name=".feture.Cardapio.SelecionarPratoActivity"/>
 
         <!-- Criar Cardápio -->
-        <activity android:name=".CriarCardapio.CriarCardapioMainActivity"/>
+        <activity android:name=".feture.CriarCardapio.CriarCardapioMainActivity"/>
 
     </application>
 
