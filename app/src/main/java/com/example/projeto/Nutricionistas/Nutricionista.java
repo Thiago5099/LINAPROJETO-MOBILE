@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.Nutricionistas;
 
 public class Nutricionista {
     private int id;

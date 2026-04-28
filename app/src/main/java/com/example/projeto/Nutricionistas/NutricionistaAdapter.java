@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.Nutricionistas;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.projeto.R;
+
 import java.util.ArrayList;
 
 public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdapter.ViewHolder> {
@@ -52,9 +55,9 @@ public class NutricionistaAdapter extends RecyclerView.Adapter<NutricionistaAdap
             params.setMargins(2, 0, 2, 0);
             img.setLayoutParams(params);
             if (i < estrelas) {
-                img.setImageResource(R.drawable.estrela_cheia);
+                img.setImageResource(R.drawable.ic_nutricionistasa_estrela_cheia);
             } else {
-                img.setImageResource(R.drawable.estrela_vazia);
+                img.setImageResource(R.drawable.ic_nutricionistas_estrela_vazia);
             }
             layoutEstrelas.addView(img);
         }

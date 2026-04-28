@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.Nutricionistas;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,13 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.*;
 import java.util.ArrayList;
 
-public class BancoHelper extends SQLiteOpenHelper {
+public class NutricionistasBancoHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "nutricionistas.db";
     private static final int DB_VERSION = 3;
     private static final String TABLE_NUTRICIONISTAS = "nutricionistas";
 
-    public BancoHelper(Context context) {
+    public NutricionistasBancoHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

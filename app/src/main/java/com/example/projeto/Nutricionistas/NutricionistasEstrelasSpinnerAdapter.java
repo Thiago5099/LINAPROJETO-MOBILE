@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.Nutricionistas;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class EstrelasSpinnerAdapter extends BaseAdapter {
+import com.example.projeto.R;
+
+public class NutricionistasEstrelasSpinnerAdapter extends BaseAdapter {
 
     private Context context;
 
-    public EstrelasSpinnerAdapter(Context context) {
+    public NutricionistasEstrelasSpinnerAdapter(Context context) {
         this.context = context;
     }
 
@@ -38,7 +40,7 @@ public class EstrelasSpinnerAdapter extends BaseAdapter {
 
     private View criarView(int position, ViewGroup parent) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_spinner_estrelas, parent, false);
+                .inflate(R.layout.item_spinner_estrelas_nutricionistas, parent, false);
 
         LinearLayout layoutEstrelas = view.findViewById(R.id.layoutEstrelas);
         layoutEstrelas.removeAllViews();
@@ -55,7 +57,7 @@ public class EstrelasSpinnerAdapter extends BaseAdapter {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(48, 48);
                 params.setMargins(2, 0, 2, 0);
                 img.setLayoutParams(params);
-                img.setImageResource(i < position ? R.drawable.estrela_cheia : R.drawable.estrela_vazia);
+                img.setImageResource(i < position ? R.drawable.ic_nutricionistasa_estrela_cheia : R.drawable.ic_nutricionistas_estrela_vazia);
                 layoutEstrelas.addView(img);
             }
         }

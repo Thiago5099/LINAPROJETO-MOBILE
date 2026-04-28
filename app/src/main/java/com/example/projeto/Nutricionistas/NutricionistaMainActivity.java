@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.Nutricionistas;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +8,14 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.projeto.R;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class NutricionistaMainActivity extends AppCompatActivity {
 
-    private BancoHelper banco;
+    private NutricionistasBancoHelper banco;
     private NutricionistaAdapter adapter;
     private ArrayList<Nutricionista> listaFiltrada;
 
@@ -22,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_nutricionistas);
 
-        banco = new BancoHelper(this);
+        banco = new NutricionistasBancoHelper(this);
 
         if (banco.listarTodos().isEmpty()) {
             banco.inserir("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678", "ana@gmail.com", "150 + pacientes atendidos", 1.0f);
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Spinner Avaliação com estrelas
         Spinner spinnerAvaliacao = findViewById(R.id.spinnerAvaliacao);
-        spinnerAvaliacao.setAdapter(new EstrelasSpinnerAdapter(this));
+        spinnerAvaliacao.setAdapter(new NutricionistasEstrelasSpinnerAdapter(this));
 
         // Listeners
         AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
