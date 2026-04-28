@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.feture.login;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -19,6 +19,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.projeto.R;
+
 public class LoginCadastro extends AppCompatActivity {
 
     private LinearLayout layoutLogin, layoutCadastro;
@@ -32,7 +34,7 @@ public class LoginCadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login_cadastro);
+        setContentView(R.layout.activity_login);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layoutLogin), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

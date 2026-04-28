@@ -23,7 +23,7 @@
             android:layout_width="74dp"
             android:layout_height="64dp"
             android:contentDescription="Logo Lina"
-            android:src="@drawable/ic_logo"/>
+            android:src="@drawable/ic_login_logo"/>
 
         <TextView
             android:id="@+id/textViewLina"
@@ -133,8 +133,8 @@
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_mail"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_email"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -155,8 +155,8 @@
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_senha"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_senha"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -207,8 +207,8 @@
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_nome"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_nome"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -229,8 +229,8 @@
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_mail"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_email"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -251,8 +251,8 @@
                     android:padding="12dp"
                     android:textColor="#0F172A"
                     android:textSize="16sp"
-                    android:background="@drawable/bg_edit_spinner"
-                    android:drawableStart="@drawable/ic_senha"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_senha"
                     android:drawablePadding="8dp"
                     android:layout_marginTop="4dp"/>
 
@@ -279,7 +279,7 @@
                     android:id="@+id/spinnerGenero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit_spinner"
+                    android:background="@drawable/bg_login_edit_spinner"
                     android:padding="8dp"/>
 
                 <TextView
@@ -294,7 +294,7 @@
                     android:id="@+id/spinnerRestricoes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit_spinner"
+                    android:background="@drawable/bg_login_edit_spinner"
                     android:padding="8dp"/>
 
                 <Button
@@ -353,8 +353,8 @@
                 android:inputType="textEmailAddress"
                 android:textColor="#0F172A"
                 android:textSize="16sp"
-                android:background="@drawable/bg_edit_spinner"
-                android:drawableStart="@drawable/ic_mail"
+                android:background="@drawable/bg_login_edit_spinner"
+                android:drawableStart="@drawable/ic_login_email"
                 android:drawablePadding="8dp"
                 android:layout_marginTop="4dp"/>
 
