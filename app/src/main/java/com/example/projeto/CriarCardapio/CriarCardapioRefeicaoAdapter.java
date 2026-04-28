@@ -1,4 +1,4 @@
-package com.example.tela;
+package com.example.projeto.CriarCardapio;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,15 +10,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.Refeicao;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 import java.util.Set;
 
-public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHolder> {
+public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCardapioRefeicaoAdapter.ViewHolder> {
 
-    private List<Refeicao> lista;
+    private List<CriarCardapioRefeicao> lista;
     private Set<Integer> selecionados;
     private final int LIMITE = 4;
 
@@ -28,7 +27,7 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
     private OnSelecaoChange listener;
 
-    public RefeicaoAdapter(List<Refeicao> lista, Set<Integer> selecionados, OnSelecaoChange listener) {
+    public CriarCardapioRefeicaoAdapter(List<CriarCardapioRefeicao> lista, Set<Integer> selecionados, OnSelecaoChange listener) {
         this.lista = lista;
         this.selecionados = selecionados;
         this.listener = listener;
@@ -52,14 +51,14 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_refeicao, parent, false);
+                .inflate(R.layout.item_criar_cardapio_refeicao, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Refeicao r = lista.get(position);
+        CriarCardapioRefeicao r = lista.get(position);
 
         // 🔥 SETANDO DADOS
         holder.tipo.setText(r.tipo);

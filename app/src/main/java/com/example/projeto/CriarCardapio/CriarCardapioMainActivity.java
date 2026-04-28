@@ -1,4 +1,4 @@
-package com.example.projeto;
+package com.example.projeto.CriarCardapio;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tela.RefeicaoAdapter;
+import com.example.projeto.R;
 
 import java.util.*;
 
-public class MainActivity extends AppCompatActivity {
+public class CriarCardapioMainActivity extends AppCompatActivity {
 
     RecyclerView recycler;
     TextView contador, txtDia;
@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
             "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"
     );
 
-    List<List<Refeicao>> cardapio;
+    List<List<CriarCardapioRefeicao>> cardapio;
     List<Set<Integer>> selecoesPorDia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_criar_cardapio_main);
 
         recycler = findViewById(R.id.recyclerRefeicoes);
         contador = findViewById(R.id.txtContador);
@@ -40,33 +40,33 @@ public class MainActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         // 🔥 SEGUNDA
-        List<Refeicao> seg = Arrays.asList(
-                new Refeicao("Café da manhã", "Pão com ovo", "10 min", "250 kcal"),
-                new Refeicao("Café da manhã", "Vitamina de banana", "8 min", "200 kcal"),
+        List<CriarCardapioRefeicao> seg = Arrays.asList(
+                new CriarCardapioRefeicao("Café da manhã", "Pão com ovo", "10 min", "250 kcal"),
+                new CriarCardapioRefeicao("Café da manhã", "Vitamina de banana", "8 min", "200 kcal"),
 
-                new Refeicao("Almoço", "Frango grelhado", "20 min", "320 kcal"),
-                new Refeicao("Almoço", "Arroz + feijão", "25 min", "350 kcal"),
+                new CriarCardapioRefeicao("Almoço", "Frango grelhado", "20 min", "320 kcal"),
+                new CriarCardapioRefeicao("Almoço", "Arroz + feijão", "25 min", "350 kcal"),
 
-                new Refeicao("Lanche da tarde", "Iogurte", "5 min", "180 kcal"),
-                new Refeicao("Lanche da tarde", "Sanduíche natural", "10 min", "220 kcal"),
+                new CriarCardapioRefeicao("Lanche da tarde", "Iogurte", "5 min", "180 kcal"),
+                new CriarCardapioRefeicao("Lanche da tarde", "Sanduíche natural", "10 min", "220 kcal"),
 
-                new Refeicao("Jantar", "Sopa de legumes", "20 min", "200 kcal"),
-                new Refeicao("Jantar", "Omelete leve", "15 min", "180 kcal")
+                new CriarCardapioRefeicao("Jantar", "Sopa de legumes", "20 min", "200 kcal"),
+                new CriarCardapioRefeicao("Jantar", "Omelete leve", "15 min", "180 kcal")
         );
 
         // 🔥 TERÇA
-        List<Refeicao> ter = Arrays.asList(
-                new Refeicao("Café da manhã", "Café + pão", "10 min", "220 kcal"),
-                new Refeicao("Café da manhã", "Aveia com frutas", "8 min", "210 kcal"),
+        List<CriarCardapioRefeicao> ter = Arrays.asList(
+                new CriarCardapioRefeicao("Café da manhã", "Café + pão", "10 min", "220 kcal"),
+                new CriarCardapioRefeicao("Café da manhã", "Aveia com frutas", "8 min", "210 kcal"),
 
-                new Refeicao("Almoço", "Carne assada", "30 min", "400 kcal"),
-                new Refeicao("Almoço", "Macarrão", "20 min", "350 kcal"),
+                new CriarCardapioRefeicao("Almoço", "Carne assada", "30 min", "400 kcal"),
+                new CriarCardapioRefeicao("Almoço", "Macarrão", "20 min", "350 kcal"),
 
-                new Refeicao("Lanche da tarde", "Fruta", "5 min", "120 kcal"),
-                new Refeicao("Lanche da tarde", "Barra de cereal", "5 min", "150 kcal"),
+                new CriarCardapioRefeicao("Lanche da tarde", "Fruta", "5 min", "120 kcal"),
+                new CriarCardapioRefeicao("Lanche da tarde", "Barra de cereal", "5 min", "150 kcal"),
 
-                new Refeicao("Jantar", "Sopa", "20 min", "180 kcal"),
-                new Refeicao("Jantar", "Salada com frango", "15 min", "200 kcal")
+                new CriarCardapioRefeicao("Jantar", "Sopa", "20 min", "180 kcal"),
+                new CriarCardapioRefeicao("Jantar", "Salada com frango", "15 min", "200 kcal")
         );
 
         // 🔁 repetir padrão
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     private void atualizarTela() {
         txtDia.setText(dias.get(diaAtual));
 
-        recycler.setAdapter(new RefeicaoAdapter(
+        recycler.setAdapter(new CriarCardapioRefeicaoAdapter(
                 cardapio.get(diaAtual),
                 selecoesPorDia.get(diaAtual),
                 total -> contador.setText(total + "/4 refeições")

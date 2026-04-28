@@ -1,12 +1,12 @@
-package com.example.projeto;
+package com.example.projeto.CriarCardapio;
 
-public class Refeicao {
+public class CriarCardapioRefeicao {
     public String tipo;
     public String nome;
     public String tempo;
     public String kcal;
 
-    public Refeicao(String tipo, String nome, String tempo, String kcal) {
+    public CriarCardapioRefeicao(String tipo, String nome, String tempo, String kcal) {
         this.tipo = tipo;
         this.nome = nome;
         this.tempo = tempo;

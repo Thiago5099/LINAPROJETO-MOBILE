@@ -7,7 +7,7 @@
         android:theme="@style/Theme.CardapioApp">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".CriarCardapio.CriarCardapioMainActivity"
             android:exported="true">
 
             <intent-filter>
