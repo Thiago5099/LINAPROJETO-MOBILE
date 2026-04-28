@@ -1,4 +1,4 @@
-package com.example.projeto.cardapio;
+package com.example.projeto.feture.cardapio;
 
 public class Prato {
     public String nome, ingredientes, preparo;

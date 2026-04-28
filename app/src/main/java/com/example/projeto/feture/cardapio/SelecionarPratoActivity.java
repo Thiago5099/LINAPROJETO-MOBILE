@@ -1,4 +1,4 @@
-package com.example.projeto.cardapio;
+package com.example.projeto.feture.cardapio;
 
 import android.content.Intent;
 import android.os.Bundle;

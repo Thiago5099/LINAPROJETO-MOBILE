@@ -23,9 +23,9 @@
         </activity>
 
         <!-- Cardápio -->
-        <activity android:name=".cardapio.CardapioMainActivity"/>
-        <activity android:name=".cardapio.ReceitaActivity"/>
-        <activity android:name=".cardapio.SelecionarPratoActivity"/>
+        <activity android:name=".feture.cardapio.CardapioMainActivity"/>
+        <activity android:name=".feture.cardapio.ReceitaActivity"/>
+        <activity android:name=".feture.cardapio.SelecionarPratoActivity"/>
 
     </application>
 
