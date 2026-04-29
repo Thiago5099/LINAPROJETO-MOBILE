@@ -44,7 +44,7 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup p, int v) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_cardapio_item_refeicao, p, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_refeicao_adapter, p, false);
         return new ViewHolder(view);
     }
 

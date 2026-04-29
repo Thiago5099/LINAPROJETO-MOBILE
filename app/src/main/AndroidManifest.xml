@@ -7,28 +7,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lina">
-
-        <!-- Principal -->
+        <activity
+            android:name=".feture.MudarCardapio.RefeicaoAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".feture.MudarCardapio.ItemRefeicao"
+            android:exported="false" />
+        <activity
+            android:name=".feture.MudarCardapio.MudarCardapio"
+            android:exported="false" /> <!-- Principal -->
         <activity
             android:name=".feture.Login.LoginCadastro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Cardápio -->
-        <activity android:name=".feture.Cardapio.CardapioMainActivity"/>
-        <activity android:name=".feture.Cardapio.ReceitaActivity"/>
-        <activity android:name=".feture.Cardapio.SelecionarPratoActivity"/>
-
-        <!-- Criar Cardápio -->
-        <activity android:name=".feture.CriarCardapio.CriarCardapioMainActivity"/>
-
-        <!-- Compras -->
-        <activity android:name=".Compras.models.ComprasMainActivity"/>
-
+        </activity> <!-- Cardápio -->
+        <activity android:name=".feture.Cardapio.CardapioMainActivity" />
+        <activity android:name=".feture.Cardapio.ReceitaActivity" />
+        <activity android:name=".feture.Cardapio.SelecionarPratoActivity" /> <!-- Criar Cardápio -->
+        <activity android:name=".feture.CriarCardapio.CriarCardapioMainActivity" /> <!-- Compras -->
+        <activity android:name=".Compras.models.ComprasMainActivity" />
     </application>
 
 </manifest>
