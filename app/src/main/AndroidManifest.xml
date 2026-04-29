@@ -12,21 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projeto">
 
-        <!-- Principal -->
+        <!-- Cardápio -->
         <activity
-            android:name=".feture.login.LoginCadastro"
+            android:name=".feture.cardapio.CardapioMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Cardápio -->
-        <activity android:name=".feture.cardapio.CardapioMainActivity"/>
-        <activity android:name=".feture.cardapio.ReceitaActivity"/>
-        <activity android:name=".feture.cardapio.SelecionarPratoActivity"/>
+        <activity
+            android:name=".feture.cardapio.ReceitaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".feture.cardapio.SelecionarPratoActivity"
+            android:exported="false" />
 
     </application>
 
-</manifest> 
+</manifest>
