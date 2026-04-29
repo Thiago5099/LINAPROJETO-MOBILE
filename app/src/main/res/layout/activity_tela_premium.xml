@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context="com.example.perfil.MainActivity"
     android:background="#F5F5F5">
 
     <!-- TOPO -->
@@ -30,20 +30,16 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="52dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="55dp"
             android:text="Premium"
-            android:background="@drawable/caixa_redonda"
+            android:background="@drawable/caixa_redonda_premium"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="10dp" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
     </FrameLayout>
 
     <!-- CARD PERFIL -->
@@ -146,16 +142,5 @@
             android:layout_weight="1"
             android:src="@drawable/ic_perfil" />
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="187dp"
-        android:layout_height="158dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="55dp"
-        android:background="@color/premium"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="486dp">
-
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
