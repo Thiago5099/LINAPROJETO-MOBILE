@@ -27,13 +27,15 @@
             <!-- Botão voltar redondo -->
             <ImageButton
                 android:id="@+id/buttonVoltarReceita"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_vector"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bg_circle"
                 android:backgroundTint="#119488"
+                android:padding="8dp"
                 android:scaleType="centerInside"
-                android:clipToOutline="true"/>
+                android:src="@drawable/ic_vector" />
 
 
             <!-- Texto centralizado -->
@@ -52,39 +54,102 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardReceita"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_margin="16dp"
         android:backgroundTint="#FFFFFF"
-        android:visibility="gone"
         app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="6dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="388dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Imagem da receita -->
+            <ImageView
+                android:id="@+id/imageReceita"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_receita"/>
+
+            <!-- Título da receita -->
             <TextView
+                android:id="@+id/textTituloReceita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text=""
-                android:textColor="#475569"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
+            <!-- Tempo e calorias -->
             <TextView
+                android:id="@+id/textReceitaInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text=""
                 android:textColor="#475569"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
+            <!-- Tags (ex: Sem Glúten, Sem Lactose) -->
+            <LinearLayout
+                android:id="@+id/layoutTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/textTag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tag_background"
+                    android:padding="6dp"
+                    android:text=""
+                    android:textColor="#119488"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/textTag2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/tag_background"
+                    android:padding="6dp"
+                    android:text=""
+                    android:textColor="#119488"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <!-- Ingredientes -->
+            <TextView
+                android:id="@+id/textIngredientesTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Ingredientes"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textIngredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="#475569"
+                android:textSize="14sp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
