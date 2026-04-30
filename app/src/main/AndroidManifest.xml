@@ -12,17 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Perfil">
         <activity
-            android:name="com.example.perfil.Tela_premium"
-            android:exported="false" />
+            android:name=".Perfil.PerfilPremium"
+            android:exported="true" />
         <activity
-            android:name="com.example.perfil.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".Perfil.Perfil"
+            android:exported="true" />
     </application>
 
 </manifest>
