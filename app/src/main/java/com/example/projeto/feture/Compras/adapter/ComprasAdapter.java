@@ -1,4 +1,4 @@
-package com.example.projeto.Compras.adapter;
+package com.example.projeto.feture.Compras.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.Compras.models.ComprasIngrediente;
-import com.example.projeto.Compras.models.ComprasItemLista;
+import com.example.projeto.feture.Compras.models.ComprasIngrediente;
+import com.example.projeto.feture.Compras.models.ComprasItemLista;
 
 import java.util.List;
 

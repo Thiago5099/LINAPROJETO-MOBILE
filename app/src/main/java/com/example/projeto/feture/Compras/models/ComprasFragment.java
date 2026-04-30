@@ -1,4 +1,4 @@
-package com.example.projeto.Compras.models;
+package com.example.projeto.feture.Compras.models;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.projeto.R;
-import com.example.projeto.Compras.adapter.ComprasAdapter;
+import com.example.projeto.feture.Compras.adapter.ComprasAdapter;
 
 import java.util.*;
 

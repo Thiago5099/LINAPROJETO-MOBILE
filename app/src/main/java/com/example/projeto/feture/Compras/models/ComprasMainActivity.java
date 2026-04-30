@@ -1,4 +1,4 @@
-package com.example.projeto.Compras.models;
+package com.example.projeto.feture.Compras.models;
 
 import android.os.Bundle;
 

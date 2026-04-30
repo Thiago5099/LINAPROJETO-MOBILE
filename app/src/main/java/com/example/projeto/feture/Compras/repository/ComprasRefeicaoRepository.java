@@ -1,6 +1,6 @@
-package com.example.projeto.Compras.repository;
+package com.example.projeto.feture.Compras.repository;
 
-import com.example.projeto.Compras.models.ComprasRefeicao;
+import com.example.projeto.feture.Compras.models.ComprasRefeicao;
 
 import java.util.ArrayList;
 import java.util.List;
