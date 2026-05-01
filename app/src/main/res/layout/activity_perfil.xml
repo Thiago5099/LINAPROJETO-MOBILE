@@ -35,7 +35,7 @@
         android:layout_width="365dp"
         android:layout_height="158dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/caixa_redonda"
+        android:background="@drawable/bg_perfil_caixa_redonda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
@@ -46,10 +46,10 @@
             android:layout_height="69dp"
             android:layout_marginStart="142dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/perfildois"
+            android:background="@drawable/bg_perfil_dois"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/circle" />
+            android:src="@drawable/ic_perfil_foto" />
 
         <TextView
             android:id="@+id/textView"
@@ -107,7 +107,7 @@
         android:layout_width="366dp"
         android:layout_height="62dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/botao_gradiente"
+        android:background="@drawable/bg_perfil_botao_gradiente"
         android:text="Assine o Lina Premium\nTenha acesso a todas as funcionalidades"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -117,48 +117,11 @@
         app:layout_constraintTop_toBottomOf="@id/plano" />
 
     <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cardapio" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_compras" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_nutri" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_perfil" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/plano"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/caixa_redonda"
+        android:background="@drawable/bg_perfil_caixa_redonda"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -225,7 +188,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="check"
-                android:src="@drawable/check" />
+                android:src="@drawable/ic_perfil_check" />
 
             <TextView
                 android:id="@+id/beneficio1"
@@ -249,7 +212,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="check"
-                android:src="@drawable/check" />
+                android:src="@drawable/ic_perfil_check" />
 
             <TextView
                 android:id="@+id/beneficio3"
@@ -273,7 +236,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="check"
-                android:src="@drawable/check" />
+                android:src="@drawable/ic_perfil_check" />
 
             <TextView
                 android:id="@+id/beneficio5"
@@ -297,7 +260,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="check"
-                android:src="@drawable/check" />
+                android:src="@drawable/ic_perfil_check" />
 
             <TextView
                 android:id="@+id/beneficio6"
@@ -321,7 +284,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="check"
-                android:src="@drawable/check" />
+                android:src="@drawable/ic_perfil_check" />
 
             <TextView
                 android:id="@+id/beneficio7"

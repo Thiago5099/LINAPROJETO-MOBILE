@@ -35,7 +35,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="55dp"
             android:text="Premium"
-            android:background="@drawable/caixa_redonda_premium"
+            android:background="@drawable/bg_perfil_caixa_redonda_premium"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp" />
@@ -50,7 +50,7 @@
         android:layout_width="365dp"
         android:layout_height="158dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/caixa_redonda"
+        android:background="@drawable/bg_perfil_caixa_redonda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
@@ -61,10 +61,10 @@
             android:layout_height="69dp"
             android:layout_marginStart="142dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/perfildois"
+            android:background="@drawable/bg_perfil_dois"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/circle" />
+            android:src="@drawable/ic_perfil_foto" />
 
         <TextView
             android:id="@+id/textView"
@@ -105,42 +105,5 @@
     <!-- BOTÃO PREMIUM -->
 
     <!-- BARRA INFERIOR -->
-
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_cardapio" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_compras" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_nutri" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_perfil" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
