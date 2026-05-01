@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -19,16 +20,53 @@
         </activity>
 
         <!-- Cardápio -->
-        <activity android:name=".feture.Cardapio.CardapioMainActivity"/>
-        <activity android:name=".feture.Cardapio.ReceitaActivity"/>
-        <activity android:name=".feture.Cardapio.SelecionarPratoActivity"/>
+        <activity
+            android:name=".feture.Cardapio.CardapioMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".feture.Cardapio.ReceitaActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".feture.Cardapio.SelecionarPratoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- Criar Cardápio -->
-        <activity android:name=".feture.CriarCardapio.CriarCardapioMainActivity"/>
+        <activity
+            android:name=".feture.CriarCardapio.CriarCardapioMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- Compras -->
-        <activity android:name=".Compras.models.ComprasMainActivity"/>
+        <activity
+            android:name="feture.Cardapio.CardapioMainActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
-
 </manifest>

@@ -154,8 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Adequado para:"
-                android:textColor="#475569"
-                android:textSize="14sp"/>
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
             <!-- Tags (Sem Glúten, Sem Lactose) -->
             <LinearLayout
@@ -264,5 +265,4 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
