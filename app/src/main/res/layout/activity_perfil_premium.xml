@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.projeto.Perfil.PerfilPremium"
+    android:background="#F5F5F5">
+
+    <!-- TOPO -->
+    <FrameLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="Perfil"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="55dp"
+            android:text="Premium"
+            android:background="@drawable/bg_perfil_caixa_redonda_premium"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="10dp" />
+
+    </FrameLayout>
+
+    <!-- CARD PERFIL -->
+
+    <!-- PLANO PREMIUM -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="365dp"
+        android:layout_height="158dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_perfil_caixa_redonda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <ImageView
+            android:id="@+id/imagePerfil"
+            android:layout_width="69dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_perfil_dois"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_perfil_foto" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="Giovanna@gmail.com"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Giovanna Oliveira"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- BOTÃO PREMIUM -->
+
+    <!-- BARRA INFERIOR -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,3 @@
 <resources>
-    <string name="nome_app">Lina</string>
-
-    <!-- Opções de gênero -->
-    <string-array name="opcoes_genero">
-        <item>Feminino</item>
-        <item>Masculino</item>
-        <item>Outros</item>
-    </string-array>
-
-    <!-- Opções de restrições alimentares -->
-    <string-array name="opcoes_restricoes">
-        <item>Celíacos</item>
-    </string-array>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <sring-array name ="SpinnerNutricionistas">
-        <item name="app_name">Projeto</item>
-        <item name="cidade">Cidade</item>
-        <item name="avaliacao">Avaliação</item>
-    </sring-array>
-
+    <string name="app_name">Projeto</string>
 </resources>
