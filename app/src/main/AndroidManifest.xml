@@ -70,7 +70,7 @@
 
         <!-- Nutricionistas -->
         <activity
-            android:name=".Nutricionistas.NutricionistaMainActivity"
+            android:name=".feture.Nutricionistas.NutricionistaMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
