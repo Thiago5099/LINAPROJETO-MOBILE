@@ -59,7 +59,39 @@
 
         <!-- Compras -->
         <activity
-            android:name=".Cardapio.CardapioMainActivity"
+            android:name=".feture.Compras.models.ComprasMainActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Nutricionistas -->
+        <activity
+            android:name=".feture.Nutricionistas.NutricionistaMainActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Perfil -->
+        <activity
+            android:name=".feture.Perfil.Perfil"
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".feture.Perfil.PerfilPremium"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
