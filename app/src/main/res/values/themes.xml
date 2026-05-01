@@ -1,7 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Lina" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize aqui se quiser -->
+<!--NÃO MEXER -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Projeto" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
 
+    <style name="Theme.Projeto" parent="Base.Theme.Projeto">
+    </style>
 </resources>
