@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:width="35dp" android:height="85dp"/>
+    <radius android:radius="12"/>
+    <solid android:backgroundTint="#B8E3D8"/>
+</selector>

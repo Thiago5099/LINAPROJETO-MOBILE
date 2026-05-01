@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:background="@drawable/bg_circle"
+                android:background="@drawable/bg_receita_card_circle"
                 android:backgroundTint="#119488"
                 android:padding="8dp"
                 android:scaleType="centerInside"
@@ -40,7 +40,7 @@
 
             <!-- Texto centralizado -->
             <TextView
-                android:id="@+id/textReceitaTitulo"
+                android:id="@+id/textReceita    "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Receita"
@@ -57,27 +57,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#FFFFFF"
         app:cardCornerRadius="20dp"
         app:cardElevation="6dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/cardReceitaTop">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Imagem da receita -->
-            <ImageView
-                android:id="@+id/imageReceita"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholder_receita"/>
+            <!-- Hora do dia -->
+            <TextView
+                android:id="@+id/textReceitaMomento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Refeição Hora do Dia"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <!-- Título da receita -->
             <TextView
@@ -85,49 +89,86 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text=""
+                android:text="Título da receita"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
-            <!-- Tempo e calorias -->
+            <!-- Imagem da receita -->
+            <ImageView
+                android:id="@+id/imageReceita"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop" />
+
+            <!-- Tags Info -->
+            <LinearLayout
+                android:id="@+id/layoutTagsInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textTagTempo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_receita_card_informacoes"
+                    android:padding="6dp"
+                    android:text="Tempo"
+                    android:textColor="#119488"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textTagKcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_receita_card_informacoes"
+                    android:padding="6dp"
+                    android:text="Kcal"
+                    android:textColor="#119488"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Adequação -->
             <TextView
                 android:id="@+id/textReceitaInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text=""
+                android:text="Adequado para:"
                 android:textColor="#475569"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <!-- Tags (ex: Sem Glúten, Sem Lactose) -->
             <LinearLayout
                 android:id="@+id/layoutTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textTag1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/tag_background"
+                    android:background="@drawable/bg_receita_card_informacoes"
                     android:padding="6dp"
-                    android:text=""
+                    android:text="Sem 1"
                     android:textColor="#119488"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/textTag2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/tag_background"
+                    android:background="@drawable/bg_receita_card_informacoes"
                     android:padding="6dp"
-                    android:text=""
+                    android:text="Sem 2"
                     android:textColor="#119488"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <!-- Ingredientes -->
@@ -138,17 +179,57 @@
                 android:layout_marginTop="12dp"
                 android:text="Ingredientes"
                 android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textIngredientes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text=""
+                android:text="Texto dos ingredientes"
                 android:textColor="#475569"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
+
+            <!-- Modo de Preparo -->
+            <TextView
+                android:id="@+id/textModoDePreparoTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Modo de Preparo"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textModoDePreparo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Texto do modo de preparo"
+                android:textColor="#475569"
+                android:textSize="14sp" />
+
+            <!-- Informações Nutricionais -->
+            <TextView
+                android:id="@+id/textInformacoesNutricionaisTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Informações Nutricionais"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textInformacoesNutricionais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Texto das informações nutricionais"
+                android:textColor="#475569"
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
