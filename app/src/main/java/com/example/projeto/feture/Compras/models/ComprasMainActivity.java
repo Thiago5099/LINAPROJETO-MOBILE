@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.projeto.R;
+import com.example.projeto.feture.CardapioFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ComprasMainActivity extends AppCompatActivity {
@@ -20,17 +21,14 @@ public class ComprasMainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
 
         // Tela inicial
-        loadFragment(new ComprasFragment());
-        // loadFragment(new LoginFragment()); *?*
+        loadFragment(new CardapioFragment());
 
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment selected = null;
 
-            if (item.getItemId() == R.id.nav_cardapio) {
-                selected = new ComprasPlaceholderFragment("Cardápio (em desenvolvimento)");
-                // if (item.getItemId() == R.id.nav_cardapio) {
-                //   selected = new CardapioFragment();
+                 if (item.getItemId() == R.id.nav_cardapio) {
+                   selected = new CardapioFragment();
 
             } else if (item.getItemId() == R.id.nav_compras) {
                 selected = new ComprasFragment();
