@@ -1,11 +1,16 @@
 package com.example.projeto.feture.Nutricionistas;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +18,7 @@ import com.example.projeto.R;
 
 import java.util.ArrayList;
 
-public class NutricionistaMainActivity extends AppCompatActivity {
+public class NutricionistasFragment extends Fragment {
 
     private NutricionistasBancoHelper banco;
     private NutricionistaAdapter adapter;
@@ -22,12 +27,19 @@ public class NutricionistaMainActivity extends AppCompatActivity {
     private String cidadeSelecionada = "Cidade";
     private int avaliacaoSelecionada = 0;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nutricionistas);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_nutricionistas, container, false);
+    }
 
-        banco = new NutricionistasBancoHelper(this);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        banco = new NutricionistasBancoHelper(requireContext());
 
         if (banco.listarTodos().isEmpty()) {
             banco.inserir("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678", "ana@gmail.com", "150 + pacientes atendidos", 1.0f);
@@ -43,22 +55,22 @@ public class NutricionistaMainActivity extends AppCompatActivity {
 
         // RecyclerView
         listaFiltrada = banco.listarTodos();
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NutricionistaAdapter(this, listaFiltrada);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new NutricionistaAdapter(requireContext(), listaFiltrada);
         recyclerView.setAdapter(adapter);
 
         // Spinner Cidade
-        Spinner spinnerCidade = findViewById(R.id.spinnerCidade);
-        ArrayAdapter<String> adapterCidade = new ArrayAdapter<>(this,
+        Spinner spinnerCidade = view.findViewById(R.id.spinnerCidade);
+        ArrayAdapter<String> adapterCidade = new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_item,
                 new String[]{"Cidade", "São Paulo", "Campinas", "Santos"});
         adapterCidade.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCidade.setAdapter(adapterCidade);
 
         // Spinner Avaliação com estrelas
-        Spinner spinnerAvaliacao = findViewById(R.id.spinnerAvaliacao);
-        spinnerAvaliacao.setAdapter(new NutricionistasEstrelasSpinnerAdapter(this));
+        Spinner spinnerAvaliacao = view.findViewById(R.id.spinnerAvaliacao);
+        spinnerAvaliacao.setAdapter(new NutricionistasEstrelasSpinnerAdapter(requireContext()));
 
         // Listeners
         AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
@@ -67,7 +79,7 @@ public class NutricionistaMainActivity extends AppCompatActivity {
                 if (parent.getId() == R.id.spinnerCidade) {
                     cidadeSelecionada = parent.getItemAtPosition(position).toString();
                 } else if (parent.getId() == R.id.spinnerAvaliacao) {
-                    avaliacaoSelecionada = position; // 0 = sem filtro, 1-5 = estrelas
+                    avaliacaoSelecionada = position;
                 }
                 aplicarFiltros();
             }
