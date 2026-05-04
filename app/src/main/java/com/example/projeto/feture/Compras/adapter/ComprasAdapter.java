@@ -1,5 +1,6 @@
 package com.example.projeto.feture.Compras.adapter;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,7 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     icon.setImageResource(R.drawable.ic_compras_graos);
                     break;
                 case "Laticínios":
-                    icon.setImageResource(R.drawable.ic_compras_laticionios);
+                    icon.setImageResource(R.drawable.ic_compras_laticinios);
                     break;
                 case "Proteínas":
                     icon.setImageResource(R.drawable.ic_compras_proteinas);
@@ -93,6 +94,21 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 default:
                     icon.setImageResource(R.drawable.ic_compras_proteinas);
             }
+
+            int widthInDp = 21;
+            int heightInDp = 21;
+
+            int widthInPx = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, widthInDp, icon.getResources().getDisplayMetrics()
+            );
+            int heightInPx = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, heightInDp, icon.getResources().getDisplayMetrics()
+            );
+
+            ViewGroup.LayoutParams params = icon.getLayoutParams();
+            params.width = widthInPx;
+            params.height = heightInPx;
+            icon.setLayoutParams(params);
         }
     }
 
