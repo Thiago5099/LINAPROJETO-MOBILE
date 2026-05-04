@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/nav_nutri"
-        android:title="Nutri"
+        android:title="Nutricionistas"
         android:icon="@drawable/ic_menu_nutri"
         android:layout_width="25dp"
         android:layout_height="25dp"

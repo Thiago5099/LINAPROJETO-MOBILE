@@ -18,8 +18,13 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:menu="@menu/menu_bottom"
-        android:background="@color/white"/>
+        app:itemIconTint="@color/nav_colors"
+        app:itemTextColor="@color/nav_colors"
+        app:labelVisibilityMode="labeled"
+        app:itemActiveIndicatorStyle="@android:style/Widget.DeviceDefault"/>
+
 
 
 </LinearLayout>
