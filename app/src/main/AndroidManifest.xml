@@ -21,15 +21,6 @@
         </activity>
 
         <!-- Cardápio -->
-        <activity
-            android:name=".feture.Cardapio.CardapioMainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".feture.Cardapio.ReceitaActivity"
@@ -75,28 +66,10 @@
         </activity>
 
         <!-- Nutricionistas -->
-        <activity
-            android:name=".feture.Nutricionistas.NutricionistaMainActivity"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <!-- Perfil -->
-        <activity
-            android:name=".feture.Perfil.Perfil"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".feture.Perfil.PerfilPremium"
