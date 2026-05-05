@@ -29,16 +29,16 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tipo, nome, info;
-        Button receita, mudar;
+        TextView tvTipoRefeicao, tvNomeRefeicao, tvTempo, tvCalorias;
+        Button btnVerReceita;
 
         public ViewHolder(View v) {
             super(v);
-            tipo = v.findViewById(R.id.tipo);
-            nome = v.findViewById(R.id.nome);
-            info = v.findViewById(R.id.info);
-            receita = v.findViewById(R.id.btnReceita);
-            mudar = v.findViewById(R.id.btnMudar);
+            tvTipoRefeicao = v.findViewById(R.id.tvTipoRefeicao);
+            tvNomeRefeicao = v.findViewById(R.id.tvNomeRefeicao);
+            tvTempo        = v.findViewById(R.id.tvTempo);
+            tvCalorias     = v.findViewById(R.id.tvCalorias);
+            btnVerReceita  = v.findViewById(R.id.btnVerReceita);
         }
     }
 
@@ -52,25 +52,18 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
     public void onBindViewHolder(ViewHolder h, int i) {
         Refeicao r = lista.get(i);
 
-        h.tipo.setText(r.tipo);
-        h.nome.setText(r.prato.nome);
-        h.info.setText(r.prato.tempo + " min | " + r.prato.calorias + " kcal");
+        h.tvTipoRefeicao.setText(r.tipo);
+        h.tvNomeRefeicao.setText(r.prato.nome);
+        h.tvTempo.setText(r.prato.tempo + " min");
+        h.tvCalorias.setText(r.prato.calorias + " kcal");
 
         // VER RECEITA
-        h.receita.setOnClickListener(v -> {
+        h.btnVerReceita.setOnClickListener(v -> {
             Intent it = new Intent(context, ReceitaActivity.class);
             it.putExtra("nome", r.prato.nome);
             it.putExtra("ingredientes", r.prato.ingredientes);
             it.putExtra("preparo", r.prato.preparo);
             context.startActivity(it);
-        });
-
-        // MUDAR
-        h.mudar.setOnClickListener(v -> {
-            int pos = h.getAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION && listener != null) {
-                listener.onMudar(pos, r.tipo);
-            }
         });
     }
 
