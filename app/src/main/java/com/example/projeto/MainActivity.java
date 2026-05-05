@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.activity.EdgeToEdge;
@@ -23,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EditText editText;
-    private Button btnEnviar;
+    private ImageButton btnEnviar;
+    private LinearLayout layoutBoasVindas;
     private List<Mensagem> mensagens = new ArrayList<>();
     private MensagemAdapter adapter;
     private List<JSONObject> historico = new ArrayList<>();
+    private boolean primeiraInteracao = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +45,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewMensagens);
         editText = findViewById(R.id.editTextMensagem);
         btnEnviar = findViewById(R.id.btnEnviar);
+        layoutBoasVindas = findViewById(R.id.layoutBoasVindas);
 
         adapter = new MensagemAdapter(mensagens);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        // Mensagem inicial do bot
-        adicionarMensagem("Olá! Posso ajudar você a encontrar pratos com ou sem ingredientes específicos. O que deseja?", false);
-
         btnEnviar.setOnClickListener(v -> {
             String texto = editText.getText().toString().trim();
             if (texto.isEmpty()) return;
+
+            // Esconde a tela de boas-vindas e mostra o chat
+            if (primeiraInteracao) {
+                layoutBoasVindas.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                primeiraInteracao = false;
+            }
 
             adicionarMensagem(texto, true);
             editText.setText("");
