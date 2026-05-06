@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_cardapio_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Tipo -->
+    <TextView
+        android:id="@+id/tipo"
+        android:text="Café da Manhã"
+        android:textSize="13sp"
+        android:textColor="#666"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Nome -->
+    <TextView
+        android:id="@+id/nome"
+        android:text="Omelete com Vegetais"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Info -->
+    <TextView
+        android:id="@+id/info"
+        android:text="⏱ 15 min  ⚡ 280 kcal"
+        android:textSize="12sp"
+        android:textColor="#777"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Botão Ver Receita -->
+    <Button
+        android:id="@+id/btnVerReceita"
+        android:text="Ver Receita"
+        android:backgroundTint="#1E8E7E"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

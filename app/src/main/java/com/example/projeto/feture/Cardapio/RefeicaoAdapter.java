@@ -15,9 +15,8 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
     Context context;
     List<Refeicao> lista;
 
-    // INTERFACE PARA CLIQUE
     public interface OnMudarClick {
-        void onMudar(int posicao, String tipo);
+        void onMudar(int posicao, String tipo, String nomeAtual, String infoAtual);
     }
 
     OnMudarClick listener;
@@ -34,17 +33,18 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
         public ViewHolder(View v) {
             super(v);
-            tipo = v.findViewById(R.id.tipo);
-            nome = v.findViewById(R.id.nome);
-            info = v.findViewById(R.id.info);
+            tipo    = v.findViewById(R.id.tipo);
+            nome    = v.findViewById(R.id.nome);
+            info    = v.findViewById(R.id.info);
             receita = v.findViewById(R.id.btnReceita);
-            mudar = v.findViewById(R.id.btnMudar);
+            mudar   = v.findViewById(R.id.btnMudar);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup p, int v) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_cardapio_item_refeicao, p, false);
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.activity_cardapio_item_refeicao, p, false);
         return new ViewHolder(view);
     }
 
@@ -54,7 +54,7 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
         h.tipo.setText(r.tipo);
         h.nome.setText(r.prato.nome);
-        h.info.setText(r.prato.tempo + " min | " + r.prato.calorias + " kcal");
+        h.info.setText("⏱ " + r.prato.tempo + " min  ⚡ " + r.prato.calorias + " kcal");
 
         // VER RECEITA
         h.receita.setOnClickListener(v -> {
@@ -65,11 +65,13 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
             context.startActivity(it);
         });
 
-        // MUDAR
+        // MUDAR → delega ao Fragment para abrir com startActivityForResult
         h.mudar.setOnClickListener(v -> {
             int pos = h.getAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION && listener != null) {
-                listener.onMudar(pos, r.tipo);
+            if (pos == RecyclerView.NO_POSITION) return;
+            if (listener != null) {
+                String info = "⏱ " + r.prato.tempo + " min  ⚡ " + r.prato.calorias + " kcal";
+                listener.onMudar(pos, r.tipo, r.prato.nome, info);
             }
         });
     }
