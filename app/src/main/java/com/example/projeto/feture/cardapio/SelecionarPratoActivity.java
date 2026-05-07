@@ -69,14 +69,20 @@ public class SelecionarPratoActivity extends AppCompatActivity {
 
             Prato selecionado = listaPratos.get(position);
 
-            Intent it = new Intent();
+            Intent it = new Intent(this, ReceitaActivity.class);
 
-            it.putExtra("nome", selecionado.nome);
-            it.putExtra("tipo", tipo);
-            it.putExtra("posicao", posicao);
+            it.putExtra(ReceitaIntentKeys.MOMENTO,      tipo);
+            it.putExtra(ReceitaIntentKeys.TITULO,       selecionado.nome);
+            it.putExtra(ReceitaIntentKeys.INGREDIENTES, selecionado.ingredientes);
+            it.putExtra(ReceitaIntentKeys.PREPARO,      selecionado.preparo);
+            it.putExtra(ReceitaIntentKeys.KCAL,         selecionado.calorias + " kcal");
+            it.putExtra(ReceitaIntentKeys.TEMPO,        selecionado.tempo + " min");
 
-            setResult(RESULT_OK, it);
-            finish();
+            it.putExtra(ReceitaIntentKeys.SEM_GLUTEN,  "Sem Glúten");
+            it.putExtra(ReceitaIntentKeys.SEM_LACTOSE, "Sem Lactose");
+            it.putExtra(ReceitaIntentKeys.NUTRICIONAL, selecionado.calorias + " kcal no total");
+
+            startActivity(it);
         });
     }
 }

@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardReceitaTop"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="100dp"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:gravity="bottom|center"
             android:padding="8dp">
 
             <!-- Botão voltar redondo -->
@@ -29,7 +29,6 @@
                 android:id="@+id/buttonVoltarReceita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:background="@drawable/bg_receita_card_circle"
                 android:backgroundTint="#119488"

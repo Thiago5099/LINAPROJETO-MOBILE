@@ -57,11 +57,28 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
         h.info.setText(r.prato.tempo + " min | " + r.prato.calorias + " kcal");
 
         // VER RECEITA
+        //h.receita.setOnClickListener(v -> {
+            //Intent it = new Intent(context, ReceitaActivity.class);
+            //it.putExtra("nome", r.prato.nome);
+            //it.putExtra("ingredientes", r.prato.ingredientes);
+            //it.putExtra("preparo", r.prato.preparo);
+            //context.startActivity(it);
+        //})
+        // VER RECEITA
         h.receita.setOnClickListener(v -> {
             Intent it = new Intent(context, ReceitaActivity.class);
-            it.putExtra("nome", r.prato.nome);
-            it.putExtra("ingredientes", r.prato.ingredientes);
-            it.putExtra("preparo", r.prato.preparo);
+
+            it.putExtra(ReceitaIntentKeys.MOMENTO,      r.tipo);
+            it.putExtra(ReceitaIntentKeys.TITULO,       r.prato.nome);
+            it.putExtra(ReceitaIntentKeys.TEMPO,        r.prato.tempo + " min");
+            it.putExtra(ReceitaIntentKeys.KCAL,         r.prato.calorias + " kcal");
+            it.putExtra(ReceitaIntentKeys.INGREDIENTES, r.prato.ingredientes);
+            it.putExtra(ReceitaIntentKeys.PREPARO,      r.prato.preparo);
+
+            it.putExtra(ReceitaIntentKeys.SEM_GLUTEN,   "Sem Glúten");
+            it.putExtra(ReceitaIntentKeys.SEM_LACTOSE,  "Sem Lactose");
+            it.putExtra(ReceitaIntentKeys.NUTRICIONAL,  r.prato.calorias + " kcal no total");
+
             context.startActivity(it);
         });
 
