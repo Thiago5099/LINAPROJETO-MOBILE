@@ -1,38 +1,267 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:background="#F0F0F0"
+    android:backgroundTint="#F0F0F0">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardReceitaTop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="65dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/nome"
+        <LinearLayout
+            android:id="@+id/linearCardTop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp">
 
-        <TextView
-            android:text="Ingredientes"
+            <!-- Botão voltar redondo -->
+            <ImageButton
+                android:id="@+id/buttonVoltarReceita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bg_receita_card_circle"
+                android:backgroundTint="#119488"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_vector" />
+
+
+            <!-- Texto centralizado -->
+            <TextView
+                android:id="@+id/textReceita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receita"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginStart="12dp"
+                android:gravity="center"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardReceita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardReceitaTop">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/ingredientes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <!-- Hora do dia -->
+            <TextView
+                android:id="@+id/textReceitaMomento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Refeição Hora do Dia"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:text="Preparo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <!-- Título da receita -->
+            <TextView
+                android:id="@+id/textTituloReceita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Título da receita"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/preparo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <!-- Imagem da receita -->
+            <ImageView
+                android:id="@+id/imageReceita"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop" />
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Tags Info (tempo e kcal) -->
+            <LinearLayout
+                android:id="@+id/layoutTagsInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTagTempo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    android:backgroundTint="#B8E3D8"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/textTagTempo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="Tempo de preparo"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTagKcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    android:backgroundTint="#B8E3D8">
+
+                    <TextView
+                        android:id="@+id/textTagKcal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="kcal"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Adequação -->
+            <TextView
+                android:id="@+id/textReceitaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Adequado para:"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <!-- Tags (Sem Glúten, Sem Lactose) -->
+            <LinearLayout
+                android:id="@+id/layoutTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTagSemGluten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    android:backgroundTint="#B8E3D8"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/textTagSemGluten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="Sem 1"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTagSemLactose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    android:backgroundTint="#B8E3D8">
+
+                    <TextView
+                        android:id="@+id/textTagSemLactose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="Sem 2"
+                        android:textColor="#000000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Ingredientes -->
+            <TextView
+                android:id="@+id/textIngredientesTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Ingredientes"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textIngredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Texto dos ingredientes"
+                android:textColor="#475569"
+                android:textSize="14sp" />
+
+            <!-- Modo de Preparo -->
+            <TextView
+                android:id="@+id/textModoDePreparoTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Modo de Preparo"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textModoDePreparo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Texto do modo de preparo"
+                android:textColor="#475569"
+                android:textSize="14sp" />
+
+            <!-- Informações Nutricionais -->
+            <TextView
+                android:id="@+id/textInformacoesNutricionaisTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Informações Nutricionais"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textInformacoesNutricionais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Texto das informações nutricionais"
+                android:textColor="#475569"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
