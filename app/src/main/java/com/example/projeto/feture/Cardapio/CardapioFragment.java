@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
 import com.example.projeto.R;
+import com.example.projeto.feture.CriarCardapio.CriarCardapioMainActivity;
+import com.example.projeto.feture.Login.LoginCadastro;
 
 import java.util.*;
 
@@ -34,6 +36,16 @@ public class CardapioFragment extends Fragment {
 
         recycler = view.findViewById(R.id.recycler);
         txtStatus = view.findViewById(R.id.txtStatus);
+
+
+        view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), CriarCardapioMainActivity.class));
+        });
+
+        view.findViewById(R.id.btnLogin).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), LoginCadastro.class));
+        });
+
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
