@@ -2,6 +2,7 @@ package com.example.projeto.feture.CriarCardapio;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,9 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
         contador = findViewById(R.id.txtContador);
         txtDia = findViewById(R.id.txtDia);
         btnProximo = findViewById(R.id.btnProximo);
+
+        ImageButton buttonVoltar = findViewById(R.id.buttonVoltarReceita);
+        buttonVoltar.setOnClickListener(v -> finish());
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
 

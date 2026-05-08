@@ -25,18 +25,22 @@
 
     <!-- SUBTÍTULO CENTRAL -->
 
+
     <ImageButton
-        android:id="@+id/btnImagem"
-        android:layout_width="20dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Voltar"
-        android:src="@drawable/ic_criar_cardapio_voltar"
-        app:layout_constraintBottom_toBottomOf="@id/titulo"
+        android:id="@+id/buttonVoltarReceita"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bg_btn_voltar_circulo"
+        android:backgroundTint="#119488"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/bg_btn_voltar_seta"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/titulo"
-        app:layout_constraintVertical_bias="0.692" />
+        app:layout_constraintBottom_toBottomOf="@id/titulo"
+        />
 
     <TextView
         android:id="@+id/subtitulo"

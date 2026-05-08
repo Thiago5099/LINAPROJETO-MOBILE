@@ -46,7 +46,7 @@ public class LoginCadastro extends AppCompatActivity {
         });
 
         findViewById(R.id.btnCardapio).setOnClickListener(v -> {
-            startActivity(new Intent(this, CardapioFragment.class));
+            startActivity(new Intent(this, com.example.projeto.feture.Menu.Menu.class));
         });
 
         // Referências
