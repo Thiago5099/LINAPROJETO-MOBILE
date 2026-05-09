@@ -128,10 +128,10 @@
                         android:paddingEnd="10dp">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_perfil_restricao"
-                            android:contentDescription="Condição"/>
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:contentDescription="Condição"
+                            android:src="@drawable/ic_perfil_restricao" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -387,20 +387,30 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/imgLinha"
+                    android:layout_width="400dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_nutricionistas_linha" />
 
                 <!-- Pagamento seguro -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:contentDescription="Cadeado segurança"
-                        android:src="@drawable/ic_perfil_cadeado" />
+                        android:src="@drawable/ic_perfil_cadeado_seguro" />
 
                     <TextView
                         android:id="@+id/textSeguro"
