@@ -97,7 +97,10 @@
                 android:id="@+id/imageReceita"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop" />
+                android:src="@drawable/ic_refeicao"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_image_receita"
+                android:clipToOutline="true"/>
 
             <!-- Tags Info (tempo e kcal) -->
             <LinearLayout
