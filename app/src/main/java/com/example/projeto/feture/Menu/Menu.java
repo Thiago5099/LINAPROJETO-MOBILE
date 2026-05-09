@@ -10,6 +10,7 @@ import com.example.projeto.feture.Cardapio.CardapioFragment;
 import com.example.projeto.feture.Compras.models.ComprasFragment;
 import com.example.projeto.feture.Nutricionistas.NutricionistasFragment;
 import com.example.projeto.feture.Perfil.PerfilFragment;
+import com.example.projeto.feture.Perfil.PerfilPremiumFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Menu extends AppCompatActivity {

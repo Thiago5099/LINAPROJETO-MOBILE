@@ -67,21 +67,6 @@
 
         <!-- Nutricionistas -->
 
-
-        <!-- Perfil -->
-
-
-        <activity
-            android:name=".feture.Perfil.PerfilPremium"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!-- Pagamento -->
         <activity
             android:name=".feture.Pagamento.Pagamento"

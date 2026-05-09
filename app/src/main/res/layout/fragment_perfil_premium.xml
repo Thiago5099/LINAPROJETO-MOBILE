@@ -22,8 +22,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="24dp"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <!-- Título Perfil -->
@@ -31,9 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Perfil"
-                    android:layout_marginLeft="0dp"
                     android:textColor="@color/black"
-                    android:textSize="29dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <!-- Badge Premium -->
@@ -42,10 +42,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/bg_perfil_premium_badge"
-                    android:paddingStart="14dp"
-                    android:paddingTop="3dp"
-                    android:paddingEnd="14dp"
-                    android:paddingBottom="3dp"
+                    android:paddingStart="4dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="2dp"
                     android:text="Premium"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
