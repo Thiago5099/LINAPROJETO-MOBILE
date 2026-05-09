@@ -41,7 +41,7 @@ public class Menu extends AppCompatActivity {
 
 
             } else if (item.getItemId() == R.id.nav_perfil) {
-                selected = new PerfilFragment();
+                selected = new PerfilPremiumFragment();
 
 
                 /*
