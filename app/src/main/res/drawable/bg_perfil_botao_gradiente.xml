@@ -2,17 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <!-- Gradiente -->
     <gradient
-        android:angle="90"/>           <!-- Direção do gradiente -->
+        android:angle="0"
+        android:startColor="#00BCD4"
+        android:centerColor="#00ACC1"
+        android:endColor="#0097A7"
+        android:type="linear" />
 
-    <!-- Bordas arredondadas -->
-    <corners android:radius="12dp"/>
+    <corners
+        android:radius="32dp" />
 
-    <!-- Espaçamento interno -->
-    <padding
-        android:left="16dp"
-        android:top="10dp"
-        android:right="16dp"
-        android:bottom="10dp"/>
 </shape>
