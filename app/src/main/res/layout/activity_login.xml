@@ -92,7 +92,7 @@
                         android:textStyle="bold"
                         android:textColor="#0F172A"
                         android:textSize="16sp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginLeft="5dp"
                         />
 
                     <Button
@@ -105,7 +105,7 @@
                         android:textColor="#0F172A"
                         android:textStyle="bold"
                         android:textSize="16sp"
-                        android:layout_marginRight= "4dp"/>
+                        android:layout_marginRight= "5dp"/>
                         />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
