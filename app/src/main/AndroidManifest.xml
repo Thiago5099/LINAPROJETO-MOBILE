@@ -11,7 +11,7 @@
 
         <!-- Principal -->
         <activity
-            android:name=".feture.Login.LoginCadastro"
+            android:name=".Feature.Login.LoginCadastro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
         <!-- Cardápio -->
 
         <activity
-            android:name=".feture.CardapioAlterarRefeicao.ReceitaActivityAlterarRefeicao"
+            android:name=".Feature.AlterarCardapio.ReceitaActivityAlterarRefeicao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".feture.CardapioAlterarRefeicao.SelecionarPratoActivityAlterarRefeicao"
+            android:name=".Feature.AlterarCardapio.SelecionarPratoActivityAlterarRefeicao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
 
         <!-- Criar Cardápio -->
         <activity
-            android:name=".feture.CriarCardapio.CriarCardapioMainActivity"
+            android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +55,7 @@
 
         <!-- Compras -->
         <activity
-            android:name=".feture.Menu.Menu"
+            android:name=".Feature.Menu.Menu"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
@@ -65,14 +65,8 @@
             </intent-filter>
         </activity>
 
-        <!-- Nutricionistas -->
-
-
-        <!-- Perfil -->
-
-
         <activity
-            android:name=".feture.Perfil.PerfilPremium"
+            android:name=".Feature.Perfil.PerfilPremium"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
@@ -84,7 +78,7 @@
 
         <!-- Pagamento -->
         <activity
-            android:name=".feture.Pagamento.Pagamento"
+            android:name=".Feature.Pagamento.Pagamento"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
@@ -93,6 +87,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feture.CardapioAlterarRefeicao.MudarCardapioActivityAlterarRefeicao" />
+        <activity android:name=".Feature.AlterarCardapio.MudarCardapioActivityAlterarRefeicao" />
     </application>
 </manifest>
