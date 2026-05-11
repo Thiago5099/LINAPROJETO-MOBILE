@@ -1,0 +1,83 @@
+package com.example.projeto.Feature.AlterarCardapio;
+
+import android.content.*;
+import android.view.*;
+import android.widget.*;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.projeto.R;
+
+import java.util.List;
+
+public class RefeicaoAdapterAlterarRefeicao extends RecyclerView.Adapter<RefeicaoAdapterAlterarRefeicao.ViewHolder> {
+
+    Context context;
+    List<RefeicaoAlterarReifecao> lista;
+
+    public interface OnMudarClick {
+        void onMudar(int posicao, String tipo, String nomeAtual, String infoAtual);
+    }
+
+    OnMudarClick listener;
+
+    public RefeicaoAdapterAlterarRefeicao(Context c, List<RefeicaoAlterarReifecao> l, OnMudarClick listener) {
+        context = c;
+        lista = l;
+        this.listener = listener;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tipo, nome, info;
+        Button receita, mudar;
+
+        public ViewHolder(View v) {
+            super(v);
+            tipo    = v.findViewById(R.id.tipo);
+            nome    = v.findViewById(R.id.nome);
+            info    = v.findViewById(R.id.info);
+            receita = v.findViewById(R.id.btnReceita);
+            mudar   = v.findViewById(R.id.btnMudar);
+        }
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup p, int v) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.activity_cardapio_item_refeicao, p, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder h, int i) {
+        RefeicaoAlterarReifecao r = lista.get(i);
+
+        h.tipo.setText(r.tipo);
+        h.nome.setText(r.prato.nome);
+        h.info.setText("⏱ " + r.prato.tempo + " min  ⚡ " + r.prato.calorias + " kcal");
+
+        // VER RECEITA
+        h.receita.setOnClickListener(v -> {
+            Intent it = new Intent(context, ReceitaActivityAlterarRefeicao.class);
+            it.putExtra("nome", r.prato.nome);
+            it.putExtra("ingredientes", r.prato.ingredientes);
+            it.putExtra("preparo", r.prato.preparo);
+            context.startActivity(it);
+        });
+
+        // MUDAR → delega ao Fragment para abrir com startActivityForResult
+        h.mudar.setOnClickListener(v -> {
+            int pos = h.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            if (listener != null) {
+                String info = "⏱ " + r.prato.tempo + " min  ⚡ " + r.prato.calorias + " kcal";
+                listener.onMudar(pos, r.tipo, r.prato.nome, info);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return lista.size();
+    }
+}
