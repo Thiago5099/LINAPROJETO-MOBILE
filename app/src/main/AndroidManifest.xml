@@ -23,7 +23,7 @@
         <!-- Cardápio -->
 
         <activity
-            android:name=".feture.Cardapio.ReceitaActivity"
+            android:name=".feture.CardapioAlterarRefeicao.ReceitaActivityAlterarRefeicao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".feture.Cardapio.SelecionarPratoActivity"
+            android:name=".feture.CardapioAlterarRefeicao.SelecionarPratoActivityAlterarRefeicao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,6 +93,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feture.Cardapio.MudarCardapioActivity" />
+        <activity android:name=".feture.CardapioAlterarRefeicao.MudarCardapioActivityAlterarRefeicao" />
     </application>
 </manifest>

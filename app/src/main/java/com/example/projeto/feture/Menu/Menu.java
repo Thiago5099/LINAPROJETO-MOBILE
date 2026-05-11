@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.projeto.R;
-import com.example.projeto.feture.Cardapio.CardapioFragment;
+import com.example.projeto.feture.CardapioAlterarRefeicao.CardapioFragmentAlterarRefeicao;
 import com.example.projeto.feture.Compras.models.ComprasFragment;
 import com.example.projeto.feture.Nutricionistas.NutricionistasFragment;
 import com.example.projeto.feture.Perfil.PerfilFragment;
@@ -24,14 +24,14 @@ public class Menu extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
 
         // Tela inicial
-        loadFragment(new CardapioFragment());
+        loadFragment(new CardapioFragmentAlterarRefeicao());
 
         bottomNav.setOnItemSelectedListener(item -> {
 
             Fragment selected = null;
 
             if (item.getItemId() == R.id.nav_cardapio) {
-                selected = new CardapioFragment();
+                selected = new CardapioFragmentAlterarRefeicao();
 
             } else if (item.getItemId() == R.id.nav_compras) {
                 selected = new ComprasFragment();

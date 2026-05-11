@@ -1,4 +1,4 @@
-package com.example.projeto.feture.Cardapio;
+package com.example.projeto.feture.CardapioAlterarRefeicao;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MudarCardapioActivity extends AppCompatActivity {
+public class MudarCardapioActivityAlterarRefeicao extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,15 @@ public class MudarCardapioActivity extends AppCompatActivity {
 
         // Botão ver receita do prato atual
         findViewById(R.id.btnVerReceitaAtual).setOnClickListener(v -> {
-            Intent it = new Intent(this, ReceitaActivity.class);
+            Intent it = new Intent(this, ReceitaActivityAlterarRefeicao.class);
             it.putExtra("nome", nomeAtual);
             startActivity(it);
         });
 
         // Monta lista de opções JÁ sem o prato atual
-        List<Prato> todasOpcoes = obterOpcoesPorTipo(tipo);
-        List<Prato> opcoesFiltradas = new ArrayList<>();
-        for (Prato p : todasOpcoes) {
+        List<PratoAlterarRefeicao> todasOpcoes = obterOpcoesPorTipo(tipo);
+        List<PratoAlterarRefeicao> opcoesFiltradas = new ArrayList<>();
+        for (PratoAlterarRefeicao p : todasOpcoes) {
             if (!p.nome.equals(nomeAtual)) {
                 opcoesFiltradas.add(p);
             }
@@ -72,36 +72,36 @@ public class MudarCardapioActivity extends AppCompatActivity {
 
     // Retorna todas as opções disponíveis para o tipo de refeição
     // Substitua pela sua fonte de dados real (repositório, BD, etc.)
-    private List<Prato> obterOpcoesPorTipo(String tipo) {
+    private List<PratoAlterarRefeicao> obterOpcoesPorTipo(String tipo) {
         if (tipo == null) return new ArrayList<>();
         switch (tipo) {
             case "Café da manhã":
                 return Arrays.asList(
-                    new Prato("Omelete",          "Ovos",           "Frite os ovos",            250, 10),
-                    new Prato("Torrada",           "Pão integral",   "Toste o pão",              150,  5),
-                    new Prato("Vitamina de Frutas","Frutas, leite",  "Bata no liquidificador",   200, 10),
-                    new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",      180,  3)
+                    new PratoAlterarRefeicao("Omelete",          "Ovos",           "Frite os ovos",            250, 10),
+                    new PratoAlterarRefeicao("Torrada",           "Pão integral",   "Toste o pão",              150,  5),
+                    new PratoAlterarRefeicao("Vitamina de Frutas","Frutas, leite",  "Bata no liquidificador",   200, 10),
+                    new PratoAlterarRefeicao("Iogurte com Granola","Iogurte, granola","Misture na tigela",      180,  3)
                 );
             case "Almoço":
                 return Arrays.asList(
-                    new Prato("Arroz e Feijão",   "Arroz, feijão",  "Cozinhe separado",         400, 25),
-                    new Prato("Frango",            "Frango",         "Grelhe temperado",         350, 20),
-                    new Prato("Macarrão",          "Massa, tomate",  "Cozinhe e tempere",        500, 20),
-                    new Prato("Salada de Atum",    "Atum, legumes",  "Misture os ingredientes",  250, 10)
+                    new PratoAlterarRefeicao("Arroz e Feijão",   "Arroz, feijão",  "Cozinhe separado",         400, 25),
+                    new PratoAlterarRefeicao("Frango",            "Frango",         "Grelhe temperado",         350, 20),
+                    new PratoAlterarRefeicao("Macarrão",          "Massa, tomate",  "Cozinhe e tempere",        500, 20),
+                    new PratoAlterarRefeicao("Salada de Atum",    "Atum, legumes",  "Misture os ingredientes",  250, 10)
                 );
             case "Lanche":
                 return Arrays.asList(
-                    new Prato("Sanduíche",         "Pão, frango",    "Monte as camadas",         300,  5),
-                    new Prato("Salada",            "Verduras",       "Misture e tempere",        150,  5),
-                    new Prato("Salada de Frutas",  "Frutas variadas","Pique e misture",          120,  5),
-                    new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",      180,  3)
+                    new PratoAlterarRefeicao("Sanduíche",         "Pão, frango",    "Monte as camadas",         300,  5),
+                    new PratoAlterarRefeicao("Salada",            "Verduras",       "Misture e tempere",        150,  5),
+                    new PratoAlterarRefeicao("Salada de Frutas",  "Frutas variadas","Pique e misture",          120,  5),
+                    new PratoAlterarRefeicao("Iogurte com Granola","Iogurte, granola","Misture na tigela",      180,  3)
                 );
             case "Jantar":
                 return Arrays.asList(
-                    new Prato("Macarrão",          "Massa",          "Cozinhe e tempere",        500, 20),
-                    new Prato("Sopa",              "Legumes",        "Cozinhe e tempere",        200, 15),
-                    new Prato("Omelete Simples",   "Ovos",           "Frite os ovos",            220, 10),
-                    new Prato("Arroz com Legumes", "Arroz, legumes", "Refogue e cozinhe",        350, 20)
+                    new PratoAlterarRefeicao("Macarrão",          "Massa",          "Cozinhe e tempere",        500, 20),
+                    new PratoAlterarRefeicao("Sopa",              "Legumes",        "Cozinhe e tempere",        200, 15),
+                    new PratoAlterarRefeicao("Omelete Simples",   "Ovos",           "Frite os ovos",            220, 10),
+                    new PratoAlterarRefeicao("Arroz com Legumes", "Arroz, legumes", "Refogue e cozinhe",        350, 20)
                 );
             default:
                 return new ArrayList<>();
@@ -111,13 +111,13 @@ public class MudarCardapioActivity extends AppCompatActivity {
     // Adapter interno das opções de troca
     static class OpcaoAdapter extends RecyclerView.Adapter<OpcaoAdapter.VH> {
 
-        interface OnEscolha { void onEscolha(Prato prato); }
+        interface OnEscolha { void onEscolha(PratoAlterarRefeicao prato); }
 
         Context context;
-        List<Prato> lista;
+        List<PratoAlterarRefeicao> lista;
         OnEscolha listener;
 
-        OpcaoAdapter(Context c, List<Prato> l, OnEscolha listener) {
+        OpcaoAdapter(Context c, List<PratoAlterarRefeicao> l, OnEscolha listener) {
             context  = c;
             lista    = l;
             this.listener = listener;
@@ -146,7 +146,7 @@ public class MudarCardapioActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(VH h, int i) {
-            Prato p = lista.get(i);
+            PratoAlterarRefeicao p = lista.get(i);
             h.nome.setText(p.nome);
             h.info.setText("⏱ " + p.tempo + " min  ⚡ " + p.calorias + " kcal");
 

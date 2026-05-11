@@ -1,4 +1,4 @@
-package com.example.projeto.feture.Cardapio;
+package com.example.projeto.feture.CardapioAlterarRefeicao;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,13 +14,13 @@ import com.example.projeto.R;
 
 import java.util.*;
 
-public class CardapioFragment extends Fragment {
+public class CardapioFragmentAlterarRefeicao extends Fragment {
 
     RecyclerView recycler;
     TextView txtStatus;
 
-    Map<String, List<Refeicao>> cardapios = new HashMap<>();
-    Map<String, List<Prato>> pratosPorTipo = new HashMap<>();
+    Map<String, List<RefeicaoAlterarReifecao>> cardapios = new HashMap<>();
+    Map<String, List<PratoAlterarRefeicao>> pratosPorTipo = new HashMap<>();
 
     String diaAtual = "Segunda";
 
@@ -47,7 +47,7 @@ public class CardapioFragment extends Fragment {
 
     // Chamado pelo adapter via listener — abre MudarCardapioActivity com startActivityForResult
     public void abrirMudar(int posicao, String tipo, String nomeAtual, String infoAtual) {
-        Intent it = new Intent(getContext(), MudarCardapioActivity.class);
+        Intent it = new Intent(getContext(), MudarCardapioActivityAlterarRefeicao.class);
         it.putExtra("posicao",   posicao);
         it.putExtra("tipo",      tipo);
         it.putExtra("nomeAtual", nomeAtual);
@@ -57,32 +57,32 @@ public class CardapioFragment extends Fragment {
 
     private void criarDados() {
 
-        List<Prato> cafe = Arrays.asList(
-                new Prato("Omelete",           "Ovos",           "Frite os ovos",           250, 10),
-                new Prato("Torrada",           "Pão integral",   "Toste o pão",             150,  5),
-                new Prato("Vitamina de Frutas","Frutas, leite",  "Bata no liquidificador",  200, 10),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
+        List<PratoAlterarRefeicao> cafe = Arrays.asList(
+                new PratoAlterarRefeicao("Omelete",           "Ovos",           "Frite os ovos",           250, 10),
+                new PratoAlterarRefeicao("Torrada",           "Pão integral",   "Toste o pão",             150,  5),
+                new PratoAlterarRefeicao("Vitamina de Frutas","Frutas, leite",  "Bata no liquidificador",  200, 10),
+                new PratoAlterarRefeicao("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
         );
 
-        List<Prato> almoco = Arrays.asList(
-                new Prato("Arroz e Feijão",  "Arroz, feijão", "Cozinhe separado",          400, 25),
-                new Prato("Frango",          "Frango",        "Grelhe temperado",           350, 20),
-                new Prato("Macarrão",        "Massa, tomate", "Cozinhe e tempere",          500, 20),
-                new Prato("Salada de Atum",  "Atum, legumes", "Misture os ingredientes",   250, 10)
+        List<PratoAlterarRefeicao> almoco = Arrays.asList(
+                new PratoAlterarRefeicao("Arroz e Feijão",  "Arroz, feijão", "Cozinhe separado",          400, 25),
+                new PratoAlterarRefeicao("Frango",          "Frango",        "Grelhe temperado",           350, 20),
+                new PratoAlterarRefeicao("Macarrão",        "Massa, tomate", "Cozinhe e tempere",          500, 20),
+                new PratoAlterarRefeicao("Salada de Atum",  "Atum, legumes", "Misture os ingredientes",   250, 10)
         );
 
-        List<Prato> lanche = Arrays.asList(
-                new Prato("Sanduíche",        "Pão, frango",    "Monte as camadas",         300,  5),
-                new Prato("Salada",           "Verduras",       "Misture e tempere",        150,  5),
-                new Prato("Salada de Frutas", "Frutas variadas","Pique e misture",          120,  5),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
+        List<PratoAlterarRefeicao> lanche = Arrays.asList(
+                new PratoAlterarRefeicao("Sanduíche",        "Pão, frango",    "Monte as camadas",         300,  5),
+                new PratoAlterarRefeicao("Salada",           "Verduras",       "Misture e tempere",        150,  5),
+                new PratoAlterarRefeicao("Salada de Frutas", "Frutas variadas","Pique e misture",          120,  5),
+                new PratoAlterarRefeicao("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
         );
 
-        List<Prato> jantar = Arrays.asList(
-                new Prato("Macarrão",         "Massa",          "Cozinhe e tempere",        500, 20),
-                new Prato("Sopa",             "Legumes",        "Cozinhe e tempere",        200, 15),
-                new Prato("Omelete Simples",  "Ovos",           "Frite os ovos",            220, 10),
-                new Prato("Arroz com Legumes","Arroz, legumes", "Refogue e cozinhe",        350, 20)
+        List<PratoAlterarRefeicao> jantar = Arrays.asList(
+                new PratoAlterarRefeicao("Macarrão",         "Massa",          "Cozinhe e tempere",        500, 20),
+                new PratoAlterarRefeicao("Sopa",             "Legumes",        "Cozinhe e tempere",        200, 15),
+                new PratoAlterarRefeicao("Omelete Simples",  "Ovos",           "Frite os ovos",            220, 10),
+                new PratoAlterarRefeicao("Arroz com Legumes","Arroz, legumes", "Refogue e cozinhe",        350, 20)
         );
 
         pratosPorTipo.put("Café da manhã", cafe);
@@ -90,22 +90,22 @@ public class CardapioFragment extends Fragment {
         pratosPorTipo.put("Lanche",        lanche);
         pratosPorTipo.put("Jantar",        jantar);
 
-        List<Refeicao> base = Arrays.asList(
-                new Refeicao("Café da manhã", cafe.get(0)),
-                new Refeicao("Almoço",        almoco.get(0)),
-                new Refeicao("Lanche",        lanche.get(0)),
-                new Refeicao("Jantar",        jantar.get(0))
+        List<RefeicaoAlterarReifecao> base = Arrays.asList(
+                new RefeicaoAlterarReifecao("Café da manhã", cafe.get(0)),
+                new RefeicaoAlterarReifecao("Almoço",        almoco.get(0)),
+                new RefeicaoAlterarReifecao("Lanche",        lanche.get(0)),
+                new RefeicaoAlterarReifecao("Jantar",        jantar.get(0))
         );
 
         String[] dias = {"Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"};
 
         for (String dia : dias) {
-            List<Refeicao> copia = new ArrayList<>();
-            for (Refeicao r : base) {
-                Prato p = new Prato(
+            List<RefeicaoAlterarReifecao> copia = new ArrayList<>();
+            for (RefeicaoAlterarReifecao r : base) {
+                PratoAlterarRefeicao p = new PratoAlterarRefeicao(
                         r.prato.nome, r.prato.ingredientes,
                         r.prato.preparo, r.prato.calorias, r.prato.tempo);
-                copia.add(new Refeicao(r.tipo, p));
+                copia.add(new RefeicaoAlterarReifecao(r.tipo, p));
             }
             cardapios.put(dia, copia);
         }
@@ -142,7 +142,7 @@ public class CardapioFragment extends Fragment {
     }
 
     private void atualizarLista() {
-        recycler.setAdapter(new RefeicaoAdapter(
+        recycler.setAdapter(new RefeicaoAdapterAlterarRefeicao(
                 getContext(),
                 cardapios.get(diaAtual),
                 // Listener agora recebe nomeAtual e infoAtual também
@@ -153,9 +153,9 @@ public class CardapioFragment extends Fragment {
 
     private void atualizarStatus() {
         int total = 0, preenchidos = 0;
-        for (List<Refeicao> lista : cardapios.values()) {
+        for (List<RefeicaoAlterarReifecao> lista : cardapios.values()) {
             total += lista.size();
-            for (Refeicao r : lista) {
+            for (RefeicaoAlterarReifecao r : lista) {
                 if (r.prato != null) preenchidos++;
             }
         }
@@ -172,12 +172,12 @@ public class CardapioFragment extends Fragment {
 
             if (pos == -1 || tipo == null || nome == null) return;
 
-            List<Prato> listaPratos = pratosPorTipo.get(tipo);
+            List<PratoAlterarRefeicao> listaPratos = pratosPorTipo.get(tipo);
             if (listaPratos == null) return;
 
-            for (Prato p : listaPratos) {
+            for (PratoAlterarRefeicao p : listaPratos) {
                 if (p.nome.equals(nome)) {
-                    Prato novo = new Prato(
+                    PratoAlterarRefeicao novo = new PratoAlterarRefeicao(
                             p.nome, p.ingredientes,
                             p.preparo, p.calorias, p.tempo);
                     cardapios.get(diaAtual).get(pos).prato = novo;
