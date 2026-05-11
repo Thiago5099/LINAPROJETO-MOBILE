@@ -428,7 +428,7 @@
 
         <!-- BOTÃO ASSINE PREMIUM -->
         <Button
-            android:id="@+id/buttonPremium"
+            android:id="@+id/btnAssinatura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

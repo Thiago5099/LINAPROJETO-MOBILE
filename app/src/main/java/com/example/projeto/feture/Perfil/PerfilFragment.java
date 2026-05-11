@@ -1,5 +1,6 @@
 package com.example.projeto.feture.Perfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projeto.R;
+import com.example.projeto.feture.Pagamento.Pagamento;
 
 public class PerfilFragment extends Fragment {
 
@@ -22,5 +24,6 @@ public class PerfilFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // sua lógica aqui quando tiver
+
     }
 }
