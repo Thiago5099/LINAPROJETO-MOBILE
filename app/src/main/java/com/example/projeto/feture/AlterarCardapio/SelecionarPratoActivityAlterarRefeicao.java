@@ -1,4 +1,4 @@
-package com.example.projeto.feture.CardapioAlterarRefeicao;
+package com.example.projeto.feture.AlterarCardapio;
 
 import android.content.Intent;
 import android.os.Bundle;

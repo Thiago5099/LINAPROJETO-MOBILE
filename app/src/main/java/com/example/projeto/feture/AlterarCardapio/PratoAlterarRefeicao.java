@@ -1,4 +1,4 @@
-package com.example.projeto.feture.CardapioAlterarRefeicao;
+package com.example.projeto.feture.AlterarCardapio;
 
 public class PratoAlterarRefeicao {
     public String nome, ingredientes, preparo;
