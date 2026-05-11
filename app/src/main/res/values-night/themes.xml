@@ -1,7 +1,11 @@
 
 <!--NÃO MEXER -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+    <style name="Base.Theme.Projeto" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="Theme.Projeto" parent="Base.Theme.Projeto">
     </style>
 </resources>

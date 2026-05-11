@@ -11,20 +11,24 @@
 
 
         <activity
-            android:name=".feture.AtulizarPerfil.AtualizarPerfil"
+            android:name=".Feature.AtulizarPerfil.AtualizarPerfil"
             android:exported="true" />
+
+
         <!-- Principal -->
         <activity
-            android:name=".feture.Login.LoginCadastro"
+            android:name=".Feature.Login.LoginCadastro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Cardápio -->
+        </activity>
+
+        <!-- Cardápio -->
         <activity
-            android:name=".feture.Cardapio.ReceitaActivity"
+            android:name=".Feature.Cardapio.ReceitaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,25 +37,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feture.Cardapio.SelecionarPratoActivity"
+            android:name=".Feature.Cardapio.SelecionarPratoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity> <!-- Criar Cardápio -->
+        </activity>
+
+
+        <!-- Criar Cardápio -->
         <activity
-            android:name=".feture.CriarCardapio.CriarCardapioMainActivity"
+            android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity> <!-- Compras -->
+        </activity>
+
+        <!-- Menu-->
         <activity
-            android:name=".feture.Menu.Menu"
+            android:name=".Feature.Menu.Menu"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
@@ -59,10 +68,12 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity> <!-- Nutricionistas -->
+        </activity>
+
+
         <!-- Pagamento -->
         <activity
-            android:name=".feture.Pagamento.Pagamento"
+            android:name=".Feature.Pagamento.Pagamento"
             android:exported="true"
             tools:ignore="DuplicateActivity">
             <intent-filter>
