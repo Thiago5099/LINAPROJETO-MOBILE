@@ -9,16 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projeto">
 
-        <!-- Principal -->
-        <activity
-            android:name=".Feature.Login.LoginCadastro"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <!-- Cardápio -->
 
@@ -42,51 +32,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Criar Cardápio -->
-        <activity
-            android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- Compras -->
-        <activity
-            android:name=".Feature.Menu.Menu"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Feature.Perfil.PerfilPremium"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- Pagamento -->
-        <activity
-            android:name=".Feature.Pagamento.Pagamento"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Feature.AlterarCardapio.MudarCardapioActivityAlterarRefeicao" />
     </application>
 </manifest>
