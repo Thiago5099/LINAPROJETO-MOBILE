@@ -55,11 +55,13 @@ public class CardapioFragment extends Fragment {
         return view;
     }
 
-    // Chamado pelo adapter via listener — abre SelecionarPratoActivity com startActivityForResult
-    public void abrirSelecao(int posicao, String tipo) {
-        Intent it = new Intent(getContext(), SelecionarPratoActivity.class);
-        it.putExtra("posicao", posicao);
-        it.putExtra("tipo", tipo);
+    // Chamado pelo adapter — abre MudarCardapioActivity com startActivityForResult
+    public void abrirMudar(int posicao, String tipo, String nomeAtual, String infoAtual) {
+        Intent it = new Intent(getContext(), MudarCardapioActivity.class);
+        it.putExtra("posicao",   posicao);
+        it.putExtra("tipo",      tipo);
+        it.putExtra("nomeAtual", nomeAtual);
+        it.putExtra("infoAtual", infoAtual);
         startActivityForResult(it, 1);
     }
 
@@ -157,7 +159,7 @@ public class CardapioFragment extends Fragment {
         recycler.setAdapter(new RefeicaoAdapter(
                 getContext(),
                 cardapios.get(diaAtual),
-                (posicao, tipo) -> abrirSelecao(posicao, tipo)
+                (posicao, tipo, nomeAtual, infoAtual) -> abrirMudar(posicao, tipo, nomeAtual, infoAtual)
         ));
     }
 

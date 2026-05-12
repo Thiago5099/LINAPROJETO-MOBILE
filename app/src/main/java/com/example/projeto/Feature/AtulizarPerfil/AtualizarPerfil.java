@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:app/src/main/java/com/example/projeto/Feature/Perfil/PerfilPremium.java
-package com.example.projeto.Feature.Perfil;
-========
+
 package com.example.projeto.Feature.AtulizarPerfil;
->>>>>>>> main:app/src/main/java/com/example/projeto/Feature/AtulizarPerfil/AtualizarPerfil.java
 
 import android.os.Bundle;
 import android.widget.Button;
