@@ -68,16 +68,16 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
         h.receita.setOnClickListener(v -> {
             Intent it = new Intent(context, ReceitaActivity.class);
 
-            it.putExtra(ReceitaIntentKeys.MOMENTO,      r.tipo);
-            it.putExtra(ReceitaIntentKeys.TITULO,       r.prato.nome);
-            it.putExtra(ReceitaIntentKeys.TEMPO,        r.prato.tempo + " min");
-            it.putExtra(ReceitaIntentKeys.KCAL,         r.prato.calorias + " kcal");
-            it.putExtra(ReceitaIntentKeys.INGREDIENTES, r.prato.ingredientes);
-            it.putExtra(ReceitaIntentKeys.PREPARO,      r.prato.preparo);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.MOMENTO,      r.tipo);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TITULO,       r.prato.nome);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TEMPO,        r.prato.tempo + " min");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.KCAL,         r.prato.calorias + " kcal");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.INGREDIENTES, r.prato.ingredientes);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.PREPARO,      r.prato.preparo);
 
-            it.putExtra(ReceitaIntentKeys.SEM_GLUTEN,   "Sem Glúten");
-            it.putExtra(ReceitaIntentKeys.SEM_LACTOSE,  "Sem Lactose");
-            it.putExtra(ReceitaIntentKeys.NUTRICIONAL,  r.prato.calorias + " kcal no total");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_GLUTEN,   "Sem Glúten");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_LACTOSE,  "Sem Lactose");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.NUTRICIONAL,  r.prato.calorias + " kcal no total");
 
             context.startActivity(it);
         });

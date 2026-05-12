@@ -20,30 +20,30 @@ public class ReceitaActivity extends AppCompatActivity {
 
         // Preenche os campos com os dados recebidos
         ((TextView) findViewById(R.id.textReceitaMomento))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.MOMENTO));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.MOMENTO));
 
         ((TextView) findViewById(R.id.textTituloReceita))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.TITULO));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TITULO));
 
         ((TextView) findViewById(R.id.textTagTempo))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.TEMPO));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TEMPO));
 
         ((TextView) findViewById(R.id.textTagKcal))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.KCAL));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.KCAL));
 
         ((TextView) findViewById(R.id.textTagSemGluten))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.SEM_GLUTEN));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_GLUTEN));
 
         ((TextView) findViewById(R.id.textTagSemLactose))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.SEM_LACTOSE));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_LACTOSE));
 
         ((TextView) findViewById(R.id.textIngredientes))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.INGREDIENTES));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.INGREDIENTES));
 
         ((TextView) findViewById(R.id.textModoDePreparo))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.PREPARO));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.PREPARO));
 
         ((TextView) findViewById(R.id.textInformacoesNutricionais))
-                .setText(getIntent().getStringExtra(ReceitaIntentKeys.NUTRICIONAL));
+                .setText(getIntent().getStringExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.NUTRICIONAL));
     }
 }

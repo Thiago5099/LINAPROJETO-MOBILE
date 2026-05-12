@@ -71,16 +71,16 @@ public class SelecionarPratoActivity extends AppCompatActivity {
 
             Intent it = new Intent(this, ReceitaActivity.class);
 
-            it.putExtra(ReceitaIntentKeys.MOMENTO,      tipo);
-            it.putExtra(ReceitaIntentKeys.TITULO,       selecionado.nome);
-            it.putExtra(ReceitaIntentKeys.INGREDIENTES, selecionado.ingredientes);
-            it.putExtra(ReceitaIntentKeys.PREPARO,      selecionado.preparo);
-            it.putExtra(ReceitaIntentKeys.KCAL,         selecionado.calorias + " kcal");
-            it.putExtra(ReceitaIntentKeys.TEMPO,        selecionado.tempo + " min");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.MOMENTO,      tipo);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TITULO,       selecionado.nome);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.INGREDIENTES, selecionado.ingredientes);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.PREPARO,      selecionado.preparo);
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.KCAL,         selecionado.calorias + " kcal");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TEMPO,        selecionado.tempo + " min");
 
-            it.putExtra(ReceitaIntentKeys.SEM_GLUTEN,  "Sem Glúten");
-            it.putExtra(ReceitaIntentKeys.SEM_LACTOSE, "Sem Lactose");
-            it.putExtra(ReceitaIntentKeys.NUTRICIONAL, selecionado.calorias + " kcal no total");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_GLUTEN,  "Sem Glúten");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_LACTOSE, "Sem Lactose");
+            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.NUTRICIONAL, selecionado.calorias + " kcal no total");
 
             startActivity(it);
         });
