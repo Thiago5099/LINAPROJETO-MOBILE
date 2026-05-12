@@ -20,7 +20,7 @@
 
         <ImageView
             android:id="@+id/imageViewLogo"
-            android:layout_width="74dp"
+            android:layout_width="64dp"
             android:layout_height="64dp"
             android:contentDescription="Logo Lina"
             android:src="@drawable/ic_login_logo"/>
@@ -29,8 +29,10 @@
             android:id="@+id/textViewLina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lina"
+            android:layout_marginStart="8dp"
+           android:text="Lina"
             android:textColor="#0078FF"
+
             android:textSize="48sp"/>
     </LinearLayout>
 
@@ -90,7 +92,7 @@
                         android:textStyle="bold"
                         android:textColor="#0F172A"
                         android:textSize="16sp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginLeft="5dp"
                         />
 
                     <Button
@@ -103,7 +105,7 @@
                         android:textColor="#0F172A"
                         android:textStyle="bold"
                         android:textSize="16sp"
-                        android:layout_marginRight= "4dp"/>
+                        android:layout_marginRight= "5dp"/>
                         />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -398,5 +400,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardForm"
         app:layout_constraintVertical_bias="0.333" />
+
+
+    <Button
+        android:id="@+id/btnCardapio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

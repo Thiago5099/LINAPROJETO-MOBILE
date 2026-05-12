@@ -4,32 +4,92 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projeto">
 
-        <!-- Cardápio -->
         <activity
-            android:name=".feture.cardapio.CardapioMainActivity"
+            android:name=".Feature.AtulizarPerfil.AtualizarPerfil"
+            android:exported="true" />
+
+
+        <!-- Principal -->
+        <activity
+            android:name=".Feature.Login.LoginCadastro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Cardápio -->
         <activity
-            android:name=".feture.cardapio.ReceitaActivity"
-            android:exported="false" />
+            android:name=".Feature.Cardapio.ReceitaActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
-            android:name=".feture.cardapio.SelecionarPratoActivity"
-            android:exported="false" />
+            android:name=".Feature.Cardapio.SelecionarPratoActivity"
+
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Criar Cardápio -->
+        <activity
+            android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Menu-->
+        <activity
+            android:name=".Feature.Menu.Menu"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Pagamento -->
+        <activity
+            android:name=".Feature.Pagamento.Pagamento"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    <!-- Mudar Cardapio -->
+    <activity
+        android:name=".Feature.Cardapio.MudarCardapioActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
 
     </application>
-
 </manifest>
