@@ -1,4 +1,4 @@
-package com.example.projeto.Feature.AlterarCardapio;
+package com.example.projeto.Feature.Cardapio;
 
 import android.content.*;
 import android.view.*;
@@ -10,10 +10,10 @@ import com.example.projeto.R;
 
 import java.util.List;
 
-public class RefeicaoAdapterAlterarRefeicao extends RecyclerView.Adapter<RefeicaoAdapterAlterarRefeicao.ViewHolder> {
+public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHolder> {
 
     Context context;
-    List<RefeicaoAlterarReifecao> lista;
+    List<Refeicao> lista;
 
     public interface OnMudarClick {
         void onMudar(int posicao, String tipo, String nomeAtual, String infoAtual);
@@ -21,7 +21,7 @@ public class RefeicaoAdapterAlterarRefeicao extends RecyclerView.Adapter<Refeica
 
     OnMudarClick listener;
 
-    public RefeicaoAdapterAlterarRefeicao(Context c, List<RefeicaoAlterarReifecao> l, OnMudarClick listener) {
+    public RefeicaoAdapter(Context c, List<Refeicao> l, OnMudarClick listener) {
         context = c;
         lista = l;
         this.listener = listener;
@@ -50,7 +50,7 @@ public class RefeicaoAdapterAlterarRefeicao extends RecyclerView.Adapter<Refeica
 
     @Override
     public void onBindViewHolder(ViewHolder h, int i) {
-        RefeicaoAlterarReifecao r = lista.get(i);
+        Refeicao r = lista.get(i);
 
         h.tipo.setText(r.tipo);
         h.nome.setText(r.prato.nome);
@@ -58,7 +58,7 @@ public class RefeicaoAdapterAlterarRefeicao extends RecyclerView.Adapter<Refeica
 
         // VER RECEITA
         h.receita.setOnClickListener(v -> {
-            Intent it = new Intent(context, ReceitaActivityAlterarRefeicao.class);
+            Intent it = new Intent(context, ReceitaActivity.class);
             it.putExtra("nome", r.prato.nome);
             it.putExtra("ingredientes", r.prato.ingredientes);
             it.putExtra("preparo", r.prato.preparo);

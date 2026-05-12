@@ -1,10 +1,10 @@
-package com.example.projeto.Feature.AlterarCardapio;
+package com.example.projeto.Feature.Cardapio;
 
-public class PratoAlterarRefeicao {
+public class Prato {
     public String nome, ingredientes, preparo;
     public int calorias, tempo;
 
-    public PratoAlterarRefeicao(String n, String i, String p, int c, int t) {
+    public Prato(String n, String i, String p, int c, int t) {
         nome = n;
         ingredientes = i;
         preparo = p;

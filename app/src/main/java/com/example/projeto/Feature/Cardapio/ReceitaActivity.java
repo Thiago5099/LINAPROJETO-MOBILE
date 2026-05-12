@@ -1,4 +1,4 @@
-package com.example.projeto.Feature.AlterarCardapio;
+package com.example.projeto.Feature.Cardapio;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projeto.R;
 
-public class ReceitaActivityAlterarRefeicao extends AppCompatActivity {
+public class ReceitaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle b) {

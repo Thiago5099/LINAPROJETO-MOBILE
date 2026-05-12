@@ -1,4 +1,4 @@
-package com.example.projeto.Feature.AlterarCardapio;
+package com.example.projeto.Feature.Cardapio;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,14 @@ import com.example.projeto.R;
 
 import java.util.*;
 
-public class SelecionarPratoActivityAlterarRefeicao extends AppCompatActivity {
+public class SelecionarPratoActivity extends AppCompatActivity {
 
     ListView listaView;
 
     int posicao;
     String tipo;
 
-    List<PratoAlterarRefeicao> listaPratos = new ArrayList<>();
+    List<Prato> listaPratos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle b) {
@@ -33,29 +33,29 @@ public class SelecionarPratoActivityAlterarRefeicao extends AppCompatActivity {
 
         if (tipo.equals("Café da manhã")) {
 
-            listaPratos.add(new PratoAlterarRefeicao("Omelete","Ovos e queijo","Frite",250,10));
-            listaPratos.add(new PratoAlterarRefeicao("Torrada","Pão","Toste",150,5));
+            listaPratos.add(new Prato("Omelete","Ovos e queijo","Frite",250,10));
+            listaPratos.add(new Prato("Torrada","Pão","Toste",150,5));
 
         } else if (tipo.equals("Almoço")) {
 
-            listaPratos.add(new PratoAlterarRefeicao("Arroz e Feijão","Arroz e feijão","Cozinhe",400,25));
-            listaPratos.add(new PratoAlterarRefeicao("Frango","Frango grelhado","Grelhe",350,20));
+            listaPratos.add(new Prato("Arroz e Feijão","Arroz e feijão","Cozinhe",400,25));
+            listaPratos.add(new Prato("Frango","Frango grelhado","Grelhe",350,20));
 
         } else if (tipo.equals("Lanche")) {
 
-            listaPratos.add(new PratoAlterarRefeicao("Sanduíche","Pão e recheio","Monte",300,5));
-            listaPratos.add(new PratoAlterarRefeicao("Salada","Verduras","Misture",150,5));
+            listaPratos.add(new Prato("Sanduíche","Pão e recheio","Monte",300,5));
+            listaPratos.add(new Prato("Salada","Verduras","Misture",150,5));
 
         } else if (tipo.equals("Jantar")) {
 
-            listaPratos.add(new PratoAlterarRefeicao("Macarrão","Massa","Cozinhe",500,20));
-            listaPratos.add(new PratoAlterarRefeicao("Sopa","Legumes","Cozinhe",200,15));
+            listaPratos.add(new Prato("Macarrão","Massa","Cozinhe",500,20));
+            listaPratos.add(new Prato("Sopa","Legumes","Cozinhe",200,15));
         }
 
         // mostra nomes
 
         List<String> nomes = new ArrayList<>();
-        for (PratoAlterarRefeicao p : listaPratos) {
+        for (Prato p : listaPratos) {
             nomes.add(p.nome);
         }
 
@@ -67,7 +67,7 @@ public class SelecionarPratoActivityAlterarRefeicao extends AppCompatActivity {
 
         listaView.setOnItemClickListener((parent, view, position, id) -> {
 
-            PratoAlterarRefeicao selecionado = listaPratos.get(position);
+            Prato selecionado = listaPratos.get(position);
 
             Intent it = new Intent();
 
