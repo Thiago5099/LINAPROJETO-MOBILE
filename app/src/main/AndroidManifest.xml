@@ -9,6 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projeto">
 
+
+        <activity
+            android:name=".Feature.AtulizarPerfil.AtualizarPerfil"
+            android:exported="true" />
+
+
         <!-- Principal -->
         <activity
             android:name=".Feature.Login.LoginCadastro"
@@ -21,9 +27,9 @@
         </activity>
 
         <!-- Cardápio -->
-
         <activity
             android:name=".Feature.Cardapio.ReceitaActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +37,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Feature.Cardapio.SelecionarPratoActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +47,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
 
         <!-- Criar Cardápio -->
         <activity
@@ -53,11 +61,10 @@
             </intent-filter>
         </activity>
 
-        <!-- Compras -->
+        <!-- Menu-->
         <activity
             android:name=".Feature.Menu.Menu"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,28 +72,27 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Feature.Perfil.PerfilPremium"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <!-- Pagamento -->
         <activity
             android:name=".Feature.Pagamento.Pagamento"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Feature.Cardapio.MudarCardapioActivity" />
-    </application>
+
+
+    <!-- Mudar Cardapio -->
+    <activity
+        android:name=".Feature.Cardapio.MudarCardapioActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.projeto.Feature.Perfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,8 +23,11 @@ public class PerfilPremiumFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // sua lógica aqui quando tiver
-    }
 
+        view.findViewById(R.id.buttonConta).setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), com.example.projeto.Feature.AtulizarPerfil.AtualizarPerfil.class));
+        });
+    }
 
 }
 

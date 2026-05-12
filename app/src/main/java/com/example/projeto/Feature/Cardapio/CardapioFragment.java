@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
 import com.example.projeto.R;
+import com.example.projeto.Feature.CriarCardapio.CriarCardapioMainActivity;
+import com.example.projeto.Feature.Login.LoginCadastro;
 
 import java.util.*;
 
@@ -32,8 +34,16 @@ public class CardapioFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_cardapio_tela, container, false);
 
-        recycler   = view.findViewById(R.id.recycler);
-        txtStatus  = view.findViewById(R.id.txtStatus);
+        recycler = view.findViewById(R.id.recycler);
+        txtStatus = view.findViewById(R.id.txtStatus);
+
+        view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), CriarCardapioMainActivity.class));
+        });
+
+        view.findViewById(R.id.btnLogin).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), LoginCadastro.class));
+        });
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -45,44 +55,42 @@ public class CardapioFragment extends Fragment {
         return view;
     }
 
-    // Chamado pelo adapter via listener — abre MudarCardapioActivity com startActivityForResult
-    public void abrirMudar(int posicao, String tipo, String nomeAtual, String infoAtual) {
-        Intent it = new Intent(getContext(), MudarCardapioActivity.class);
-        it.putExtra("posicao",   posicao);
-        it.putExtra("tipo",      tipo);
-        it.putExtra("nomeAtual", nomeAtual);
-        it.putExtra("infoAtual", infoAtual);
+    // Chamado pelo adapter via listener — abre SelecionarPratoActivity com startActivityForResult
+    public void abrirSelecao(int posicao, String tipo) {
+        Intent it = new Intent(getContext(), SelecionarPratoActivity.class);
+        it.putExtra("posicao", posicao);
+        it.putExtra("tipo", tipo);
         startActivityForResult(it, 1);
     }
 
     private void criarDados() {
 
         List<Prato> cafe = Arrays.asList(
-                new Prato("Omelete",           "Ovos",           "Frite os ovos",           250, 10),
-                new Prato("Torrada",           "Pão integral",   "Toste o pão",             150,  5),
-                new Prato("Vitamina de Frutas","Frutas, leite",  "Bata no liquidificador",  200, 10),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
+                new Prato("Omelete",            "Ovos",            "Frite os ovos",            250, 10),
+                new Prato("Torrada",            "Pão integral",    "Toste o pão",              150,  5),
+                new Prato("Vitamina de Frutas", "Frutas, leite",   "Bata no liquidificador",   200, 10),
+                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",        180,  3)
         );
 
         List<Prato> almoco = Arrays.asList(
-                new Prato("Arroz e Feijão",  "Arroz, feijão", "Cozinhe separado",          400, 25),
-                new Prato("Frango",          "Frango",        "Grelhe temperado",           350, 20),
-                new Prato("Macarrão",        "Massa, tomate", "Cozinhe e tempere",          500, 20),
+                new Prato("Arroz e Feijão",  "Arroz, feijão", "Cozinhe separado",         400, 25),
+                new Prato("Frango",          "Frango",        "Grelhe temperado",          350, 20),
+                new Prato("Macarrão",        "Massa, tomate", "Cozinhe e tempere",         500, 20),
                 new Prato("Salada de Atum",  "Atum, legumes", "Misture os ingredientes",   250, 10)
         );
 
         List<Prato> lanche = Arrays.asList(
-                new Prato("Sanduíche",        "Pão, frango",    "Monte as camadas",         300,  5),
-                new Prato("Salada",           "Verduras",       "Misture e tempere",        150,  5),
-                new Prato("Salada de Frutas", "Frutas variadas","Pique e misture",          120,  5),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",     180,  3)
+                new Prato("Sanduíche",        "Pão, frango",     "Monte as camadas",    300, 5),
+                new Prato("Salada",           "Verduras",        "Misture e tempere",   150, 5),
+                new Prato("Salada de Frutas", "Frutas variadas", "Pique e misture",     120, 5),
+                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela", 180, 3)
         );
 
         List<Prato> jantar = Arrays.asList(
-                new Prato("Macarrão",         "Massa",          "Cozinhe e tempere",        500, 20),
-                new Prato("Sopa",             "Legumes",        "Cozinhe e tempere",        200, 15),
-                new Prato("Omelete Simples",  "Ovos",           "Frite os ovos",            220, 10),
-                new Prato("Arroz com Legumes","Arroz, legumes", "Refogue e cozinhe",        350, 20)
+                new Prato("Macarrão",          "Massa",          "Cozinhe e tempere",  500, 20),
+                new Prato("Sopa",              "Legumes",        "Cozinhe e tempere",  200, 15),
+                new Prato("Omelete Simples",   "Ovos",           "Frite os ovos",      220, 10),
+                new Prato("Arroz com Legumes", "Arroz, legumes", "Refogue e cozinhe",  350, 20)
         );
 
         pratosPorTipo.put("Café da manhã", cafe);
@@ -103,8 +111,12 @@ public class CardapioFragment extends Fragment {
             List<Refeicao> copia = new ArrayList<>();
             for (Refeicao r : base) {
                 Prato p = new Prato(
-                        r.prato.nome, r.prato.ingredientes,
-                        r.prato.preparo, r.prato.calorias, r.prato.tempo);
+                        r.prato.nome,
+                        r.prato.ingredientes,
+                        r.prato.preparo,
+                        r.prato.calorias,
+                        r.prato.tempo
+                );
                 copia.add(new Refeicao(r.tipo, p));
             }
             cardapios.put(dia, copia);
@@ -145,20 +157,21 @@ public class CardapioFragment extends Fragment {
         recycler.setAdapter(new RefeicaoAdapter(
                 getContext(),
                 cardapios.get(diaAtual),
-                // Listener agora recebe nomeAtual e infoAtual também
-                (posicao, tipo, nomeAtual, infoAtual) ->
-                        abrirMudar(posicao, tipo, nomeAtual, infoAtual)
+                (posicao, tipo) -> abrirSelecao(posicao, tipo)
         ));
     }
 
     private void atualizarStatus() {
-        int total = 0, preenchidos = 0;
+        int total = 0;
+        int preenchidos = 0;
+
         for (List<Refeicao> lista : cardapios.values()) {
             total += lista.size();
             for (Refeicao r : lista) {
                 if (r.prato != null) preenchidos++;
             }
         }
+
         txtStatus.setText(preenchidos + "/" + total + " refeições planejadas");
     }
 
@@ -166,9 +179,9 @@ public class CardapioFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
 
-            int pos      = data.getIntExtra("posicao", -1);
-            String nome  = data.getStringExtra("nome");
-            String tipo  = data.getStringExtra("tipo");
+            int pos    = data.getIntExtra("posicao", -1);
+            String nome = data.getStringExtra("nome");
+            String tipo = data.getStringExtra("tipo");
 
             if (pos == -1 || tipo == null || nome == null) return;
 
@@ -178,8 +191,12 @@ public class CardapioFragment extends Fragment {
             for (Prato p : listaPratos) {
                 if (p.nome.equals(nome)) {
                     Prato novo = new Prato(
-                            p.nome, p.ingredientes,
-                            p.preparo, p.calorias, p.tempo);
+                            p.nome,
+                            p.ingredientes,
+                            p.preparo,
+                            p.calorias,
+                            p.tempo
+                    );
                     cardapios.get(diaAtual).get(pos).prato = novo;
                     break;
                 }
