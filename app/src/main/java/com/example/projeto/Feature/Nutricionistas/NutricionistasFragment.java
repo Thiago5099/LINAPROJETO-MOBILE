@@ -1,12 +1,14 @@
 package com.example.projeto.Feature.Nutricionistas;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +19,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projeto.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NutricionistasFragment extends Fragment {
 
-    private NutricionistasBancoHelper banco;
     private NutricionistaAdapter adapter;
-    private ArrayList<Nutricionista> listaFiltrada;
+    private ArrayList<Nutricionista> listaTodos = new ArrayList<>();
+    private ArrayList<Nutricionista> listaFiltrada = new ArrayList<>();
 
     private String cidadeSelecionada = "Cidade";
     private int avaliacaoSelecionada = 0;
@@ -39,22 +46,7 @@ public class NutricionistasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        banco = new NutricionistasBancoHelper(requireContext());
-
-        if (banco.listarTodos().isEmpty()) {
-            banco.inserir("Ana Lima", "Esportiva", "São Paulo", "(11) 91234-5678", "ana@gmail.com", "150 + pacientes atendidos", 1.0f);
-            banco.inserir("Carlos Souza", "Clínica", "Campinas", "(19) 98765-4321", "carlos@gmail.com", "50 + pacientes atendidos", 2.0f);
-            banco.inserir("Maria Silva", "Infantil", "Santos", "(13) 99876-5432", "maria@gmail.com", "200 + pacientes atendidos", 3.0f);
-            banco.inserir("João Santos", "Clínica", "São Paulo", "(11) 91234-5678", "joao@gmail.com", "100 + pacientes atendidos", 4.0f);
-            banco.inserir("Maria Oliveira", "Infantil", "Campinas", "(19) 98765-4321", "maria2@gmail.com", "50 + pacientes atendidos", 3.0f);
-            banco.inserir("Pedro Almeida", "Clínica", "Santos", "(13) 99876-5432", "pedro@gmail.com", "200 + pacientes atendidos", 4.0f);
-            banco.inserir("Ana Pereira", "Esportiva", "São Paulo", "(11) 91234-5678", "anap@gmail.com", "150 + pacientes atendidos", 5.0f);
-            banco.inserir("Carlos Silva", "Clínica", "Campinas", "(19) 98765-4321", "carlosp@gmail.com", "50 + pacientes atendidos", 5.0f);
-            banco.inserir("Maria Santos", "Infantil", "Santos", "(13) 99876-5432", "marias@gmail.com", "200 + pacientes atendidos", 3.0f);
-        }
-
         // RecyclerView
-        listaFiltrada = banco.listarTodos();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new NutricionistaAdapter(requireContext(), listaFiltrada);
@@ -68,14 +60,14 @@ public class NutricionistasFragment extends Fragment {
         adapterCidade.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCidade.setAdapter(adapterCidade);
 
-        // Spinner Avaliação com estrelas
+        // Spinner Avaliação
         Spinner spinnerAvaliacao = view.findViewById(R.id.spinnerAvaliacao);
         spinnerAvaliacao.setAdapter(new NutricionistasEstrelasSpinnerAdapter(requireContext()));
 
-        // Listeners
+        // Listeners dos spinners
         AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
                 if (parent.getId() == R.id.spinnerCidade) {
                     cidadeSelecionada = parent.getItemAtPosition(position).toString();
                 } else if (parent.getId() == R.id.spinnerAvaliacao) {
@@ -83,26 +75,56 @@ public class NutricionistasFragment extends Fragment {
                 }
                 aplicarFiltros();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         };
 
         spinnerCidade.setOnItemSelectedListener(listener);
         spinnerAvaliacao.setOnItemSelectedListener(listener);
+
+        // Buscar da API
+        carregarDaApi();
+    }
+
+    private void carregarDaApi() {
+        // TODO: substituir pela leitura real do token salvo no login
+        String token = "Bearer SEU_TOKEN_AQUI";
+
+        NutricionistaApiService api = RetrofitClient.getInstance()
+                .create(NutricionistaApiService.class);
+
+        api.listar(token).enqueue(new Callback<List<Nutricionista>>() {
+            @Override
+            public void onResponse(Call<List<Nutricionista>> call,
+                                   Response<List<Nutricionista>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listaTodos.clear();
+                    listaTodos.addAll(response.body());
+                    aplicarFiltros();
+                } else {
+                    Log.e("API", "Erro HTTP: " + response.code());
+                    Toast.makeText(requireContext(),
+                            "Erro ao carregar nutricionistas", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Nutricionista>> call, Throwable t) {
+                Log.e("API", "Falha na chamada: " + t.getMessage());
+                Toast.makeText(requireContext(),
+                        "Sem conexão com o servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void aplicarFiltros() {
-        ArrayList<Nutricionista> todos = banco.listarTodos();
         ArrayList<Nutricionista> resultado = new ArrayList<>();
 
-        for (Nutricionista n : todos) {
-            boolean passaCidade = cidadeSelecionada.equals("Cidade") || n.getCidade().equals(cidadeSelecionada);
-            boolean passaAvaliacao = true;
-
-            if (avaliacaoSelecionada != 0) {
-                passaAvaliacao = Math.round(n.getAvaliacao()) == avaliacaoSelecionada;
-            }
+        for (Nutricionista n : listaTodos) {
+            boolean passaCidade = cidadeSelecionada.equals("Cidade")
+                    || n.getCidade().equalsIgnoreCase(cidadeSelecionada);
+            boolean passaAvaliacao = avaliacaoSelecionada == 0
+                    || Math.round(n.getAvaliacao()) == avaliacaoSelecionada;
 
             if (passaCidade && passaAvaliacao) {
                 resultado.add(n);
