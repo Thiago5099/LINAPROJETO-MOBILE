@@ -100,15 +100,24 @@ public class PerfilFragment extends Fragment {
 
                     // Preenche idade calculada a partir da data de nascimento (vinda da API)
                     String dataNasc = usuario.getDataNascimento();
+                    Log.d("Perfil", "dataNascimento recebida da API: [" + dataNasc + "]");
                     TextView tvIdade = view.findViewById(R.id.textIdade);
                     if (tvIdade != null && dataNasc != null && !dataNasc.isEmpty()) {
                         try {
-                            LocalDate nascimento = LocalDate.parse(dataNasc);
+                            // Suporta "YYYY-MM-DD" e "YYYY-MM-DDTHH:mm:ss" (com ou sem hora)
+                            String apenasData = dataNasc.length() >= 10
+                                    ? dataNasc.substring(0, 10)
+                                    : dataNasc;
+                            LocalDate nascimento = LocalDate.parse(apenasData);
                             long anos = ChronoUnit.YEARS.between(nascimento, LocalDate.now());
                             tvIdade.setText(anos + " Anos");
+                            Log.d("Perfil", "Idade calculada: " + anos);
                         } catch (Exception e) {
-                            Log.e("Perfil", "Data de nascimento inválida: " + dataNasc);
+                            Log.e("Perfil", "Data de nascimento inválida: " + dataNasc, e);
+                            tvIdade.setText("-- Anos");
                         }
+                    } else {
+                        Log.w("Perfil", "dataNascimento nula ou vazia");
                     }
 
                     // Preenche restrição (chip)
