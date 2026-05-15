@@ -35,7 +35,7 @@ public class LoginCadastro extends AppCompatActivity {
     private Button btnEntrarTab, btnRegistrarTab;
     private Button btnEntrar, btnRegistrar;
     private EditText editTextLoginEmail, editTextLoginSenha;
-    private EditText editTextNome, editTextCadastroEmail, editTextCadastroSenha;
+    private EditText editTextNome, editTextCadastroEmail, editTextCadastroSenha, editTextDataNascimento;
     private Spinner spinnerGenero, spinnerRestricoes;
 
     @Override
@@ -65,6 +65,7 @@ public class LoginCadastro extends AppCompatActivity {
         editTextNome = findViewById(R.id.editTextNome);
         editTextCadastroEmail = findViewById(R.id.editTextCadastroEmail);
         editTextCadastroSenha = findViewById(R.id.editTextCadastroSenha);
+        editTextDataNascimento = findViewById(R.id.editTextDataNascimento);
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerRestricoes = findViewById(R.id.spinnerRestricoes);
 
@@ -110,23 +111,25 @@ public class LoginCadastro extends AppCompatActivity {
                 public void onResponse(Call<LoginResponse> call,
                                        Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        String token = response.body().getToken();
+                        LoginResponse body = response.body();
+                        String token = body.getToken();
 
                         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-                        prefs.edit().putString("token", token).apply();
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("token", token);
 
-                        // Extrai o email do JWT e salva
-                        try {
-                            String payload = token.split("\\.")[1];
-                            byte[] decoded = android.util.Base64.decode(
-                                    payload, android.util.Base64.URL_SAFE);
-                            String json = new String(decoded);
-                            String emailJwt = json.split("\"sub\":\"")[1].split("\"")[0];
-                            prefs.edit().putString("userEmail", emailJwt).apply();
-                            Log.d("JWT_PAYLOAD", "Email salvo: " + emailJwt);
-                        } catch (Exception e) {
-                            Log.e("JWT", "Erro: " + e.getMessage());
+                        // Salva usuarioId direto da resposta do backend
+                        if (body.getUsuarioId() != null) {
+                            editor.putLong("userId", body.getUsuarioId());
+                            Log.d("LOGIN", "userId salvo: " + body.getUsuarioId());
                         }
+                        if (body.getNome() != null) {
+                            editor.putString("userName", body.getNome());
+                        }
+                        if (body.getEmail() != null) {
+                            editor.putString("userEmail", body.getEmail());
+                        }
+                        editor.apply();
 
                         Toast.makeText(LoginCadastro.this,
                                 "Login realizado!", Toast.LENGTH_SHORT).show();
@@ -154,18 +157,41 @@ public class LoginCadastro extends AppCompatActivity {
             String senha = editTextCadastroSenha.getText().toString().trim();
             String genero = spinnerGenero.getSelectedItem().toString();
             String restricao = spinnerRestricoes.getSelectedItem().toString();
+            String dataNascimentoRaw = editTextDataNascimento.getText().toString().trim();
 
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Converter DD/MM/AAAA → YYYY-MM-DD para o backend
+            String dataNascimento = null;
+            if (!dataNascimentoRaw.isEmpty()) {
+                try {
+                    String[] partes = dataNascimentoRaw.split("/");
+                    if (partes.length == 3) {
+                        dataNascimento = partes[2] + "-" + partes[1] + "-" + partes[0];
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(this, "Data de nascimento inválida (use DD/MM/AAAA)", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
             AuthApiService api = RetrofitClient.getInstance().create(AuthApiService.class);
-            api.cadastrar(new CadastroRequest(nome, email, senha, genero, restricao))
+            String finalDataNascimento = dataNascimento;
+            api.cadastrar(new CadastroRequest(nome, email, senha, genero, restricao, dataNascimento))
                     .enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
+                                // Salva a data de nascimento localmente para exibir no perfil
+                                if (finalDataNascimento != null) {
+                                    getSharedPreferences("auth", MODE_PRIVATE)
+                                            .edit()
+                                            .putString("dataNascimento", finalDataNascimento)
+                                            .apply();
+                                }
                                 Toast.makeText(LoginCadastro.this,
                                         "Cadastro realizado! Faça login.",
                                         Toast.LENGTH_SHORT).show();
