@@ -1,5 +1,6 @@
 package com.example.projeto.Feature.Login;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -25,6 +26,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.projeto.Feature.Nutricionistas.RetrofitClient;
 import com.example.projeto.R;
 
+import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +39,8 @@ public class LoginCadastro extends AppCompatActivity {
     private Button btnEntrar, btnRegistrar;
     private EditText editTextLoginEmail, editTextLoginSenha;
     private EditText editTextNome, editTextCadastroEmail, editTextCadastroSenha;
+    private EditText editTextDataNascimento;
+    private String dataNascimentoParaBackend = ""; // Armazena no formato YYYY-MM-DD para o backend
     private Spinner spinnerGenero, spinnerRestricoes;
 
     @Override
@@ -50,8 +55,8 @@ public class LoginCadastro extends AppCompatActivity {
             return insets;
         });
 
-        findViewById(R.id.btnCardapio).setOnClickListener(v ->
-                startActivity(new Intent(this, com.example.projeto.Feature.Menu.Menu.class)));
+        findViewById(R.id.btnCardapio)
+                .setOnClickListener(v -> startActivity(new Intent(this, com.example.projeto.Feature.Menu.Menu.class)));
 
         // Referências
         layoutLogin = findViewById(R.id.layoutLogin);
@@ -65,19 +70,44 @@ public class LoginCadastro extends AppCompatActivity {
         editTextNome = findViewById(R.id.editTextNome);
         editTextCadastroEmail = findViewById(R.id.editTextCadastroEmail);
         editTextCadastroSenha = findViewById(R.id.editTextCadastroSenha);
+        editTextDataNascimento = findViewById(R.id.editTextDataNascimento);
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerRestricoes = findViewById(R.id.spinnerRestricoes);
 
-        // Popula os spinners
+        // Popula os spinners — exibe labels amigáveis, envia valores de enum
         ArrayAdapter<CharSequence> adapterGenero = ArrayAdapter.createFromResource(
-                this, R.array.opcoes_genero, android.R.layout.simple_spinner_item);
+                this, R.array.opcoes_genero_labels, android.R.layout.simple_spinner_item);
         adapterGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenero.setAdapter(adapterGenero);
 
         ArrayAdapter<CharSequence> adapterRestricoes = ArrayAdapter.createFromResource(
-                this, R.array.opcoes_restricoes, android.R.layout.simple_spinner_item);
+                this, R.array.opcoes_restricoes_labels, android.R.layout.simple_spinner_item);
         adapterRestricoes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRestricoes.setAdapter(adapterRestricoes);
+
+        // Campo Data de Nascimento — abre calendário ao tocar
+        editTextDataNascimento.setFocusable(false);
+        editTextDataNascimento.setClickable(true);
+        editTextDataNascimento.setOnClickListener(v -> {
+            Calendar cal = Calendar.getInstance();
+            int ano  = cal.get(Calendar.YEAR)  - 18; // começa 18 anos atrás
+            int mes  = cal.get(Calendar.MONTH);
+            int dia  = cal.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog picker = new DatePickerDialog(this,
+                    (datePicker, anoSel, mesSel, diaSel) -> {
+                        // Exibe no campo: DD/MM/AAAA
+                        String diaStr = String.format("%02d", diaSel);
+                        String mesStr = String.format("%02d", mesSel + 1);
+                        editTextDataNascimento.setText(diaStr + "/" + mesStr + "/" + anoSel);
+                        // Salva para o backend: YYYY-MM-DD
+                        dataNascimentoParaBackend = anoSel + "-" + mesStr + "-" + diaStr;
+                    }, ano, mes, dia);
+
+            // Impede datas futuras
+            picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+            picker.show();
+        });
 
         // Alternar abas
         btnEntrarTab.setOnClickListener(v -> {
@@ -108,12 +138,18 @@ public class LoginCadastro extends AppCompatActivity {
             api.login(new LoginRequest(email, senha)).enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call,
-                                       Response<LoginResponse> response) {
+                        Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        String token = response.body().getToken();
+                        LoginResponse body = response.body();
+                        String token = body.getToken();
 
                         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-                        prefs.edit().putString("token", token).apply();
+                        SharedPreferences.Editor ed = prefs.edit();
+                        ed.putString("token", token);
+                        if (body.getUsuarioId() != null) {
+                            ed.putLong("userId", body.getUsuarioId());
+                        }
+                        ed.apply();
 
                         // Extrai o email do JWT e salva
                         try {
@@ -123,6 +159,7 @@ public class LoginCadastro extends AppCompatActivity {
                             String json = new String(decoded);
                             String emailJwt = json.split("\"sub\":\"")[1].split("\"")[0];
                             prefs.edit().putString("userEmail", emailJwt).apply();
+                            // JWT não traz usuarioId; id já veio no LoginResponse acima.
                             Log.d("JWT_PAYLOAD", "Email salvo: " + emailJwt);
                         } catch (Exception e) {
                             Log.e("JWT", "Erro: " + e.getMessage());
@@ -152,8 +189,13 @@ public class LoginCadastro extends AppCompatActivity {
             String nome = editTextNome.getText().toString().trim();
             String email = editTextCadastroEmail.getText().toString().trim();
             String senha = editTextCadastroSenha.getText().toString().trim();
-            String genero = spinnerGenero.getSelectedItem().toString();
-            String restricao = spinnerRestricoes.getSelectedItem().toString();
+            // Pega o valor de enum pelo índice (não o label exibido)
+            String[] valoresGenero = getResources().getStringArray(R.array.opcoes_genero);
+            String[] valoresRestricoes = getResources().getStringArray(R.array.opcoes_restricoes);
+            String genero = valoresGenero[spinnerGenero.getSelectedItemPosition()];
+            int idxRestricao = spinnerRestricoes.getSelectedItemPosition();
+            // NENHUMA: não envia restricaoAlimentar (Gson omite null) — bate com enum do backend
+            String restricao = idxRestricao == 0 ? null : valoresRestricoes[idxRestricao];
 
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -161,7 +203,7 @@ public class LoginCadastro extends AppCompatActivity {
             }
 
             AuthApiService api = RetrofitClient.getInstance().create(AuthApiService.class);
-            api.cadastrar(new CadastroRequest(nome, email, senha, genero, restricao))
+            api.cadastrar(new CadastroRequest(nome, email, senha, genero, restricao, dataNascimentoParaBackend))
                     .enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -202,8 +244,7 @@ public class LoginCadastro extends AppCompatActivity {
 
         // Foto de perfil
         Button buttonFotoPerfil = findViewById(R.id.buttonFotoPerfil);
-        buttonFotoPerfil.setOnClickListener(v ->
-                Toast.makeText(this,
-                        "Função de adicionar foto em breve!", Toast.LENGTH_SHORT).show());
+        buttonFotoPerfil.setOnClickListener(v -> Toast.makeText(this,
+                "Função de adicionar foto em breve!", Toast.LENGTH_SHORT).show());
     }
 }

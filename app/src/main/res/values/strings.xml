@@ -2,16 +2,36 @@
 
     <!-- Login Cadastro -->
     <string name="nome_app">Lina</string>
-    <!-- Opções de gênero -->
+    <!-- Opções de gênero — valores devem bater com o enum do backend -->
     <string-array name="opcoes_genero">
+        <item>FEMININO</item>
+        <item>MASCULINO</item>
+        <item>OUTRO</item>
+    </string-array>
+    <!-- Labels amigáveis exibidos no spinner -->
+    <string-array name="opcoes_genero_labels">
         <item>Feminino</item>
         <item>Masculino</item>
-        <item>Outros</item>
+        <item>Outro</item>
     </string-array>
 
-    <!-- Opções de restrições alimentares -->
+    <!-- Valores = enum Restricao do backend (CELIACO, LACTOSE, VEGANO, VEGETARIANO, DIABETICO). Índice 0 = sem restrição (não envia campo). -->
     <string-array name="opcoes_restricoes">
-        <item>Celíacos</item>
+        <item>NENHUMA</item>
+        <item>CELIACO</item>
+        <item>LACTOSE</item>
+        <item>VEGETARIANO</item>
+        <item>VEGANO</item>
+        <item>DIABETICO</item>
+    </string-array>
+    <!-- Labels amigáveis exibidos no spinner -->
+    <string-array name="opcoes_restricoes_labels">
+        <item>Nenhuma</item>
+        <item>Sem Glúten</item>
+        <item>Sem Lactose</item>
+        <item>Vegetariano</item>
+        <item>Vegano</item>
+        <item>Sem Açúcar / diabético</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

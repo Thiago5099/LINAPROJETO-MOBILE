@@ -203,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_login_edit_spinner"
-                android:entries="@array/opcoes_restricoes"
+                android:entries="@array/opcoes_restricoes_labels"
                 android:padding="8dp"/>
 
             <!-- Botão -->
