@@ -6,16 +6,14 @@ public class CadastroRequest {
     private String senha;
     private String genero;
     private String restricaoAlimentar;
-    private String dataNascimento;
 
     public CadastroRequest(String nome, String email, String senha,
-                           String genero, String restricaoAlimentar, String dataNascimento) {
+                           String genero, String restricaoAlimentar) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
         this.restricaoAlimentar = restricaoAlimentar;
-        this.dataNascimento = dataNascimento;
     }
 
     // Getters necessários para o Retrofit/Gson serializar o JSON corretamente
@@ -24,5 +22,4 @@ public class CadastroRequest {
     public String getSenha() { return senha; }
     public String getGenero() { return genero; }
     public String getRestricaoAlimentar() { return restricaoAlimentar; }
-    public String getDataNascimento() { return dataNascimento; }
 }

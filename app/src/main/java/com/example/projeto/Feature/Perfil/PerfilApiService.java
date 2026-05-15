@@ -7,8 +7,13 @@ import retrofit2.http.Path;
 
 public interface PerfilApiService {
 
+    @GET("usuarios/me")
+    Call<UsuarioResponse> buscarMeuPerfil(
+            @Header("Authorization") String token
+    );
+
     @GET("usuarios/{id}")
-    Call<UsuarioResponse> buscarPorId(
+    Call<UsuarioResponse> buscarPerfil(
             @Header("Authorization") String token,
             @Path("id") Long id
     );
