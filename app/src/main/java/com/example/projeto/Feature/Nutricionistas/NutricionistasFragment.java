@@ -1,7 +1,6 @@
 package com.example.projeto.Feature.Nutricionistas;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,27 +82,58 @@ public class NutricionistasFragment extends Fragment {
 
         spinnerCidade.setOnItemSelectedListener(listener);
         spinnerAvaliacao.setOnItemSelectedListener(listener);
+    }
 
-        // Buscar da API
+    @Override
+    public void onResume() {
+        super.onResume();
+        // JWT gravado no login (SharedPreferences auth/token) — recarrega ao voltar para a aba
         carregarDaApi();
+    }
+
+    /**
+     * Header Authorization do usuário logado (mesmo token do {@code LoginCadastro}).
+     * Evita "Bearer Bearer ..." se o valor já vier prefixado.
+     */
+    @Nullable
+    private String authorizationHeader() {
+        Context ctx = getContext();
+        if (ctx == null) return null;
+        String raw = ctx.getSharedPreferences("auth", Context.MODE_PRIVATE)
+                .getString("token", "");
+        if (raw == null || raw.trim().isEmpty()) {
+            return null;
+        }
+        raw = raw.trim();
+        if (raw.regionMatches(true, 0, "Bearer ", 0, 7)) {
+            return raw;
+        }
+        return "Bearer " + raw;
     }
 
     private void carregarDaApi() {
         Context ctx = getContext();
         if (ctx == null) return;
 
-        SharedPreferences prefs = ctx.getSharedPreferences("auth", Context.MODE_PRIVATE);
-        String raw = prefs.getString("token", "");
-        if (raw.isEmpty()) {
+        String auth = authorizationHeader();
+        if (auth == null) {
             Log.w("API", "Sem token — faça login para ver nutricionistas");
+            listaTodos.clear();
+            listaFiltrada.clear();
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
+            if (isAdded()) {
+                Toast.makeText(requireContext(),
+                        "Faça login para ver nutricionistas.", Toast.LENGTH_LONG).show();
+            }
             return;
         }
-        String token = "Bearer " + raw;
 
         NutricionistaApiService api = RetrofitClient.getInstance()
                 .create(NutricionistaApiService.class);
 
-        api.listar(token).enqueue(new Callback<List<Nutricionista>>() {
+        api.listar(auth).enqueue(new Callback<List<Nutricionista>>() {
             @Override
             public void onResponse(Call<List<Nutricionista>> call,
                                    Response<List<Nutricionista>> response) {
@@ -114,8 +144,15 @@ public class NutricionistasFragment extends Fragment {
                     aplicarFiltros();
                 } else {
                     Log.e("API", "Erro HTTP: " + response.code());
-                    Toast.makeText(requireContext(),
-                            "Erro ao carregar nutricionistas", Toast.LENGTH_SHORT).show();
+                    String msg;
+                    if (response.code() == 401) {
+                        msg = "Sessão expirada. Faça login novamente.";
+                    } else if (response.code() == 403) {
+                        msg = "Acesso negado.";
+                    } else {
+                        msg = "Erro ao carregar nutricionistas (" + response.code() + ")";
+                    }
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show();
                 }
             }
 

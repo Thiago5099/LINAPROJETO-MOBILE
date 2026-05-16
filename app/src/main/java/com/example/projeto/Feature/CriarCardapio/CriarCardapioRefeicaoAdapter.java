@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projeto.R;
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +21,7 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
 
     private List<CriarCardapioRefeicao> lista;
     private Set<Integer> selecionados;
-    private final int LIMITE = 4;
+    /** Um índice selecionado por período (café, almoço, lanche da tarde, jantar) — no máximo 4. */
 
     public interface OnSelecaoChange {
         void onChange(int total);
@@ -72,21 +74,33 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
             holder.card.setCardBackgroundColor(Color.WHITE);
         }
 
-        // 🔥 CLICK NO CARD (selecionar)
+        // Um período = um tipo (Café da manhã, Almoço, Lanche da tarde, Jantar).
+        // Ao escolher outra opção do mesmo período, a anterior é desmarcada.
         holder.card.setOnClickListener(v -> {
             if (selecionados.contains(position)) {
                 selecionados.remove(position);
+                notifyItemChanged(position);
             } else {
-                if (selecionados.size() < LIMITE) {
-                    selecionados.add(position);
+                String tipoSel = lista.get(position).tipo;
+                List<Integer> desmarcar = new ArrayList<>();
+                Iterator<Integer> it = selecionados.iterator();
+                while (it.hasNext()) {
+                    int idx = it.next();
+                    if (mesmoPeriodo(tipoSel, lista.get(idx).tipo)) {
+                        it.remove();
+                        desmarcar.add(idx);
+                    }
                 }
+                selecionados.add(position);
+                for (int idx : desmarcar) {
+                    notifyItemChanged(idx);
+                }
+                notifyItemChanged(position);
             }
 
             if (listener != null) {
                 listener.onChange(selecionados.size());
             }
-
-            notifyItemChanged(position);
         });
 
         // 🔥 BOTÃO RECEITA (pode evoluir depois)
@@ -98,5 +112,10 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
     @Override
     public int getItemCount() {
         return lista.size();
+    }
+
+    private static boolean mesmoPeriodo(String tipoA, String tipoB) {
+        if (tipoA == null || tipoB == null) return false;
+        return tipoA.equals(tipoB);
     }
 }

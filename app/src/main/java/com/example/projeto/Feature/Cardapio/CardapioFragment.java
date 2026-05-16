@@ -1,17 +1,21 @@
 package com.example.projeto.Feature.Cardapio;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
 import com.example.projeto.R;
 import com.example.projeto.Feature.CriarCardapio.CriarCardapioMainActivity;
+import com.example.projeto.Feature.Login.ApiAuthHeaders;
 import com.example.projeto.Feature.Login.LoginCadastro;
 
 import java.util.*;
@@ -21,12 +25,41 @@ public class CardapioFragment extends Fragment {
     RecyclerView recycler;
     TextView txtStatus;
 
-    Map<String, List<Refeicao>> cardapios = new HashMap<>();
-    Map<String, List<Prato>> pratosPorTipo = new HashMap<>();
+    /** Dia da semana (rótulo) → refeições salvas pelo + Criar ou editadas por Mudar. */
+    Map<String, List<Refeicao>> cardapios = new LinkedHashMap<>();
 
     String diaAtual = "Segunda";
 
     List<Button> botoesDias = new ArrayList<>();
+
+    private ActivityResultLauncher<Intent> mudarCardapioLauncher;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mudarCardapioLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (!isAdded()) return;
+                    if (result.getResultCode() != Activity.RESULT_OK || result.getData() == null) {
+                        return;
+                    }
+                    Intent data = result.getData();
+                    int pos = data.getIntExtra("posicao", -1);
+                    String tipo = data.getStringExtra("tipo");
+                    String nome = data.getStringExtra("nome");
+                    if (pos < 0 || tipo == null || nome == null) return;
+
+                    String ing = data.getStringExtra("ingredientes");
+                    String prep = data.getStringExtra("preparo");
+                    if (ing == null) ing = "";
+                    if (prep == null) prep = "";
+                    int cal = data.getIntExtra("calorias", 0);
+                    int tempo = data.getIntExtra("tempo", 0);
+
+                    aplicarTrocaNoDiaAtual(pos, tipo, nome, ing, prep, cal, tempo);
+                });
+    }
 
     @Nullable
     @Override
@@ -37,98 +70,42 @@ public class CardapioFragment extends Fragment {
         recycler = view.findViewById(R.id.recycler);
         txtStatus = view.findViewById(R.id.txtStatus);
 
-        view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), CriarCardapioMainActivity.class));
-        });
+        view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v ->
+                startActivity(new Intent(getContext(), CriarCardapioMainActivity.class)));
 
-        view.findViewById(R.id.btnLogin).setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), LoginCadastro.class));
-        });
+        view.findViewById(R.id.btnLogin).setOnClickListener(v ->
+                startActivity(new Intent(getContext(), LoginCadastro.class)));
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        criarDados();
+        recarregarDoArmazenamento();
         criarBotoesDias(view);
-        atualizarLista();
         atualizarStatus();
 
         return view;
     }
 
-    // Chamado pelo adapter — abre MudarCardapioActivity com startActivityForResult
-    public void abrirMudar(int posicao, String tipo, String nomeAtual, String infoAtual) {
-        Intent it = new Intent(getContext(), MudarCardapioActivity.class);
-        it.putExtra("posicao",   posicao);
-        it.putExtra("tipo",      tipo);
-        it.putExtra("nomeAtual", nomeAtual);
-        it.putExtra("infoAtual", infoAtual);
-        startActivityForResult(it, 1);
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isAdded() || getView() == null) return;
+        recarregarDoArmazenamento();
+        atualizarLista();
+        atualizarStatus();
     }
 
-    private void criarDados() {
-
-        List<Prato> cafe = Arrays.asList(
-                new Prato("Omelete",            "Ovos",            "Frite os ovos",            250, 10),
-                new Prato("Torrada",            "Pão integral",    "Toste o pão",              150,  5),
-                new Prato("Vitamina de Frutas", "Frutas, leite",   "Bata no liquidificador",   200, 10),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela",        180,  3)
-        );
-
-        List<Prato> almoco = Arrays.asList(
-                new Prato("Arroz e Feijão",  "Arroz, feijão", "Cozinhe separado",         400, 25),
-                new Prato("Frango",          "Frango",        "Grelhe temperado",          350, 20),
-                new Prato("Macarrão",        "Massa, tomate", "Cozinhe e tempere",         500, 20),
-                new Prato("Salada de Atum",  "Atum, legumes", "Misture os ingredientes",   250, 10)
-        );
-
-        List<Prato> lanche = Arrays.asList(
-                new Prato("Sanduíche",        "Pão, frango",     "Monte as camadas",    300, 5),
-                new Prato("Salada",           "Verduras",        "Misture e tempere",   150, 5),
-                new Prato("Salada de Frutas", "Frutas variadas", "Pique e misture",     120, 5),
-                new Prato("Iogurte com Granola","Iogurte, granola","Misture na tigela", 180, 3)
-        );
-
-        List<Prato> jantar = Arrays.asList(
-                new Prato("Macarrão",          "Massa",          "Cozinhe e tempere",  500, 20),
-                new Prato("Sopa",              "Legumes",        "Cozinhe e tempere",  200, 15),
-                new Prato("Omelete Simples",   "Ovos",           "Frite os ovos",      220, 10),
-                new Prato("Arroz com Legumes", "Arroz, legumes", "Refogue e cozinhe",  350, 20)
-        );
-
-        pratosPorTipo.put("Café da manhã", cafe);
-        pratosPorTipo.put("Almoço",        almoco);
-        pratosPorTipo.put("Lanche",        lanche);
-        pratosPorTipo.put("Jantar",        jantar);
-
-        List<Refeicao> base = Arrays.asList(
-                new Refeicao("Café da manhã", cafe.get(0)),
-                new Refeicao("Almoço",        almoco.get(0)),
-                new Refeicao("Lanche",        lanche.get(0)),
-                new Refeicao("Jantar",        jantar.get(0))
-        );
-
-        String[] dias = {"Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"};
-
-        for (String dia : dias) {
-            List<Refeicao> copia = new ArrayList<>();
-            for (Refeicao r : base) {
-                Prato p = new Prato(
-                        r.prato.nome,
-                        r.prato.ingredientes,
-                        r.prato.preparo,
-                        r.prato.calorias,
-                        r.prato.tempo
-                );
-                copia.add(new Refeicao(r.tipo, p));
-            }
-            cardapios.put(dia, copia);
-        }
+    private void recarregarDoArmazenamento() {
+        cardapios.clear();
+        cardapios.putAll(CardapioLocalStore.carregarMapaRefeicoes(requireContext()));
     }
 
     private void criarBotoesDias(View view) {
 
         LinearLayout layout = view.findViewById(R.id.layoutDias);
-        String[] dias = {"Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"};
+        layout.removeAllViews();
+        botoesDias.clear();
+
+        String[] dias = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"};
 
         for (String dia : dias) {
             Button btn = new Button(getContext());
@@ -152,60 +129,79 @@ public class CardapioFragment extends Fragment {
             layout.addView(btn);
         }
 
-        botoesDias.get(0).performClick();
+        if (!botoesDias.isEmpty()) {
+            botoesDias.get(0).performClick();
+        }
     }
 
     private void atualizarLista() {
-        recycler.setAdapter(new RefeicaoAdapter(
-                getContext(),
-                cardapios.get(diaAtual),
-                (posicao, tipo, nomeAtual, infoAtual) -> abrirMudar(posicao, tipo, nomeAtual, infoAtual)
-        ));
+        List<Refeicao> lista = cardapios.get(diaAtual);
+        if (lista == null) {
+            lista = Collections.emptyList();
+        }
+        recycler.setAdapter(new RefeicaoAdapter(getContext(), lista,
+                (posicao, tipo, nomeAtual, infoAtual) ->
+                        abrirMudar(posicao, tipo, nomeAtual, infoAtual)));
+    }
+
+    public void abrirMudar(int posicao, String tipo, String nomeAtual, String infoAtual) {
+        if (!CardapioLocalStore.temCardapioSalvo(requireContext())) {
+            Toast.makeText(requireContext(),
+                    "Monte e salve um cardápio em + Criar antes de trocar refeições.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        String auth = ApiAuthHeaders.bearerOrNull(requireContext());
+        long userId = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+                .getLong("userId", 0L);
+        if (auth == null || userId == 0L) {
+            Toast.makeText(requireContext(),
+                    "Faça login para buscar outras refeições no servidor.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        Intent it = new Intent(requireContext(), MudarCardapioActivity.class);
+        it.putExtra("posicao", posicao);
+        it.putExtra("tipo", tipo);
+        it.putExtra("nomeAtual", nomeAtual);
+        it.putExtra("infoAtual", infoAtual);
+        it.putExtra("usuarioId", userId);
+        it.putExtra("authorization", auth);
+        mudarCardapioLauncher.launch(it);
+    }
+
+    private void aplicarTrocaNoDiaAtual(int pos, String tipo, String nome,
+            String ingredientes, String preparo, int calorias, int tempo) {
+        List<Refeicao> lista = cardapios.get(diaAtual);
+        if (lista == null || pos < 0 || pos >= lista.size()) return;
+
+        Refeicao ref = lista.get(pos);
+        if (ref.prato == null) {
+            ref.prato = new Prato(nome, ingredientes, preparo, calorias, tempo);
+        } else {
+            ref.prato.nome = nome;
+            ref.prato.ingredientes = ingredientes.isEmpty() ? "—" : ingredientes;
+            ref.prato.preparo = preparo.isEmpty() ? "—" : preparo;
+            ref.prato.calorias = calorias;
+            ref.prato.tempo = tempo;
+        }
+        ref.tipo = tipo;
+
+        CardapioLocalStore.salvarDoMapa(requireContext(), cardapios);
+        atualizarLista();
+        atualizarStatus();
+        Toast.makeText(requireContext(), "Refeição atualizada", Toast.LENGTH_SHORT).show();
     }
 
     private void atualizarStatus() {
+        if (!CardapioLocalStore.temCardapioSalvo(requireContext())) {
+            txtStatus.setText("Nenhum cardápio salvo — use + Criar para montar a semana");
+            return;
+        }
         int total = 0;
-        int preenchidos = 0;
-
         for (List<Refeicao> lista : cardapios.values()) {
             total += lista.size();
-            for (Refeicao r : lista) {
-                if (r.prato != null) preenchidos++;
-            }
         }
-
-        txtStatus.setText(preenchidos + "/" + total + " refeições planejadas");
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
-
-            int pos    = data.getIntExtra("posicao", -1);
-            String nome = data.getStringExtra("nome");
-            String tipo = data.getStringExtra("tipo");
-
-            if (pos == -1 || tipo == null || nome == null) return;
-
-            List<Prato> listaPratos = pratosPorTipo.get(tipo);
-            if (listaPratos == null) return;
-
-            for (Prato p : listaPratos) {
-                if (p.nome.equals(nome)) {
-                    Prato novo = new Prato(
-                            p.nome,
-                            p.ingredientes,
-                            p.preparo,
-                            p.calorias,
-                            p.tempo
-                    );
-                    cardapios.get(diaAtual).get(pos).prato = novo;
-                    break;
-                }
-            }
-
-            atualizarLista();
-            atualizarStatus();
-        }
+        txtStatus.setText(total + " refeições na semana — use Mudar para trocar um prato");
     }
 }

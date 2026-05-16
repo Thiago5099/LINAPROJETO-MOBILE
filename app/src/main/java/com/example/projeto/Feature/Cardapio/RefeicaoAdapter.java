@@ -82,15 +82,17 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
             context.startActivity(it);
         });
 
-        // MUDAR → delega ao Fragment para abrir com startActivityForResult
-        h.mudar.setOnClickListener(v -> {
-            int pos = h.getAdapterPosition();
-            if (pos == RecyclerView.NO_POSITION) return;
-            if (listener != null) {
+        if (listener == null) {
+            h.mudar.setVisibility(View.GONE);
+        } else {
+            h.mudar.setVisibility(View.VISIBLE);
+            h.mudar.setOnClickListener(v -> {
+                int pos = h.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
                 String info = "⏱ " + r.prato.tempo + " min  ⚡ " + r.prato.calorias + " kcal";
                 listener.onMudar(pos, r.tipo, r.prato.nome, info);
-            }
-        });
+            });
+        }
     }
 
     @Override
