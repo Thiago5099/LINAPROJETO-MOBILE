@@ -36,6 +36,10 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="atualizar_perfil_salvar">Salvar alterações</string>
+    <string name="atualizar_perfil_carregando">Carregando dados…</string>
+    <string name="atualizar_perfil_salvo">Perfil atualizado</string>
+
     <!--Nutricionistas-->
     <string name="app_name">Lina</string>
     <string name="cidade">Cidade</string>

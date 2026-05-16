@@ -45,8 +45,15 @@ public class PerfilFragment extends Fragment {
         view.findViewById(R.id.buttonConta).setOnClickListener(v ->
                 startActivity(new Intent(requireActivity(),
                         com.example.projeto.Feature.AtulizarPerfil.AtualizarPerfil.class)));
+    }
 
-        carregarPerfil(view);
+    @Override
+    public void onResume() {
+        super.onResume();
+        View v = getView();
+        if (v != null) {
+            carregarPerfil(v);
+        }
     }
 
     private void carregarPerfil(View view) {
@@ -72,6 +79,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onResponse(Call<UsuarioResponse> call,
                                    Response<UsuarioResponse> response) {
+                if (!isAdded()) return;
                 if (response.isSuccessful() && response.body() != null) {
                     UsuarioResponse usuario = response.body();
 
@@ -100,14 +108,18 @@ public class PerfilFragment extends Fragment {
                         }
                     } else {
                         Log.w("Perfil", "dataNascimento nula ou vazia");
+                        if (tvIdade != null) {
+                            tvIdade.setText("-- Anos");
+                        }
                     }
 
-                    // Preenche restrição (chip)
-                    List<String> restricoes = usuario.getRestricoes();
-                    if (restricoes != null && !restricoes.isEmpty()) {
-                        TextView tvRestricao = view.findViewById(R.id.textRestricao);
-                        if (tvRestricao != null) {
+                    TextView tvRestricao = view.findViewById(R.id.textRestricao);
+                    if (tvRestricao != null) {
+                        List<String> restricoes = usuario.getRestricoes();
+                        if (restricoes != null && !restricoes.isEmpty()) {
                             tvRestricao.setText(traduzirRestricao(restricoes.get(0)));
+                        } else {
+                            tvRestricao.setText("Nenhuma");
                         }
                     }
                     // Salva o ID para uso futuro (AtualizarPerfil etc)

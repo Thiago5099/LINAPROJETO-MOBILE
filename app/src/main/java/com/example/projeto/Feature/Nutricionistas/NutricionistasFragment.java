@@ -1,5 +1,7 @@
 package com.example.projeto.Feature.Nutricionistas;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,8 +89,16 @@ public class NutricionistasFragment extends Fragment {
     }
 
     private void carregarDaApi() {
-        // TODO: substituir pela leitura real do token salvo no login
-        String token = "Bearer SEU_TOKEN_AQUI";
+        Context ctx = getContext();
+        if (ctx == null) return;
+
+        SharedPreferences prefs = ctx.getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String raw = prefs.getString("token", "");
+        if (raw.isEmpty()) {
+            Log.w("API", "Sem token — faça login para ver nutricionistas");
+            return;
+        }
+        String token = "Bearer " + raw;
 
         NutricionistaApiService api = RetrofitClient.getInstance()
                 .create(NutricionistaApiService.class);
@@ -97,6 +107,7 @@ public class NutricionistasFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Nutricionista>> call,
                                    Response<List<Nutricionista>> response) {
+                if (!isAdded()) return;
                 if (response.isSuccessful() && response.body() != null) {
                     listaTodos.clear();
                     listaTodos.addAll(response.body());
@@ -110,6 +121,7 @@ public class NutricionistasFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Nutricionista>> call, Throwable t) {
+                if (!isAdded()) return;
                 Log.e("API", "Falha na chamada: " + t.getMessage());
                 Toast.makeText(requireContext(),
                         "Sem conexão com o servidor", Toast.LENGTH_SHORT).show();

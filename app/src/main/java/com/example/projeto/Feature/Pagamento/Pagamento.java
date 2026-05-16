@@ -1,6 +1,7 @@
 package com.example.projeto.Feature.Pagamento;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -20,7 +21,6 @@ public class Pagamento extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pagamento);
 
-
         ImageButton btnVoltar = findViewById(R.id.btnVoltarMenu);
         btnVoltar.setOnClickListener(v -> finish());
 
@@ -33,13 +33,13 @@ public class Pagamento extends AppCompatActivity {
             finish();
         });
 
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+        View root = findViewById(R.id.main);
+        if (root != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+        }
     }
 }

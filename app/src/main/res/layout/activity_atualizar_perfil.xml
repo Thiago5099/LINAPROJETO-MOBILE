@@ -126,7 +126,7 @@
                 android:padding="12dp"
                 android:textSize="14sp"/>
 
-            <!-- Senha -->
+            <!-- Senha: backend não expõe alteração por este endpoint -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,7 +134,8 @@
                 android:text="Senha"
                 android:textColor="#1E1E1E"
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/editTextCadastroSenha"
@@ -147,7 +148,8 @@
                 android:hint="••••••••"
                 android:inputType="textPassword"
                 android:padding="12dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
             <!-- Foto -->
             <Button
@@ -170,7 +172,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"/>
 
-            <!-- Gênero -->
+            <!-- Gênero: não enviado no PUT atual do backend -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,7 +180,8 @@
                 android:text="Gênero"
                 android:textColor="#1E1E1E"
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <Spinner
                 android:id="@+id/spinnerGenero"
@@ -186,7 +189,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_login_edit_spinner"
                 android:entries="@array/opcoes_genero"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:visibility="gone"/>
 
             <!-- Restrições -->
             <TextView
@@ -213,7 +217,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="18dp"
                 android:backgroundTint="#0078FF"
-                android:text="Entrar"
+                android:text="@string/atualizar_perfil_salvar"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
         </LinearLayout>
