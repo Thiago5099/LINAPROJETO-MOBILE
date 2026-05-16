@@ -1,4 +1,4 @@
-package com.example.projeto.feture.cardapio;
+package com.example.projeto.Feature.Cardapio;
 
 public class ReceitaIntentKeys {
     public static final String MOMENTO   = "momento";

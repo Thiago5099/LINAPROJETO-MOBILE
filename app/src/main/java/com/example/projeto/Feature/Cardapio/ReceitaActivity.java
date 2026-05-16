@@ -15,7 +15,7 @@ import com.example.projeto.Feature.Nutricionistas.RetrofitClient;
 import com.example.projeto.Feature.Refeicoes.RefeicaoApiService;
 import com.example.projeto.Feature.Refeicoes.RefeicaoConverters;
 import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
-import com.example.projeto.feture.cardapio.ReceitaIntentKeys;
+import com.example.projeto.Feature.Cardapio.ReceitaIntentKeys;
 
 import java.io.IOException;
 import java.util.Collections;
