@@ -13,4 +13,9 @@ public class RefeicaoResponse {
     public Integer tempoPreparo;
     public List<String> ingredientes;
     public List<String> restricoes;
+
+    /** Campos opcionais conforme o DTO do backend (Gson ignora se não existirem). */
+    public String preparo;
+    public String modoPreparo;
+    public String instrucoesPreparo;
 }

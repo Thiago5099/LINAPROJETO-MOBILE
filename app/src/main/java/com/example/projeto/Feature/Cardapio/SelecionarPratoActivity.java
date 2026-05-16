@@ -6,6 +6,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projeto.R;
+import com.example.projeto.Feature.Cardapio.ReceitaActivity;
 
 import java.util.*;
 
@@ -71,16 +72,17 @@ public class SelecionarPratoActivity extends AppCompatActivity {
 
             Intent it = new Intent(this, ReceitaActivity.class);
 
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.MOMENTO,      tipo);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TITULO,       selecionado.nome);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.INGREDIENTES, selecionado.ingredientes);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.PREPARO,      selecionado.preparo);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.KCAL,         selecionado.calorias + " kcal");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TEMPO,        selecionado.tempo + " min");
-
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_GLUTEN,  "Sem Glúten");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_LACTOSE, "Sem Lactose");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.NUTRICIONAL, selecionado.calorias + " kcal no total");
+            ReceitaActivity.putRecipeExtras(it,
+                    tipo,
+                    selecionado.nome,
+                    selecionado.tempo + " min",
+                    selecionado.calorias + " kcal",
+                    selecionado.ingredientes,
+                    selecionado.preparo,
+                    "Sem Glúten",
+                    "Sem Lactose",
+                    selecionado.calorias + " kcal no total",
+                    null);
 
             startActivity(it);
         });

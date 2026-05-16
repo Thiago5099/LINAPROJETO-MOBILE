@@ -1,6 +1,7 @@
 package com.example.projeto.Feature.CriarCardapio;
 
 import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
+import com.example.projeto.Feature.Refeicoes.RefeicaoConverters;
 import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
 
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class CriarCardapioRefeicao {
         List<String> ingList = dto.ingredientes != null ? dto.ingredientes : Collections.emptyList();
         String ing = ingList.isEmpty() ? "" : String.join(", ", ingList);
         String nome = dto.nome != null ? dto.nome : "";
-        String prep = "—";
+        String prep = RefeicaoConverters.textoPreparo(dto);
         return new CriarCardapioRefeicao(
                 dto.id,
                 tipoLabel,

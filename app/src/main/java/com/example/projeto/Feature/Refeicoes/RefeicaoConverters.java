@@ -18,6 +18,20 @@ public final class RefeicaoConverters {
         List<String> ingList = r.ingredientes != null ? r.ingredientes : Collections.emptyList();
         String ing = ingList.isEmpty() ? "—" : String.join(", ", ingList);
         String nome = r.nome != null ? r.nome : "";
-        return new Prato(nome, ing, "—", cal, t);
+        String prep = textoPreparo(r);
+        return new Prato(nome, ing, prep, cal, t);
+    }
+
+    /** Primeiro texto de preparo não vazio entre os campos possíveis do DTO. */
+    public static String textoPreparo(RefeicaoResponse r) {
+        if (r == null) return "—";
+        String[] cand = { r.preparo, r.modoPreparo, r.instrucoesPreparo };
+        for (String s : cand) {
+            if (s != null) {
+                String t = s.trim();
+                if (!t.isEmpty()) return t;
+            }
+        }
+        return "—";
     }
 }

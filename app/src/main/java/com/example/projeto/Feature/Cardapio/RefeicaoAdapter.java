@@ -7,6 +7,8 @@ import android.widget.*;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
+import com.example.projeto.Feature.Login.ApiAuthHeaders;
+import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
 
 import java.util.List;
 
@@ -67,17 +69,23 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
         // VER RECEITA
         h.receita.setOnClickListener(v -> {
             Intent it = new Intent(context, ReceitaActivity.class);
+            SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+            boolean logado = ApiAuthHeaders.bearerOrNull(context) != null
+                    && prefs.getLong("userId", 0L) != 0L;
+            String periodo = PeriodoMapeador.uiParaQuery(r.tipo);
+            String periodoFetch = logado ? periodo : null;
 
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.MOMENTO,      r.tipo);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TITULO,       r.prato.nome);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.TEMPO,        r.prato.tempo + " min");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.KCAL,         r.prato.calorias + " kcal");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.INGREDIENTES, r.prato.ingredientes);
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.PREPARO,      r.prato.preparo);
-
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_GLUTEN,   "Sem Glúten");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.SEM_LACTOSE,  "Sem Lactose");
-            it.putExtra(com.example.projeto.feture.cardapio.ReceitaIntentKeys.NUTRICIONAL,  r.prato.calorias + " kcal no total");
+            ReceitaActivity.putRecipeExtras(it,
+                    r.tipo,
+                    r.prato.nome,
+                    r.prato.tempo + " min",
+                    r.prato.calorias + " kcal",
+                    r.prato.ingredientes,
+                    r.prato.preparo,
+                    "Sem Glúten",
+                    "Sem Lactose",
+                    r.prato.calorias + " kcal no total",
+                    periodoFetch);
 
             context.startActivity(it);
         });

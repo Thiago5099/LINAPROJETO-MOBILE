@@ -10,4 +10,9 @@ public class ReceitaIntentKeys {
     public static final String INGREDIENTES = "ingredientes";
     public static final String PREPARO      = "preparo";
     public static final String NUTRICIONAL  = "nutricional";
+
+    /** {@code ?periodo=} enviado ao backend (ex.: CAFE_DA_MANHA). */
+    public static final String PERIODO_QUERY = "periodo_query";
+    /** Quando true e há sessão, detalhes são atualizados via GET /refeicoes. */
+    public static final String FETCH_FROM_BACKEND = "fetch_from_backend";
 }

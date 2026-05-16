@@ -1,5 +1,7 @@
 package com.example.projeto.Feature.CriarCardapio;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
+import com.example.projeto.Feature.Cardapio.ReceitaActivity;
+import com.example.projeto.Feature.Login.ApiAuthHeaders;
+import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -105,7 +110,28 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
 
         // 🔥 BOTÃO RECEITA (pode evoluir depois)
         holder.botao.setOnClickListener(v -> {
-            // depois você pode abrir outra tela aqui
+            Context ctx = holder.itemView.getContext();
+            Intent it = new Intent(ctx, ReceitaActivity.class);
+            boolean logado = ApiAuthHeaders.bearerOrNull(ctx) != null
+                    && ctx.getSharedPreferences("auth", Context.MODE_PRIVATE).getLong("userId", 0L) != 0L;
+            String periodoFetch = logado ? PeriodoMapeador.uiParaQuery(r.tipo) : null;
+
+            String ing = r.ingredientesTexto != null ? r.ingredientesTexto : "";
+            String prep = r.preparoTexto != null ? r.preparoTexto : "—";
+            String nut = r.kcal != null ? r.kcal + " no total" : "—";
+
+            ReceitaActivity.putRecipeExtras(it,
+                    r.tipo,
+                    r.nome,
+                    r.tempo,
+                    r.kcal,
+                    ing,
+                    prep,
+                    "Sem Glúten",
+                    "Sem Lactose",
+                    nut,
+                    periodoFetch);
+            ctx.startActivity(it);
         });
     }
 

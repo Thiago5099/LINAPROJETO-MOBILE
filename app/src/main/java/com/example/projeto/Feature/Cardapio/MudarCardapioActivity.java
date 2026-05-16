@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,13 +45,25 @@ public class MudarCardapioActivity extends AppCompatActivity {
         long usuarioId = getIntent().getLongExtra("usuarioId", 0L);
         String authorization = getIntent().getStringExtra("authorization");
 
+        final String periodo = PeriodoMapeador.uiParaQuery(tipo);
+
         ((TextView) findViewById(R.id.txtTipoAtual)).setText(tipo);
         ((TextView) findViewById(R.id.txtNomeAtual)).setText(nomeAtual);
         ((TextView) findViewById(R.id.txtInfoAtual)).setText(infoAtual);
 
         findViewById(R.id.btnVerReceitaAtual).setOnClickListener(v -> {
             Intent it = new Intent(this, ReceitaActivity.class);
-            it.putExtra("nome", nomeAtual);
+            ReceitaActivity.putRecipeExtras(it,
+                    tipo,
+                    nomeAtual,
+                    extrairTempoFmt(infoAtual),
+                    extrairKcalFmt(infoAtual),
+                    "",
+                    "",
+                    "Sem Glúten",
+                    "Sem Lactose",
+                    "",
+                    periodo);
             startActivity(it);
         });
 
@@ -59,7 +73,6 @@ public class MudarCardapioActivity extends AppCompatActivity {
         findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
         findViewById(R.id.btnContinuarMesma).setOnClickListener(v -> finish());
 
-        String periodo = PeriodoMapeador.uiParaQuery(tipo);
         if (periodo == null || usuarioId == 0L || authorization == null || authorization.isEmpty()) {
             Toast.makeText(this, "Sessão inválida. Faça login novamente.", Toast.LENGTH_LONG).show();
             finish();
@@ -90,7 +103,7 @@ public class MudarCardapioActivity extends AppCompatActivity {
                     }
                 }
                 runOnUiThread(() -> {
-                    recycler.setAdapter(new OpcaoAdapter(this, opcoes, prato -> {
+                    recycler.setAdapter(new OpcaoAdapter(this, opcoes, tipo, periodo, prato -> {
                         Intent result = new Intent();
                         result.putExtra("posicao", posicao);
                         result.putExtra("tipo", tipo);
@@ -115,6 +128,18 @@ public class MudarCardapioActivity extends AppCompatActivity {
         });
     }
 
+    private static String extrairTempoFmt(String infoAtual) {
+        if (infoAtual == null) return "—";
+        Matcher m = Pattern.compile("(\\d+)\\s*min").matcher(infoAtual);
+        return m.find() ? m.group(1) + " min" : "—";
+    }
+
+    private static String extrairKcalFmt(String infoAtual) {
+        if (infoAtual == null) return "—";
+        Matcher m = Pattern.compile("(\\d+)\\s*kcal").matcher(infoAtual);
+        return m.find() ? m.group(1) + " kcal" : "—";
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -128,10 +153,14 @@ public class MudarCardapioActivity extends AppCompatActivity {
         Context context;
         List<Prato> lista;
         OnEscolha listener;
+        String tipoMomento;
+        String periodoQuery;
 
-        OpcaoAdapter(Context c, List<Prato> l, OnEscolha listener) {
+        OpcaoAdapter(Context c, List<Prato> l, String tipoMomento, String periodoQuery, OnEscolha listener) {
             context = c;
             lista = l;
+            this.tipoMomento = tipoMomento;
+            this.periodoQuery = periodoQuery;
             this.listener = listener;
         }
 
@@ -163,7 +192,19 @@ public class MudarCardapioActivity extends AppCompatActivity {
             h.info.setText("⏱ " + p.tempo + " min  ⚡ " + p.calorias + " kcal");
 
             h.btnVerReceita.setOnClickListener(v -> {
-                if (listener != null) listener.onEscolha(p);
+                Intent it = new Intent(context, ReceitaActivity.class);
+                ReceitaActivity.putRecipeExtras(it,
+                        tipoMomento,
+                        p.nome,
+                        p.tempo > 0 ? p.tempo + " min" : "—",
+                        p.calorias > 0 ? p.calorias + " kcal" : "—",
+                        p.ingredientes != null ? p.ingredientes : "",
+                        p.preparo != null ? p.preparo : "",
+                        "Sem Glúten",
+                        "Sem Lactose",
+                        p.calorias > 0 ? p.calorias + " kcal no total" : "",
+                        periodoQuery);
+                context.startActivity(it);
             });
 
             h.itemView.setOnClickListener(v -> {
