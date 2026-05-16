@@ -75,16 +75,15 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
             String periodo = PeriodoMapeador.uiParaQuery(r.tipo);
             String periodoFetch = logado ? periodo : null;
 
+            Long refId = r.prato.refeicaoId > 0L ? r.prato.refeicaoId : null;
             ReceitaActivity.putRecipeExtras(it,
                     r.tipo,
+                    refId,
                     r.prato.nome,
-                    r.prato.tempo + " min",
-                    r.prato.calorias + " kcal",
+                    r.prato.tempo > 0 ? r.prato.tempo + " min" : null,
+                    r.prato.calorias > 0 ? r.prato.calorias + " kcal" : null,
                     r.prato.ingredientes,
                     r.prato.preparo,
-                    "Sem Glúten",
-                    "Sem Lactose",
-                    r.prato.calorias + " kcal no total",
                     periodoFetch);
 
             context.startActivity(it);

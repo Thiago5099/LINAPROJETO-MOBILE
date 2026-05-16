@@ -11,27 +11,31 @@ public final class RefeicaoConverters {
 
     public static Prato paraPrato(RefeicaoResponse r) {
         if (r == null) {
-            return new Prato("", "—", "—", 0, 0);
+            return new Prato("", ApiUiFormatter.VAZIO, ApiUiFormatter.VAZIO, 0, 0, 0L);
         }
         int cal = r.calorias != null ? (int) Math.round(r.calorias) : 0;
         int t = r.tempoPreparo != null ? r.tempoPreparo : 0;
         List<String> ingList = r.ingredientes != null ? r.ingredientes : Collections.emptyList();
-        String ing = ingList.isEmpty() ? "—" : String.join(", ", ingList);
+        String ing = ApiUiFormatter.listaIngredientes(ingList);
         String nome = r.nome != null ? r.nome : "";
         String prep = textoPreparo(r);
-        return new Prato(nome, ing, prep, cal, t);
+        long id = r.id != null ? r.id : 0L;
+        return new Prato(nome, ing, prep, cal, t, id);
     }
 
-    /** Primeiro texto de preparo não vazio entre os campos possíveis do DTO. */
     public static String textoPreparo(RefeicaoResponse r) {
-        if (r == null) return "—";
-        String[] cand = { r.preparo, r.modoPreparo, r.instrucoesPreparo };
+        if (r == null) {
+            return ApiUiFormatter.VAZIO;
+        }
+        String[] cand = { r.modoPreparo, r.preparo, r.instrucoesPreparo };
         for (String s : cand) {
             if (s != null) {
                 String t = s.trim();
-                if (!t.isEmpty()) return t;
+                if (!t.isEmpty()) {
+                    return t;
+                }
             }
         }
-        return "—";
+        return ApiUiFormatter.VAZIO;
     }
 }

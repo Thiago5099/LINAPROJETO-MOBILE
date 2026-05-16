@@ -55,14 +55,12 @@ public class MudarCardapioActivity extends AppCompatActivity {
             Intent it = new Intent(this, ReceitaActivity.class);
             ReceitaActivity.putRecipeExtras(it,
                     tipo,
+                    null,
                     nomeAtual,
                     extrairTempoFmt(infoAtual),
                     extrairKcalFmt(infoAtual),
-                    "",
-                    "",
-                    "Sem Glúten",
-                    "Sem Lactose",
-                    "",
+                    null,
+                    null,
                     periodo);
             startActivity(it);
         });
@@ -129,15 +127,15 @@ public class MudarCardapioActivity extends AppCompatActivity {
     }
 
     private static String extrairTempoFmt(String infoAtual) {
-        if (infoAtual == null) return "—";
+        if (infoAtual == null) return null;
         Matcher m = Pattern.compile("(\\d+)\\s*min").matcher(infoAtual);
-        return m.find() ? m.group(1) + " min" : "—";
+        return m.find() ? m.group(1) + " min" : null;
     }
 
     private static String extrairKcalFmt(String infoAtual) {
-        if (infoAtual == null) return "—";
+        if (infoAtual == null) return null;
         Matcher m = Pattern.compile("(\\d+)\\s*kcal").matcher(infoAtual);
-        return m.find() ? m.group(1) + " kcal" : "—";
+        return m.find() ? m.group(1) + " kcal" : null;
     }
 
     @Override
@@ -193,16 +191,15 @@ public class MudarCardapioActivity extends AppCompatActivity {
 
             h.btnVerReceita.setOnClickListener(v -> {
                 Intent it = new Intent(context, ReceitaActivity.class);
+                Long refId = p.refeicaoId > 0L ? p.refeicaoId : null;
                 ReceitaActivity.putRecipeExtras(it,
                         tipoMomento,
+                        refId,
                         p.nome,
-                        p.tempo > 0 ? p.tempo + " min" : "—",
-                        p.calorias > 0 ? p.calorias + " kcal" : "—",
-                        p.ingredientes != null ? p.ingredientes : "",
-                        p.preparo != null ? p.preparo : "",
-                        "Sem Glúten",
-                        "Sem Lactose",
-                        p.calorias > 0 ? p.calorias + " kcal no total" : "",
+                        p.tempo > 0 ? p.tempo + " min" : null,
+                        p.calorias > 0 ? p.calorias + " kcal" : null,
+                        p.ingredientes,
+                        p.preparo,
                         periodoQuery);
                 context.startActivity(it);
             });

@@ -52,13 +52,15 @@ public final class CardapioLocalStore {
             return new CardapioItemPersistido("", "", "", "", "", "");
         }
         Prato p = r.prato;
+        Long id = p.refeicaoId > 0L ? p.refeicaoId : null;
         return new CardapioItemPersistido(
+                id,
                 r.tipo != null ? r.tipo : "",
                 p.nome != null ? p.nome : "",
                 p.tempo + " min",
                 p.calorias + " kcal",
-                p.ingredientes != null ? p.ingredientes : "—",
-                p.preparo != null ? p.preparo : "—");
+                p.ingredientes != null ? p.ingredientes : "_",
+                p.preparo != null ? p.preparo : "_");
     }
 
     /**
@@ -131,10 +133,11 @@ public final class CardapioLocalStore {
         int tempoMin = parseIntFlex(it.tempo);
         int kcal = parseIntFlex(it.kcal);
         String ing = it.ingredientes != null && !it.ingredientes.isEmpty()
-                ? it.ingredientes : "—";
+                ? it.ingredientes : "_";
         String prep = it.preparo != null && !it.preparo.isEmpty()
-                ? it.preparo : "—";
-        Prato p = new Prato(it.nome != null ? it.nome : "", ing, prep, kcal, tempoMin);
+                ? it.preparo : "_";
+        long refId = it.refeicaoId != null ? it.refeicaoId : 0L;
+        Prato p = new Prato(it.nome != null ? it.nome : "", ing, prep, kcal, tempoMin, refId);
         return new Refeicao(tipoParaExibicao(it.tipo), p);
     }
 

@@ -3,6 +3,7 @@ package com.example.projeto.Feature.Cardapio;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,10 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.projeto.R;
 import com.example.projeto.Feature.Login.ApiAuthHeaders;
 import com.example.projeto.Feature.Nutricionistas.RetrofitClient;
+import com.example.projeto.Feature.Refeicoes.ApiUiFormatter;
 import com.example.projeto.Feature.Refeicoes.RefeicaoApiService;
 import com.example.projeto.Feature.Refeicoes.RefeicaoConverters;
 import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
-import com.example.projeto.Feature.Cardapio.ReceitaIntentKeys;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -38,42 +39,46 @@ public class ReceitaActivity extends AppCompatActivity {
     private TextView textIngredientes;
     private TextView textPreparo;
     private TextView textNutricional;
+    private ImageView imageReceita;
 
     /**
      * Preenche extras para {@link ReceitaActivity}.
      *
-     * @param periodoQuery quando não nulo (ex.: {@code ALMOCO}), a tela tenta atualizar pelo GET /refeicoes.
+     * @param refeicaoId     id no backend; se &gt; 0, usa GET /refeicoes/{id}
+     * @param periodoQuery   ex.: CAFE_DA_MANHA (opcional no detalhe)
      */
     public static void putRecipeExtras(Intent it,
             @Nullable String momentoUi,
+            @Nullable Long refeicaoId,
             @Nullable String titulo,
             @Nullable String tempoFmt,
             @Nullable String kcalFmt,
             @Nullable String ingredientes,
             @Nullable String preparo,
-            @Nullable String tagGluten,
-            @Nullable String tagLactose,
-            @Nullable String nutricional,
             @Nullable String periodoQuery) {
+
         it.putExtra(ReceitaIntentKeys.MOMENTO, momentoUi);
         it.putExtra(ReceitaIntentKeys.TITULO, titulo);
         it.putExtra(ReceitaIntentKeys.TEMPO, tempoFmt);
         it.putExtra(ReceitaIntentKeys.KCAL, kcalFmt);
         it.putExtra(ReceitaIntentKeys.INGREDIENTES, ingredientes);
         it.putExtra(ReceitaIntentKeys.PREPARO, preparo);
-        it.putExtra(ReceitaIntentKeys.SEM_GLUTEN, tagGluten);
-        it.putExtra(ReceitaIntentKeys.SEM_LACTOSE, tagLactose);
-        it.putExtra(ReceitaIntentKeys.NUTRICIONAL, nutricional);
 
-        boolean fetch = periodoQuery != null && !periodoQuery.trim().isEmpty();
+        if (refeicaoId != null && refeicaoId > 0L) {
+            it.putExtra(ReceitaIntentKeys.REFEICAO_ID, refeicaoId);
+        }
+
+        boolean fetch = (refeicaoId != null && refeicaoId > 0L)
+                || (periodoQuery != null && !periodoQuery.trim().isEmpty()
+                && titulo != null && !titulo.trim().isEmpty());
         it.putExtra(ReceitaIntentKeys.FETCH_FROM_BACKEND, fetch);
-        if (fetch) {
+        if (periodoQuery != null && !periodoQuery.trim().isEmpty()) {
             it.putExtra(ReceitaIntentKeys.PERIODO_QUERY, periodoQuery.trim());
         }
     }
 
-    static String nz(@Nullable String s) {
-        return (s != null && !s.trim().isEmpty()) ? s.trim() : "—";
+    static String vazio(@Nullable String s) {
+        return ApiUiFormatter.texto(s);
     }
 
     @Override
@@ -93,14 +98,11 @@ public class ReceitaActivity extends AppCompatActivity {
         textIngredientes = findViewById(R.id.textIngredientes);
         textPreparo = findViewById(R.id.textModoDePreparo);
         textNutricional = findViewById(R.id.textInformacoesNutricionais);
+        imageReceita = findViewById(R.id.imageReceita);
 
         aplicarCamposLocais(getIntent());
 
-        boolean fetch = getIntent().getBooleanExtra(ReceitaIntentKeys.FETCH_FROM_BACKEND, false);
-        String periodo = getIntent().getStringExtra(ReceitaIntentKeys.PERIODO_QUERY);
-        String nomeBusca = getIntent().getStringExtra(ReceitaIntentKeys.TITULO);
-
-        if (!fetch || periodo == null || nomeBusca == null || nomeBusca.trim().isEmpty()) {
+        if (!getIntent().getBooleanExtra(ReceitaIntentKeys.FETCH_FROM_BACKEND, false)) {
             return;
         }
 
@@ -110,51 +112,72 @@ public class ReceitaActivity extends AppCompatActivity {
             return;
         }
 
-        executor.execute(() -> buscarDoBackend(auth, uid, periodo, nomeBusca.trim()));
+        long refeicaoId = getIntent().hasExtra(ReceitaIntentKeys.REFEICAO_ID)
+                ? getIntent().getLongExtra(ReceitaIntentKeys.REFEICAO_ID, 0L)
+                : 0L;
+        String periodo = getIntent().getStringExtra(ReceitaIntentKeys.PERIODO_QUERY);
+        String nomeBusca = getIntent().getStringExtra(ReceitaIntentKeys.TITULO);
+
+        executor.execute(() -> buscarDetalhe(auth, uid, refeicaoId, periodo, nomeBusca));
     }
 
     private void aplicarCamposLocais(Intent intent) {
-        textMomento.setText(nz(intent.getStringExtra(ReceitaIntentKeys.MOMENTO)));
-        textTitulo.setText(nz(intent.getStringExtra(ReceitaIntentKeys.TITULO)));
-        textTempo.setText(nz(intent.getStringExtra(ReceitaIntentKeys.TEMPO)));
-        textKcal.setText(nz(intent.getStringExtra(ReceitaIntentKeys.KCAL)));
-        textGluten.setText(nz(intent.getStringExtra(ReceitaIntentKeys.SEM_GLUTEN)));
-        textLactose.setText(nz(intent.getStringExtra(ReceitaIntentKeys.SEM_LACTOSE)));
-        textIngredientes.setText(nz(intent.getStringExtra(ReceitaIntentKeys.INGREDIENTES)));
-        textPreparo.setText(nz(intent.getStringExtra(ReceitaIntentKeys.PREPARO)));
-        textNutricional.setText(nz(intent.getStringExtra(ReceitaIntentKeys.NUTRICIONAL)));
+        textMomento.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.MOMENTO)));
+        textTitulo.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.TITULO)));
+        textTempo.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.TEMPO)));
+        textKcal.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.KCAL)));
+        textGluten.setText(ApiUiFormatter.VAZIO);
+        textLactose.setText(ApiUiFormatter.VAZIO);
+        textIngredientes.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.INGREDIENTES)));
+        textPreparo.setText(vazio(intent.getStringExtra(ReceitaIntentKeys.PREPARO)));
+        textNutricional.setText(ApiUiFormatter.VAZIO);
     }
 
-    private void buscarDoBackend(String authorization, long usuarioId, String periodo, String nomeBusca) {
+    private void buscarDetalhe(String authorization, long usuarioId,
+                               long refeicaoId, @Nullable String periodo,
+                               @Nullable String nomeBusca) {
         try {
             RefeicaoApiService api = RetrofitClient.getInstance().create(RefeicaoApiService.class);
-            Response<List<RefeicaoResponse>> resp =
-                    api.listar(authorization, periodo, usuarioId).execute();
+
+            if (refeicaoId <= 0L && periodo != null && nomeBusca != null && !nomeBusca.trim().isEmpty()) {
+                Response<List<RefeicaoResponse>> lista =
+                        api.listar(authorization, periodo, usuarioId).execute();
+                if (lista.isSuccessful() && lista.body() != null) {
+                    String alvo = nomeBusca.trim();
+                    for (RefeicaoResponse r : lista.body()) {
+                        if (r != null && r.id != null && r.id > 0L
+                                && r.nome != null && r.nome.trim().equalsIgnoreCase(alvo)) {
+                            refeicaoId = r.id;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (refeicaoId <= 0L) {
+                runOnUiThread(() -> Toast.makeText(this,
+                        "Não foi possível identificar a receita no servidor.",
+                        Toast.LENGTH_SHORT).show());
+                return;
+            }
+
+            Response<RefeicaoResponse> resp = api.buscarPorId(
+                    authorization, refeicaoId, usuarioId, periodo).execute();
+
             if (!resp.isSuccessful()) {
                 runOnUiThread(() -> Toast.makeText(this,
                         "Não foi possível carregar a receita (" + resp.code() + ").",
                         Toast.LENGTH_SHORT).show());
                 return;
             }
-            List<RefeicaoResponse> body = resp.body();
-            if (body == null) body = Collections.emptyList();
 
-            RefeicaoResponse match = null;
-            for (RefeicaoResponse r : body) {
-                if (r != null && r.nome != null
-                        && r.nome.trim().equalsIgnoreCase(nomeBusca)) {
-                    match = r;
-                    break;
-                }
-            }
-
-            final RefeicaoResponse escolhido = match;
+            final RefeicaoResponse dto = resp.body();
             runOnUiThread(() -> {
-                if (escolhido != null) {
-                    aplicarDto(escolhido);
+                if (dto != null) {
+                    aplicarDto(dto);
                 } else {
                     Toast.makeText(this,
-                            "Este prato não foi encontrado no servidor para este período.",
+                            "Receita não encontrada no servidor.",
                             Toast.LENGTH_SHORT).show();
                 }
             });
@@ -166,34 +189,42 @@ public class ReceitaActivity extends AppCompatActivity {
     }
 
     private void aplicarDto(RefeicaoResponse dto) {
-        Prato p = RefeicaoConverters.paraPrato(dto);
-        textTitulo.setText(nz(p.nome));
-        textTempo.setText(p.tempo > 0 ? p.tempo + " min" : "—");
-        textKcal.setText(p.calorias > 0 ? p.calorias + " kcal" : "—");
-        textIngredientes.setText(nz(p.ingredientes));
-        textPreparo.setText(nz(p.preparo));
+        String momento = dto.periodoLabel != null && !dto.periodoLabel.isBlank()
+                ? dto.periodoLabel
+                : getIntent().getStringExtra(ReceitaIntentKeys.MOMENTO);
+        textMomento.setText(vazio(momento));
+        textTitulo.setText(vazio(dto.nome));
+        textTempo.setText(ApiUiFormatter.tempoMinutos(dto.tempoPreparo));
+        textKcal.setText(ApiUiFormatter.caloriasResumo(dto.calorias));
 
-        List<String> rest = dto.restricoes != null ? dto.restricoes : Collections.emptyList();
-        textGluten.setText(tagPorPalavra(rest, "gluten", "Sem glúten"));
-        textLactose.setText(tagPorPalavra(rest, "lactose", "Sem lactose"));
+        List<String> adequado = dto.adequadoPara != null
+                ? dto.adequadoPara
+                : Collections.emptyList();
+        textGluten.setText(ApiUiFormatter.tagAdequado(adequado, "glúten"));
+        textLactose.setText(ApiUiFormatter.tagAdequado(adequado, "lactose"));
 
-        String nutricional = (dto.calorias != null ? Math.round(dto.calorias) + " kcal" : "—");
-        if (!rest.isEmpty()) {
-            nutricional += " • " + String.join(", ", rest);
-        }
-        textNutricional.setText(nutricional);
+        List<String> ing = dto.ingredientes != null ? dto.ingredientes : Collections.emptyList();
+        textIngredientes.setText(ApiUiFormatter.listaIngredientes(ing));
+        textPreparo.setText(vazio(RefeicaoConverters.textoPreparo(dto)));
+        textNutricional.setText(
+                ApiUiFormatter.montarInformacoesNutricionais(
+                        dto.informacoesNutricionais,
+                        dto.calorias));
+
+        aplicarImagem(dto.imagemUrl);
     }
 
-    /** Retorna {@code rotulo} se alguma restrição contém {@code palavra}; caso contrário "—". */
-    private static String tagPorPalavra(List<String> restricoes, String palavra, String rotulo) {
-        if (restricoes == null || restricoes.isEmpty()) return "—";
-        String p = palavra.toLowerCase();
-        for (String s : restricoes) {
-            if (s != null && s.toLowerCase().contains(p)) {
-                return rotulo;
-            }
+    private void aplicarImagem(@Nullable String url) {
+        if (imageReceita == null) {
+            return;
         }
-        return "—";
+        if (url == null || url.trim().isEmpty()
+                || !url.trim().toLowerCase().startsWith("http")) {
+            imageReceita.setImageResource(R.drawable.ic_refeicao);
+            return;
+        }
+        // URLs do Drive e outras exigem tratamento específico; mantém ícone padrão por ora.
+        imageReceita.setImageResource(R.drawable.ic_refeicao);
     }
 
     @Override

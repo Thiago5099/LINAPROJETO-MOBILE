@@ -74,14 +74,12 @@ public class SelecionarPratoActivity extends AppCompatActivity {
 
             ReceitaActivity.putRecipeExtras(it,
                     tipo,
+                    null,
                     selecionado.nome,
                     selecionado.tempo + " min",
                     selecionado.calorias + " kcal",
                     selecionado.ingredientes,
                     selecionado.preparo,
-                    "Sem Glúten",
-                    "Sem Lactose",
-                    selecionado.calorias + " kcal no total",
                     null);
 
             startActivity(it);

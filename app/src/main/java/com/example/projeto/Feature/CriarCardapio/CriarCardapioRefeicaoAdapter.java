@@ -116,20 +116,18 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
                     && ctx.getSharedPreferences("auth", Context.MODE_PRIVATE).getLong("userId", 0L) != 0L;
             String periodoFetch = logado ? PeriodoMapeador.uiParaQuery(r.tipo) : null;
 
-            String ing = r.ingredientesTexto != null ? r.ingredientesTexto : "";
-            String prep = r.preparoTexto != null ? r.preparoTexto : "—";
-            String nut = r.kcal != null ? r.kcal + " no total" : "—";
+            String ing = r.ingredientesTexto != null ? r.ingredientesTexto : null;
+            String prep = r.preparoTexto != null ? r.preparoTexto : null;
+            Long refId = r.refeicaoId != null && r.refeicaoId > 0L ? r.refeicaoId : null;
 
             ReceitaActivity.putRecipeExtras(it,
                     r.tipo,
+                    refId,
                     r.nome,
                     r.tempo,
                     r.kcal,
                     ing,
                     prep,
-                    "Sem Glúten",
-                    "Sem Lactose",
-                    nut,
                     periodoFetch);
             ctx.startActivity(it);
         });

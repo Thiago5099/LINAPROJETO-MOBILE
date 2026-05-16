@@ -1,5 +1,6 @@
 package com.example.projeto.Feature.CriarCardapio;
 
+import com.example.projeto.Feature.Refeicoes.ApiUiFormatter;
 import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
 import com.example.projeto.Feature.Refeicoes.RefeicaoConverters;
 import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
@@ -34,22 +35,22 @@ public class CriarCardapioRefeicao {
 
     public static CriarCardapioRefeicao fromDto(RefeicaoResponse dto, String periodoQuery) {
         if (dto == null) {
-            return new CriarCardapioRefeicao(null, "", "", "", "", "", "—");
+            return new CriarCardapioRefeicao(null, "", "", "", "", "", ApiUiFormatter.VAZIO);
         }
         String tipoLabel = PeriodoMapeador.queryParaLabelCriarCardapio(periodoQuery);
         double cal = dto.calorias != null ? dto.calorias : 0d;
         int tmp = dto.tempoPreparo != null ? dto.tempoPreparo : 0;
         List<String> ingList = dto.ingredientes != null ? dto.ingredientes : Collections.emptyList();
-        String ing = ingList.isEmpty() ? "" : String.join(", ", ingList);
         String nome = dto.nome != null ? dto.nome : "";
         String prep = RefeicaoConverters.textoPreparo(dto);
+        String ingFmt = ApiUiFormatter.listaIngredientes(ingList);
         return new CriarCardapioRefeicao(
                 dto.id,
                 tipoLabel,
                 nome,
-                tmp + " min",
-                Math.round(cal) + " kcal",
-                ing,
+                tmp > 0 ? tmp + " min" : null,
+                cal > 0 ? Math.round(cal) + " kcal" : null,
+                ingFmt,
                 prep);
     }
 }

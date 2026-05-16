@@ -11,11 +11,18 @@ public class RefeicaoResponse {
     public String imagemUrl;
     public Double calorias;
     public Integer tempoPreparo;
-    public List<String> ingredientes;
-    public List<String> restricoes;
-
-    /** Campos opcionais conforme o DTO do backend (Gson ignora se não existirem). */
-    public String preparo;
     public String modoPreparo;
+    public String periodo;
+    public String periodoLabel;
+
+    public List<String> ingredientes;
+    public List<IngredienteItemResponse> ingredientesDetalhados;
+    public List<String> restricoes;
+    public List<String> adequadoPara;
+    public List<String> periodosPermitidos;
+    public InformacaoNutricionalResponse informacoesNutricionais;
+
+    /** Campos legados (Gson ignora se não existirem). */
+    public String preparo;
     public String instrucoesPreparo;
 }
