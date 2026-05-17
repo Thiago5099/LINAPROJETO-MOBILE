@@ -111,6 +111,7 @@ public class MudarCardapioActivity extends AppCompatActivity {
                         result.putExtra("preparo", prato.preparo != null ? prato.preparo : "");
                         result.putExtra("calorias", prato.calorias);
                         result.putExtra("tempo", prato.tempo);
+                        result.putExtra("refeicaoId", prato.refeicaoId);
                         setResult(Activity.RESULT_OK, result);
                         finish();
                     }));

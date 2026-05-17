@@ -56,8 +56,9 @@ public class CardapioFragment extends Fragment {
                     if (prep == null) prep = "";
                     int cal = data.getIntExtra("calorias", 0);
                     int tempo = data.getIntExtra("tempo", 0);
+                    long refeicaoId = data.getLongExtra("refeicaoId", 0L);
 
-                    aplicarTrocaNoDiaAtual(pos, tipo, nome, ing, prep, cal, tempo);
+                    aplicarTrocaNoDiaAtual(pos, tipo, nome, ing, prep, cal, tempo, refeicaoId);
                 });
     }
 
@@ -171,19 +172,20 @@ public class CardapioFragment extends Fragment {
     }
 
     private void aplicarTrocaNoDiaAtual(int pos, String tipo, String nome,
-            String ingredientes, String preparo, int calorias, int tempo) {
+            String ingredientes, String preparo, int calorias, int tempo, long refeicaoId) {
         List<Refeicao> lista = cardapios.get(diaAtual);
         if (lista == null || pos < 0 || pos >= lista.size()) return;
 
         Refeicao ref = lista.get(pos);
         if (ref.prato == null) {
-            ref.prato = new Prato(nome, ingredientes, preparo, calorias, tempo);
+            ref.prato = new Prato(nome, ingredientes, preparo, calorias, tempo, refeicaoId);
         } else {
             ref.prato.nome = nome;
             ref.prato.ingredientes = ingredientes.isEmpty() ? "—" : ingredientes;
             ref.prato.preparo = preparo.isEmpty() ? "—" : preparo;
             ref.prato.calorias = calorias;
             ref.prato.tempo = tempo;
+            ref.prato.refeicaoId = refeicaoId;
         }
         ref.tipo = tipo;
 

@@ -1,20 +1,32 @@
 package com.example.projeto.Feature.Compras.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.example.projeto.R;
+import com.example.projeto.Feature.Compras.CategoriaComprasMapeador;
+import com.example.projeto.Feature.Compras.ComprasListaCarregador;
 import com.example.projeto.Feature.Compras.adapter.ComprasAdapter;
+import com.example.projeto.Feature.Login.ApiAuthHeaders;
+import com.example.projeto.R;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ComprasFragment extends Fragment {
 
@@ -22,13 +34,11 @@ public class ComprasFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView txtProgresso;
 
-    // Lista lógica
-    private List<ComprasIngrediente> listaFinal = new ArrayList<>();
-
-    // Lista para exibição (com categorias)
-    private List<ComprasItemLista> listaExibicao = new ArrayList<>();
+    private final List<ComprasIngrediente> listaFinal = new ArrayList<>();
+    private final List<ComprasItemLista> listaExibicao = new ArrayList<>();
 
     private ComprasAdapter adapter;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public ComprasFragment() {
         super(R.layout.fragment_compras);
@@ -42,113 +52,109 @@ public class ComprasFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         txtProgresso = view.findViewById(R.id.txtProgresso);
 
-        // Pega dados do Repository
-        //List<Refeicao> refeicoes = RefeicaoRepository.getSelecionadas();
-        List<ComprasRefeicao> refeicoes = gerarDadosFake();
+        adapter = new ComprasAdapter(listaExibicao, this::atualizarProgresso);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
 
-        View root = view;
-
-        root.setOnApplyWindowInsetsListener((v, insets) -> {
-
+        view.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getSystemWindowInsetTop();
-
             v.setPadding(
                     v.getPaddingLeft(),
                     topInset,
                     v.getPaddingRight(),
                     v.getPaddingBottom()
             );
-
             return insets;
         });
-
-        if (refeicoes != null && !refeicoes.isEmpty()) {
-            processarIngredientes(refeicoes);
-            montarListaComCategorias(listaFinal);
-        }
-
-        // Configura RecyclerView
-        adapter = new ComprasAdapter(listaExibicao, this::atualizarProgresso);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-
-        atualizarProgresso();
     }
 
-    // Processa ingredientes (remove duplicados)
-    private void processarIngredientes(List<ComprasRefeicao> refeicoes) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        carregarLista();
+    }
 
-        Map<String, ComprasIngrediente> mapa = new HashMap<>();
+    private void carregarLista() {
+        if (!isAdded()) return;
 
-        for (ComprasRefeicao r : refeicoes) {
-            if (!r.isSelecionada()) continue;
+        String authorization = ApiAuthHeaders.bearerOrNull(requireContext());
+        if (authorization == null) {
+            Toast.makeText(requireContext(),
+                    "Faça login para ver a lista de compras", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            for (ComprasIngrediente i : r.getIngredientes()) {
+        SharedPreferences prefs = requireContext()
+                .getSharedPreferences("auth", Context.MODE_PRIVATE);
+        long userId = prefs.getLong("userId", 0L);
+        if (userId == 0L) {
+            Toast.makeText(requireContext(),
+                    "Faça login novamente", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-                if (mapa.containsKey(i.getNome())) {
+        recyclerView.setAlpha(0.4f);
 
-                    ComprasIngrediente existente = mapa.get(i.getNome());
+        executor.execute(() -> {
+            try {
+                List<ComprasIngrediente> ingredientes =
+                        ComprasListaCarregador.carregar(requireContext(), authorization, userId);
 
-                    existente.setQuantidade(
-                            existente.getQuantidade() + i.getQuantidade()
-                    );
+                if (!isAdded()) return;
 
-                } else {
+                requireActivity().runOnUiThread(() -> {
+                    recyclerView.setAlpha(1f);
+                    listaFinal.clear();
+                    listaFinal.addAll(ingredientes);
+                    montarListaComCategorias(listaFinal);
+                    adapter.notifyDataSetChanged();
+                    atualizarProgresso();
 
-                    mapa.put(i.getNome(),
-                            new ComprasIngrediente(
-                                    i.getNome(),
-                                    i.getQuantidade(),
-                                    i.getCategoria()
-                            ));
-                }
+                    if (ingredientes.isEmpty()) {
+                        Toast.makeText(requireContext(),
+                                "Monte seu cardápio para gerar a lista de compras",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            } catch (Exception e) {
+                if (!isAdded()) return;
+                requireActivity().runOnUiThread(() -> {
+                    recyclerView.setAlpha(1f);
+                    Toast.makeText(requireContext(),
+                            "Não foi possível carregar a lista de compras",
+                            Toast.LENGTH_SHORT).show();
+                });
             }
-        }
-
-        listaFinal.clear();
-        listaFinal.addAll(mapa.values());
+        });
     }
 
-    // AGRUPA POR CATEGORIA
     private void montarListaComCategorias(List<ComprasIngrediente> ingredientes) {
-
         Map<String, List<ComprasIngrediente>> agrupado = new HashMap<>();
 
         for (ComprasIngrediente i : ingredientes) {
-
-            if (!agrupado.containsKey(i.getCategoria())) {
-                agrupado.put(i.getCategoria(), new ArrayList<>());
-            }
-
-            agrupado.get(i.getCategoria()).add(i);
+            agrupado.computeIfAbsent(i.getCategoria(), k -> new ArrayList<>()).add(i);
         }
+
+        List<String> categorias = new ArrayList<>(agrupado.keySet());
+        Collections.sort(categorias, Comparator.comparingInt(CategoriaComprasMapeador::ordem));
 
         listaExibicao.clear();
 
-        for (String categoria : agrupado.keySet()) {
-
-            // HEADER
+        for (String categoria : categorias) {
             listaExibicao.add(new ComprasItemLista(categoria));
-
-            // ITENS
             for (ComprasIngrediente i : agrupado.get(categoria)) {
                 listaExibicao.add(new ComprasItemLista(i));
             }
         }
     }
 
-    // Atualiza progresso
     private void atualizarProgresso() {
-
         int total = 0;
         int comprados = 0;
 
         for (ComprasItemLista item : listaExibicao) {
-
             if (item.getTipo() == ComprasItemLista.TIPO_ITEM) {
-
                 total++;
-
                 if (item.getIngrediente().isComprado()) {
                     comprados++;
                 }
@@ -156,40 +162,7 @@ public class ComprasFragment extends Fragment {
         }
 
         int progresso = total == 0 ? 0 : (comprados * 100 / total);
-
         progressBar.setProgress(progresso);
         txtProgresso.setText(comprados + " de " + total + " itens comprados");
-    }
-
-    private List<ComprasRefeicao> gerarDadosFake() {
-
-        List<ComprasRefeicao> lista = new ArrayList<>();
-
-        // Ingredientes
-        List<ComprasIngrediente> ingredientes1 = new ArrayList<>();
-        ingredientes1.add(new ComprasIngrediente("Alface", 4, "Frutas e Vegetais"));
-        ingredientes1.add(new ComprasIngrediente("Brócolis", 2, "Frutas e Vegetais"));
-        ingredientes1.add(new ComprasIngrediente("Tomate", 5, "Frutas e Vegetais"));
-
-        List<ComprasIngrediente> ingredientes2 = new ArrayList<>();
-        ingredientes2.add(new ComprasIngrediente("Leite de Amêndoa", 3, "Laticínios"));
-        ingredientes2.add(new ComprasIngrediente("Leite desnatado", 2, "Laticínios"));
-
-        List<ComprasIngrediente> ingredientes3 = new ArrayList<>();
-        ingredientes3.add(new ComprasIngrediente("Pão Integral", 8, "Grãos e Cereais"));
-        ingredientes3.add(new ComprasIngrediente("Quinoa", 5, "Grãos e Cereais"));
-
-        List<ComprasIngrediente> ingredientes4 = new ArrayList<>();
-        ingredientes4.add(new ComprasIngrediente("Ovos", 8, "Proteínas"));
-        ingredientes4.add(new ComprasIngrediente("Peito de Frango", 5, "Proteínas"));
-        ingredientes4.add(new ComprasIngrediente("Atum em Lata", 5, "Proteínas"));
-
-        // Refeições fake
-        lista.add(new ComprasRefeicao("Refeição 1", ingredientes1, true));
-        lista.add(new ComprasRefeicao("Refeição 2", ingredientes2, true));
-        lista.add(new ComprasRefeicao("Refeição 3", ingredientes3, true));
-        lista.add(new ComprasRefeicao("Refeição 4", ingredientes4, true));
-
-        return lista;
     }
 }

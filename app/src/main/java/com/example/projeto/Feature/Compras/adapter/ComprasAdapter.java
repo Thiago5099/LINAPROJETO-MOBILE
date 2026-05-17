@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
+import com.example.projeto.Feature.Compras.ComprasQuantidadeFormatter;
 import com.example.projeto.Feature.Compras.models.ComprasIngrediente;
 import com.example.projeto.Feature.Compras.models.ComprasItemLista;
 
@@ -91,8 +92,11 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 case "Proteínas":
                     icon.setImageResource(R.drawable.ic_compras_proteinas);
                     break;
+                case "Outros":
+                    icon.setImageResource(R.drawable.ic_compras_graos);
+                    break;
                 default:
-                    icon.setImageResource(R.drawable.ic_compras_proteinas);
+                    icon.setImageResource(R.drawable.ic_compras_graos);
             }
 
             int widthInDp = 21;
@@ -127,7 +131,7 @@ public class ComprasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         void bind(ComprasIngrediente i) {
             nome.setText(i.getNome());
-            qtd.setText("(x" + i.getQuantidade() + ")");
+            qtd.setText("(" + ComprasQuantidadeFormatter.resumo(i.getQuantidade(), i.getUnidade()) + ")");
             check.setChecked(i.isComprado());
 
             check.setOnCheckedChangeListener((b, checked) -> {

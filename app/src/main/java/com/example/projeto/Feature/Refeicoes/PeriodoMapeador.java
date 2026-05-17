@@ -9,20 +9,21 @@ public final class PeriodoMapeador {
 
     /** Query enviada ao backend: CAFE_DA_MANHA, ALMOCO, LANCHE_DA_TARDE, JANTAR */
     public static String uiParaQuery(String tipoExibicao) {
-        if (tipoExibicao == null) return null;
-        switch (tipoExibicao) {
-            case "Café da manhã":
-                return "CAFE_DA_MANHA";
-            case "Almoço":
-                return "ALMOCO";
-            case "Lanche":
-            case "Lanche da tarde":
-                return "LANCHE_DA_TARDE";
-            case "Jantar":
-                return "JANTAR";
-            default:
-                return null;
+        if (tipoExibicao == null || tipoExibicao.isEmpty()) return null;
+        String t = tipoExibicao.trim().toLowerCase();
+        if (t.contains("café") || t.contains("cafe")) {
+            return "CAFE_DA_MANHA";
         }
+        if (t.contains("almoço") || t.contains("almoco")) {
+            return "ALMOCO";
+        }
+        if (t.contains("lanche")) {
+            return "LANCHE_DA_TARDE";
+        }
+        if (t.contains("jantar")) {
+            return "JANTAR";
+        }
+        return null;
     }
 
     /** Rótulo usado no criar cardápio (agrupamento por período). */
