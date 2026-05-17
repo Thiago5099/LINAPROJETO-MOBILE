@@ -31,7 +31,7 @@ O `ListaComprasService` **já agrupa** por `ingrediente.getCategoria()` ao monta
   - `itens` — lista de `ItemListaDTO`:
     - `nomeIngrediente`
     - `quantidade`
-    - **Não envia `unidade`** (campo não existe no DTO atual)
+    - `unidade` — ex.: `unidades`, `g`, `xícara`
 
 Exemplo:
 
@@ -40,7 +40,7 @@ Exemplo:
   {
     "categoria": "PROTEINAS",
     "itens": [
-      { "nomeIngrediente": "Ovo", "quantidade": 4.0 }
+      { "nomeIngrediente": "Ovo", "quantidade": 4.0, "unidade": "unidades" }
     ]
   }
 ]
@@ -52,7 +52,7 @@ Exemplo:
 
 - `ingredientesDetalhados[]` em `IngredienteItemDTO`:
   - `nome`, `quantidade`, `unidade`, `texto`
-  - **Não envia `categoria`** do ingrediente
+  - `categoria` — enum (ex.: `PROTEINAS`)
 
 ---
 
@@ -79,7 +79,7 @@ Exemplo:
 | `ComprasAdapter.java` | Exibe itens; quantidade via `ComprasQuantidadeFormatter` |
 | `CategoriaComprasMapeador.java` | `FRUTAS_E_VEGETAIS` → "Frutas e Vegetais", etc. |
 | `ComprasQuantidadeFormatter.java` | Formato igual ao backend (`2 unidades`, `1/2 xícara`) |
-| `IngredienteCatalogoLocal.java` | **Workaround** — mapa estático nome → categoria + unidade padrão |
+| ~~`IngredienteCatalogoLocal.java`~~ | Removido — categoria/unidade vêm da API |
 | `ComprasIngredienteTextoParser.java` | Parse de texto `• ingrediente` do cardápio local |
 
 ### Outras correções no app
@@ -124,19 +124,15 @@ Métodos:
 
 ---
 
-## Solução recomendada (alinhada ao backend)
+## Backend atualizado (feito)
 
-Ajuste **mínimo** no backend (sem mudar regra de negócio):
+- `ItemListaDTO.unidade` + consolidação por ingrediente+unidade em `ListaComprasService`
+- `IngredienteItemDTO.categoria` em `/refeicoes/{id}`
 
-1. **`ItemListaDTO`** — adicionar campo `unidade`.
-2. **`ListaComprasService` / `ListaComprasMapper`** — preencher `unidade` a partir de `RefeicaoIngrediente` ao consolidar (cuidado ao fazer merge de quantidades com mesma unidade).
-3. **`IngredienteItemDTO` + `RefeicaoMapper`** — adicionar `categoria` (`ingrediente.getCategoria().name()`).
+## App (feito)
 
-No app:
-
-- Ler `unidade` e `categoria` dos JSON.
-- **Remover** `IngredienteCatalogoLocal.java`.
-- Manter `CategoriaComprasMapeador` e `ComprasQuantidadeFormatter`.
+- Consome `unidade` e `categoria` da API; removido `IngredienteCatalogoLocal`
+- Mantidos `CategoriaComprasMapeador` e `ComprasQuantidadeFormatter`
 
 Opcional futuro: **POST/PUT cardápio** para sincronizar plano semanal → `/lista-compras` passa a ser a fonte principal.
 

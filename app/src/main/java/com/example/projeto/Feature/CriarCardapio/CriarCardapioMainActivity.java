@@ -147,13 +147,16 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
                 List<CriarCardapioRefeicao> merged = new ArrayList<>();
                 for (String[] periodo : PERIODOS_API) {
                     String query = periodo[0];
+                    String label = periodo[1];
                     Response<List<RefeicaoResponse>> resp =
                             api.listar(auth, query, userId).execute();
                     if (!resp.isSuccessful()) {
                         final int code = resp.code();
+                        final String periodoLabel = label;
                         runOnUiThread(() -> {
                             Toast.makeText(CriarCardapioMainActivity.this,
-                                    "Erro ao carregar refeições (" + code + ")",
+                                    "Erro ao carregar " + periodoLabel + " (HTTP " + code + "). "
+                                            + "Tente novamente ou verifique o servidor.",
                                     Toast.LENGTH_LONG).show();
                             finish();
                         });
