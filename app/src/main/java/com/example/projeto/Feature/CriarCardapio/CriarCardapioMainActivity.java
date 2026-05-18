@@ -185,10 +185,13 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
                 });
             } catch (IOException e) {
                 runOnUiThread(() -> {
+                    String msg = e.getMessage() != null ? e.getMessage() : "erro desconhecido";
                     Toast.makeText(CriarCardapioMainActivity.this,
-                            "Falha de rede: " + (e.getMessage() != null ? e.getMessage() : "erro"),
+                            "Sem conexão com o servidor. Verifique sua internet e tente novamente. (" + msg + ")",
                             Toast.LENGTH_LONG).show();
-                    finish();
+                    // Não fecha — o usuário pode tentar novamente pela seta de voltar e re-abrir
+                    setNavegacaoHabilitada(false);
+                    contador.setText("Sem conexão");
                 });
             }
         });
