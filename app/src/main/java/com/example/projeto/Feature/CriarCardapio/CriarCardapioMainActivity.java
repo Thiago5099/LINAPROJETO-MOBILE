@@ -145,23 +145,26 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
             try {
                 RefeicaoApiService api = RetrofitClient.getInstance().create(RefeicaoApiService.class);
                 List<CriarCardapioRefeicao> merged = new ArrayList<>();
+                List<String> periodosComErro = new ArrayList<>();
+
                 for (String[] periodo : PERIODOS_API) {
                     String query = periodo[0];
                     String label = periodo[1];
-                    Response<List<RefeicaoResponse>> resp =
-                            api.listar(auth, query, userId).execute();
-                    if (!resp.isSuccessful()) {
-                        final int code = resp.code();
-                        final String periodoLabel = label;
-                        runOnUiThread(() -> {
-                            Toast.makeText(CriarCardapioMainActivity.this,
-                                    "Erro ao carregar " + periodoLabel + " (HTTP " + code + "). "
-                                            + "Tente novamente ou verifique o servidor.",
-                                    Toast.LENGTH_LONG).show();
-                            finish();
-                        });
-                        return;
+                    Response<List<RefeicaoResponse>> resp;
+                    try {
+                        resp = api.listar(auth, query, userId).execute();
+                    } catch (IOException ioEx) {
+                        // Falha de rede neste período — registra e continua
+                        periodosComErro.add(label);
+                        continue;
                     }
+
+                    if (!resp.isSuccessful()) {
+                        // Servidor retornou erro (ex: 500) — registra e continua com os outros períodos
+                        periodosComErro.add(label + " (HTTP " + resp.code() + ")");
+                        continue;
+                    }
+
                     List<RefeicaoResponse> body = resp.body();
                     if (body != null) {
                         for (RefeicaoResponse dto : body) {
@@ -171,7 +174,15 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
                 }
 
                 final List<CriarCardapioRefeicao> resultado = merged;
-                runOnUiThread(() -> onCatalogoCarregado(resultado));
+                final List<String> erros = periodosComErro;
+                runOnUiThread(() -> {
+                    if (!erros.isEmpty()) {
+                        Toast.makeText(CriarCardapioMainActivity.this,
+                                "Aviso: não foi possível carregar — " + android.text.TextUtils.join(", ", erros),
+                                Toast.LENGTH_LONG).show();
+                    }
+                    onCatalogoCarregado(resultado);
+                });
             } catch (IOException e) {
                 runOnUiThread(() -> {
                     Toast.makeText(CriarCardapioMainActivity.this,
@@ -185,8 +196,11 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
 
     private void onCatalogoCarregado(List<CriarCardapioRefeicao> itens) {
         if (itens.isEmpty()) {
-            Toast.makeText(this, "Nenhuma refeição retornada pelo servidor.", Toast.LENGTH_LONG).show();
-            finish();
+            // Não fecha o app — mostra aviso e deixa a tela aberta para o usuário tentar novamente
+            Toast.makeText(this,
+                    "Nenhuma refeição encontrada no servidor. Verifique se há refeições cadastradas para cada período.",
+                    Toast.LENGTH_LONG).show();
+            contador.setText("Sem refeições disponíveis");
             return;
         }
         cardapio = new ArrayList<>();
