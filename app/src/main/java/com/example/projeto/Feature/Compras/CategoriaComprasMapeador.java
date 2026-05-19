@@ -1,17 +1,14 @@
 package com.example.projeto.Feature.Compras;
 
-/**
- * Converte {@code CategoriaIngrediente} da API para rótulos da UI.
- */
 public final class CategoriaComprasMapeador {
 
     private CategoriaComprasMapeador() {}
 
-    public static String paraLabel(String categoriaApi) {
-        if (categoriaApi == null || categoriaApi.isEmpty()) {
+    public static String paraLabel(String categoria) {
+        if (categoria == null || categoria.isEmpty()) {
             return "Outros";
         }
-        switch (categoriaApi) {
+        switch (categoria) {
             case "FRUTAS_E_VEGETAIS":
                 return "Frutas e Vegetais";
             case "LATICINIOS":

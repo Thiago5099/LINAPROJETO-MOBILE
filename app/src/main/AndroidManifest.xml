@@ -38,17 +38,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Feature.Cardapio.SelecionarPratoActivity"
-
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!-- Criar Cardápio -->
         <activity
             android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
@@ -92,6 +81,17 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
     </activity>
+
+        <!-- Criar Cardápio -->
+        <activity
+            android:name=".Feature.CriarCardapio.CriarCardapioMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>

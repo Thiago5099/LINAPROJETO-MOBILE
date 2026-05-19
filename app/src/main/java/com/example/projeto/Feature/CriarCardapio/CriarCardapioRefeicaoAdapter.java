@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
 import com.example.projeto.Feature.Cardapio.ReceitaActivity;
-import com.example.projeto.Feature.Login.ApiAuthHeaders;
-import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -112,10 +110,6 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
         holder.botao.setOnClickListener(v -> {
             Context ctx = holder.itemView.getContext();
             Intent it = new Intent(ctx, ReceitaActivity.class);
-            boolean logado = ApiAuthHeaders.bearerOrNull(ctx) != null
-                    && ctx.getSharedPreferences("auth", Context.MODE_PRIVATE).getLong("userId", 0L) != 0L;
-            String periodoFetch = logado ? PeriodoMapeador.uiParaQuery(r.tipo) : null;
-
             String ing = r.ingredientesTexto != null ? r.ingredientesTexto : null;
             String prep = r.preparoTexto != null ? r.preparoTexto : null;
             Long refId = r.refeicaoId != null && r.refeicaoId > 0L ? r.refeicaoId : null;
@@ -128,7 +122,7 @@ public class CriarCardapioRefeicaoAdapter extends RecyclerView.Adapter<CriarCard
                     r.kcal,
                     ing,
                     prep,
-                    periodoFetch);
+                    r.tipo);
             ctx.startActivity(it);
         });
     }

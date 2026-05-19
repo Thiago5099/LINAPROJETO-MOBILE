@@ -1,7 +1,6 @@
 package com.example.projeto.Feature.Cardapio;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
@@ -13,10 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
-import com.example.projeto.R;
 import com.example.projeto.Feature.CriarCardapio.CriarCardapioMainActivity;
-import com.example.projeto.Feature.Login.ApiAuthHeaders;
-import com.example.projeto.Feature.Login.LoginCadastro;
+import com.example.projeto.R;
 
 import java.util.*;
 
@@ -74,8 +71,7 @@ public class CardapioFragment extends Fragment {
         view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v ->
                 startActivity(new Intent(getContext(), CriarCardapioMainActivity.class)));
 
-        view.findViewById(R.id.btnLogin).setOnClickListener(v ->
-                startActivity(new Intent(getContext(), LoginCadastro.class)));
+        view.findViewById(R.id.btnLogin).setVisibility(View.GONE);
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -152,27 +148,16 @@ public class CardapioFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        String auth = ApiAuthHeaders.bearerOrNull(requireContext());
-        long userId = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
-                .getLong("userId", 0L);
-        if (auth == null || userId == 0L) {
-            Toast.makeText(requireContext(),
-                    "Faça login para buscar outras refeições no servidor.",
-                    Toast.LENGTH_LONG).show();
-            return;
-        }
         Intent it = new Intent(requireContext(), MudarCardapioActivity.class);
         it.putExtra("posicao", posicao);
         it.putExtra("tipo", tipo);
         it.putExtra("nomeAtual", nomeAtual);
         it.putExtra("infoAtual", infoAtual);
-        it.putExtra("usuarioId", userId);
-        it.putExtra("authorization", auth);
         mudarCardapioLauncher.launch(it);
     }
 
     private void aplicarTrocaNoDiaAtual(int pos, String tipo, String nome,
-            String ingredientes, String preparo, int calorias, int tempo, long refeicaoId) {
+                                        String ingredientes, String preparo, int calorias, int tempo, long refeicaoId) {
         List<Refeicao> lista = cardapios.get(diaAtual);
         if (lista == null || pos < 0 || pos >= lista.size()) return;
 

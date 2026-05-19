@@ -7,8 +7,6 @@ import android.widget.*;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.Feature.Login.ApiAuthHeaders;
-import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
 
 import java.util.List;
 
@@ -60,21 +58,15 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
 
         // VER RECEITA
         //h.receita.setOnClickListener(v -> {
-            //Intent it = new Intent(context, ReceitaActivity.class);
-            //it.putExtra("nome", r.prato.nome);
-            //it.putExtra("ingredientes", r.prato.ingredientes);
-            //it.putExtra("preparo", r.prato.preparo);
-            //context.startActivity(it);
+        //Intent it = new Intent(context, ReceitaActivity.class);
+        //it.putExtra("nome", r.prato.nome);
+        //it.putExtra("ingredientes", r.prato.ingredientes);
+        //it.putExtra("preparo", r.prato.preparo);
+        //context.startActivity(it);
         //})
         // VER RECEITA
         h.receita.setOnClickListener(v -> {
             Intent it = new Intent(context, ReceitaActivity.class);
-            SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
-            boolean logado = ApiAuthHeaders.bearerOrNull(context) != null
-                    && prefs.getLong("userId", 0L) != 0L;
-            String periodo = PeriodoMapeador.uiParaQuery(r.tipo);
-            String periodoFetch = logado ? periodo : null;
-
             Long refId = r.prato.refeicaoId > 0L ? r.prato.refeicaoId : null;
             ReceitaActivity.putRecipeExtras(it,
                     r.tipo,
@@ -84,7 +76,7 @@ public class RefeicaoAdapter extends RecyclerView.Adapter<RefeicaoAdapter.ViewHo
                     r.prato.calorias > 0 ? r.prato.calorias + " kcal" : null,
                     r.prato.ingredientes,
                     r.prato.preparo,
-                    periodoFetch);
+                    r.tipo);
 
             context.startActivity(it);
         });

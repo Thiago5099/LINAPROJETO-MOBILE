@@ -12,26 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
-import com.example.projeto.Feature.Nutricionistas.RetrofitClient;
-import com.example.projeto.Feature.Refeicoes.PeriodoMapeador;
-import com.example.projeto.Feature.Refeicoes.RefeicaoApiService;
-import com.example.projeto.Feature.Refeicoes.RefeicaoConverters;
-import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
+import com.example.projeto.Data.BancoHelper;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import retrofit2.Response;
 
 public class MudarCardapioActivity extends AppCompatActivity {
-
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +29,8 @@ public class MudarCardapioActivity extends AppCompatActivity {
         String tipo = getIntent().getStringExtra("tipo");
         String nomeAtual = getIntent().getStringExtra("nomeAtual");
         String infoAtual = getIntent().getStringExtra("infoAtual");
-        long usuarioId = getIntent().getLongExtra("usuarioId", 0L);
-        String authorization = getIntent().getStringExtra("authorization");
 
-        final String periodo = PeriodoMapeador.uiParaQuery(tipo);
+        final String periodo = tipo;
 
         ((TextView) findViewById(R.id.txtTipoAtual)).setText(tipo);
         ((TextView) findViewById(R.id.txtNomeAtual)).setText(nomeAtual);
@@ -61,7 +46,7 @@ public class MudarCardapioActivity extends AppCompatActivity {
                     extrairKcalFmt(infoAtual),
                     null,
                     null,
-                    periodo);
+                    tipo);
             startActivity(it);
         });
 
@@ -71,60 +56,20 @@ public class MudarCardapioActivity extends AppCompatActivity {
         findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
         findViewById(R.id.btnContinuarMesma).setOnClickListener(v -> finish());
 
-        if (periodo == null || usuarioId == 0L || authorization == null || authorization.isEmpty()) {
-            Toast.makeText(this, "Sessão inválida. Faça login novamente.", Toast.LENGTH_LONG).show();
+        List<Prato> opcoes = new BancoHelper(this).listarPratosPorPeriodo(periodo, nomeAtual);
+        recycler.setAdapter(new OpcaoAdapter(this, opcoes, tipo, periodo, prato -> {
+            Intent result = new Intent();
+            result.putExtra("posicao", posicao);
+            result.putExtra("tipo", tipo);
+            result.putExtra("nome", prato.nome);
+            result.putExtra("ingredientes", prato.ingredientes != null ? prato.ingredientes : "");
+            result.putExtra("preparo", prato.preparo != null ? prato.preparo : "");
+            result.putExtra("calorias", prato.calorias);
+            result.putExtra("tempo", prato.tempo);
+            result.putExtra("refeicaoId", prato.refeicaoId);
+            setResult(Activity.RESULT_OK, result);
             finish();
-            return;
-        }
-
-        executor.execute(() -> {
-            try {
-                RefeicaoApiService api = RetrofitClient.getInstance().create(RefeicaoApiService.class);
-                Response<List<RefeicaoResponse>> resp =
-                        api.listar(authorization, periodo, usuarioId).execute();
-                if (!resp.isSuccessful()) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(this,
-                                "Erro ao carregar opções (" + resp.code() + ")",
-                                Toast.LENGTH_LONG).show();
-                        finish();
-                    });
-                    return;
-                }
-                List<RefeicaoResponse> body = resp.body();
-                if (body == null) body = Collections.emptyList();
-                List<Prato> opcoes = new ArrayList<>();
-                for (RefeicaoResponse r : body) {
-                    Prato p = RefeicaoConverters.paraPrato(r);
-                    if (nomeAtual == null || !p.nome.equals(nomeAtual)) {
-                        opcoes.add(p);
-                    }
-                }
-                runOnUiThread(() -> {
-                    recycler.setAdapter(new OpcaoAdapter(this, opcoes, tipo, periodo, prato -> {
-                        Intent result = new Intent();
-                        result.putExtra("posicao", posicao);
-                        result.putExtra("tipo", tipo);
-                        result.putExtra("nome", prato.nome);
-                        result.putExtra("ingredientes",
-                                prato.ingredientes != null ? prato.ingredientes : "");
-                        result.putExtra("preparo", prato.preparo != null ? prato.preparo : "");
-                        result.putExtra("calorias", prato.calorias);
-                        result.putExtra("tempo", prato.tempo);
-                        result.putExtra("refeicaoId", prato.refeicaoId);
-                        setResult(Activity.RESULT_OK, result);
-                        finish();
-                    }));
-                });
-            } catch (IOException e) {
-                runOnUiThread(() -> {
-                    Toast.makeText(this,
-                            "Falha de rede: " + (e.getMessage() != null ? e.getMessage() : "erro"),
-                            Toast.LENGTH_LONG).show();
-                    finish();
-                });
-            }
-        });
+        }));
     }
 
     private static String extrairTempoFmt(String infoAtual) {
@@ -137,12 +82,6 @@ public class MudarCardapioActivity extends AppCompatActivity {
         if (infoAtual == null) return null;
         Matcher m = Pattern.compile("(\\d+)\\s*kcal").matcher(infoAtual);
         return m.find() ? m.group(1) + " kcal" : null;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        executor.shutdownNow();
     }
 
     static class OpcaoAdapter extends RecyclerView.Adapter<OpcaoAdapter.VH> {

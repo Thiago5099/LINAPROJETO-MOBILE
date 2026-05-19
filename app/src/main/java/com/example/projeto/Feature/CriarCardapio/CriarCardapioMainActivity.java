@@ -1,6 +1,5 @@
 package com.example.projeto.Feature.CriarCardapio;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,32 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto.R;
+import com.example.projeto.Data.BancoHelper;
 import com.example.projeto.Feature.Cardapio.CardapioItemPersistido;
 import com.example.projeto.Feature.Cardapio.CardapioLocalStore;
-import com.example.projeto.Feature.Login.ApiAuthHeaders;
-import com.example.projeto.Feature.Nutricionistas.RetrofitClient;
-import com.example.projeto.Feature.Refeicoes.RefeicaoApiService;
-import com.example.projeto.Feature.Refeicoes.RefeicaoResponse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import retrofit2.Response;
 
 public class CriarCardapioMainActivity extends AppCompatActivity {
-
-    private static final String[][] PERIODOS_API = {
-            {"CAFE_DA_MANHA", "Café da manhã"},
-            {"ALMOCO", "Almoço"},
-            {"LANCHE_DA_TARDE", "Lanche da tarde"},
-            {"JANTAR", "Jantar"}
-    };
 
     RecyclerView recycler;
     TextView contador, txtDia;
@@ -57,7 +41,6 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
     List<List<CriarCardapioRefeicao>> cardapio;
     List<Set<Integer>> selecoesPorDia;
 
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean catalogoCarregado = false;
 
     @Override
@@ -87,7 +70,7 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
             selecoesPorDia.add(new HashSet<>());
         }
 
-        contador.setText("Carregando refeições…");
+        contador.setText("Carregando refeições...");
         setNavegacaoHabilitada(false);
 
         findViewById(R.id.chipSeg).setOnClickListener(v -> trocar(0));
@@ -110,13 +93,7 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
             salvarSemanaSeCompleta();
         });
 
-        carregarOpcoesDoBackend();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        executor.shutdownNow();
+        carregarOpcoesLocais();
     }
 
     private void setNavegacaoHabilitada(boolean habilitada) {
@@ -131,78 +108,14 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
         }
     }
 
-    private void carregarOpcoesDoBackend() {
-        SharedPreferences p = getSharedPreferences("auth", MODE_PRIVATE);
-        long userId = p.getLong("userId", 0L);
-        String auth = ApiAuthHeaders.bearerOrNull(this);
-        if (userId == 0L || auth == null) {
-            Toast.makeText(this, "Faça login para carregar as refeições do servidor.", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
-        executor.execute(() -> {
-            try {
-                RefeicaoApiService api = RetrofitClient.getInstance().create(RefeicaoApiService.class);
-                List<CriarCardapioRefeicao> merged = new ArrayList<>();
-                List<String> periodosComErro = new ArrayList<>();
-
-                for (String[] periodo : PERIODOS_API) {
-                    String query = periodo[0];
-                    String label = periodo[1];
-                    Response<List<RefeicaoResponse>> resp;
-                    try {
-                        resp = api.listar(auth, query, userId).execute();
-                    } catch (IOException ioEx) {
-                        // Falha de rede neste período — registra e continua
-                        periodosComErro.add(label);
-                        continue;
-                    }
-
-                    if (!resp.isSuccessful()) {
-                        // Servidor retornou erro (ex: 500) — registra e continua com os outros períodos
-                        periodosComErro.add(label + " (HTTP " + resp.code() + ")");
-                        continue;
-                    }
-
-                    List<RefeicaoResponse> body = resp.body();
-                    if (body != null) {
-                        for (RefeicaoResponse dto : body) {
-                            merged.add(CriarCardapioRefeicao.fromDto(dto, query));
-                        }
-                    }
-                }
-
-                final List<CriarCardapioRefeicao> resultado = merged;
-                final List<String> erros = periodosComErro;
-                runOnUiThread(() -> {
-                    if (!erros.isEmpty()) {
-                        Toast.makeText(CriarCardapioMainActivity.this,
-                                "Aviso: não foi possível carregar — " + android.text.TextUtils.join(", ", erros),
-                                Toast.LENGTH_LONG).show();
-                    }
-                    onCatalogoCarregado(resultado);
-                });
-            } catch (IOException e) {
-                runOnUiThread(() -> {
-                    String msg = e.getMessage() != null ? e.getMessage() : "erro desconhecido";
-                    Toast.makeText(CriarCardapioMainActivity.this,
-                            "Sem conexão com o servidor. Verifique sua internet e tente novamente. (" + msg + ")",
-                            Toast.LENGTH_LONG).show();
-                    // Não fecha — o usuário pode tentar novamente pela seta de voltar e re-abrir
-                    setNavegacaoHabilitada(false);
-                    contador.setText("Sem conexão");
-                });
-            }
-        });
+    private void carregarOpcoesLocais() {
+        onCatalogoCarregado(new BancoHelper(this).listarOpcoesCriarCardapio());
     }
 
     private void onCatalogoCarregado(List<CriarCardapioRefeicao> itens) {
         if (itens.isEmpty()) {
             // Não fecha o app — mostra aviso e deixa a tela aberta para o usuário tentar novamente
-            Toast.makeText(this,
-                    "Nenhuma refeição encontrada no servidor. Verifique se há refeições cadastradas para cada período.",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nenhuma refeição cadastrada no banco local.", Toast.LENGTH_LONG).show();
             contador.setText("Sem refeições disponíveis");
             return;
         }

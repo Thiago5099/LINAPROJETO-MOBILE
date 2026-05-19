@@ -3,7 +3,7 @@ package com.example.projeto.Feature.Cardapio;
 public class Prato {
     public String nome, ingredientes, preparo;
     public int calorias, tempo;
-    /** Id no backend; 0 se desconhecido (dados só locais). */
+    /** Id no banco local; 0 se desconhecido. */
     public long refeicaoId;
 
     public Prato(String n, String i, String p, int c, int t) {

@@ -1,10 +1,9 @@
 package com.example.projeto.Feature.Cardapio;
 
 import android.content.Context;
+import com.example.projeto.Data.BancoHelper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -12,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Grava na memória do aparelho o cardápio montado em {@code CriarCardapioMainActivity}
- * (7 dias × até 4 refeições). O backend ainda não expõe POST para atualizar o plano.
+ * Grava no banco local o cardápio montado em {@code CriarCardioMainActivity}
+ * (7 dias × até 4 refeições).
  */
 public final class CardapioLocalStore {
 
@@ -24,6 +23,7 @@ public final class CardapioLocalStore {
     private CardapioLocalStore() {}
 
     public static void salvarSemana(Context ctx, List<List<CardapioItemPersistido>> dias) {
+        new BancoHelper(ctx).salvarSemana(dias);
         String json = GSON.toJson(dias);
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
                 .edit()
@@ -64,37 +64,14 @@ public final class CardapioLocalStore {
     }
 
     /**
-     * @return lista com 7 entradas (uma por dia) ou {@code null} se não houver dados.
+     * @return lista com 7 entradas (uma por dia); vazia enquanto o usuário não salvar.
      */
     public static List<List<CardapioItemPersistido>> carregarSemana(Context ctx) {
-        String json = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-                .getString(KEY_JSON, null);
-        if (json == null || json.isEmpty()) {
-            return null;
-        }
-        Type type = new TypeToken<List<List<CardapioItemPersistido>>>() {}.getType();
-        List<List<CardapioItemPersistido>> raw = GSON.fromJson(json, type);
-        if (raw == null) {
-            return null;
-        }
-        List<List<CardapioItemPersistido>> out = new ArrayList<>(7);
-        for (int i = 0; i < 7; i++) {
-            if (i < raw.size() && raw.get(i) != null) {
-                out.add(new ArrayList<>(raw.get(i)));
-            } else {
-                out.add(new ArrayList<>());
-            }
-        }
-        return out;
+        return new BancoHelper(ctx).carregarSemana();
     }
 
     public static boolean temCardapioSalvo(Context ctx) {
-        List<List<CardapioItemPersistido>> s = carregarSemana(ctx);
-        if (s == null) return false;
-        for (List<CardapioItemPersistido> dia : s) {
-            if (dia != null && !dia.isEmpty()) return true;
-        }
-        return false;
+        return new BancoHelper(ctx).temCardapioSalvo();
     }
 
     /**

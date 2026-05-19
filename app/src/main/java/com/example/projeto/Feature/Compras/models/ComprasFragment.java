@@ -1,7 +1,5 @@
 package com.example.projeto.Feature.Compras.models;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,10 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projeto.Data.BancoHelper;
 import com.example.projeto.Feature.Compras.CategoriaComprasMapeador;
-import com.example.projeto.Feature.Compras.ComprasListaCarregador;
 import com.example.projeto.Feature.Compras.adapter.ComprasAdapter;
-import com.example.projeto.Feature.Login.ApiAuthHeaders;
 import com.example.projeto.R;
 
 import java.util.ArrayList;
@@ -25,8 +22,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ComprasFragment extends Fragment {
 
@@ -38,8 +33,6 @@ public class ComprasFragment extends Fragment {
     private final List<ComprasItemLista> listaExibicao = new ArrayList<>();
 
     private ComprasAdapter adapter;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
     public ComprasFragment() {
         super(R.layout.fragment_compras);
     }
@@ -77,55 +70,18 @@ public class ComprasFragment extends Fragment {
     private void carregarLista() {
         if (!isAdded()) return;
 
-        String authorization = ApiAuthHeaders.bearerOrNull(requireContext());
-        if (authorization == null) {
+        List<ComprasIngrediente> ingredientes = new BancoHelper(requireContext()).gerarListaDeCompras();
+        listaFinal.clear();
+        listaFinal.addAll(ingredientes);
+        montarListaComCategorias(listaFinal);
+        adapter.notifyDataSetChanged();
+        atualizarProgresso();
+
+        if (ingredientes.isEmpty()) {
             Toast.makeText(requireContext(),
-                    "Faça login para ver a lista de compras", Toast.LENGTH_SHORT).show();
-            return;
+                    "Monte seu cardápio para gerar a lista de compras",
+                    Toast.LENGTH_LONG).show();
         }
-
-        SharedPreferences prefs = requireContext()
-                .getSharedPreferences("auth", Context.MODE_PRIVATE);
-        long userId = prefs.getLong("userId", 0L);
-        if (userId == 0L) {
-            Toast.makeText(requireContext(),
-                    "Faça login novamente", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        recyclerView.setAlpha(0.4f);
-
-        executor.execute(() -> {
-            try {
-                List<ComprasIngrediente> ingredientes =
-                        ComprasListaCarregador.carregar(requireContext(), authorization, userId);
-
-                if (!isAdded()) return;
-
-                requireActivity().runOnUiThread(() -> {
-                    recyclerView.setAlpha(1f);
-                    listaFinal.clear();
-                    listaFinal.addAll(ingredientes);
-                    montarListaComCategorias(listaFinal);
-                    adapter.notifyDataSetChanged();
-                    atualizarProgresso();
-
-                    if (ingredientes.isEmpty()) {
-                        Toast.makeText(requireContext(),
-                                "Monte seu cardápio para gerar a lista de compras",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            } catch (Exception e) {
-                if (!isAdded()) return;
-                requireActivity().runOnUiThread(() -> {
-                    recyclerView.setAlpha(1f);
-                    Toast.makeText(requireContext(),
-                            "Não foi possível carregar a lista de compras",
-                            Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
     }
 
     private void montarListaComCategorias(List<ComprasIngrediente> ingredientes) {

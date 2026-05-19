@@ -1,8 +1,5 @@
 package com.example.projeto.Feature.Compras;
 
-/**
- * Formata quantidade + unidade no mesmo padrão do backend ({@code RefeicaoMapper#formatarIngrediente}).
- */
 public final class ComprasQuantidadeFormatter {
 
     private ComprasQuantidadeFormatter() {}
