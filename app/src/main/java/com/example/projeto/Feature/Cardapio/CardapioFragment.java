@@ -1,6 +1,7 @@
 package com.example.projeto.Feature.Cardapio;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
@@ -12,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.*;
 
-import com.example.projeto.Feature.CriarCardapio.CriarCardapioMainActivity;
 import com.example.projeto.R;
+import com.example.projeto.Feature.CriarCardapio.CriarCardapioMainActivity;
 
 import java.util.*;
 
@@ -70,8 +71,6 @@ public class CardapioFragment extends Fragment {
 
         view.findViewById(R.id.btnCriarCadapio).setOnClickListener(v ->
                 startActivity(new Intent(getContext(), CriarCardapioMainActivity.class)));
-
-        view.findViewById(R.id.btnLogin).setVisibility(View.GONE);
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
