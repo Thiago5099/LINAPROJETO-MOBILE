@@ -1,34 +1,53 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Item de ingrediente → exibido pelo ComprasAdapter (TIPO_ITEM)         -->
+<!-- Campos:  checkItem    ← estado comprado/não comprado                   -->
+<!--          txtNome      ← ComprasIngrediente.getNome()                   -->
+<!--          txtQuantidade ← ComprasQuantidadeFormatter.resumo()           -->
+<!--            Exemplos: "(x3)" para unidades  |  "100g" para gramas/ml   -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="6dp"
+    android:layout_marginHorizontal="0dp"
+    android:layout_marginVertical="3dp"
+    android:backgroundTint="#FFFFFF"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="14dp">
 
+        <!-- Checkbox: estado controlado pelo Adapter (clickable=false) -->
         <CheckBox
             android:id="@+id/checkItem"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:buttonTint="#119488" />
 
+        <!-- Nome do ingrediente (ex: "Ovo", "Frango") -->
         <TextView
             android:id="@+id/txtNome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="10dp"
+            android:textColor="#0F172A"
+            android:textSize="15sp" />
 
+        <!-- Quantidade formatada: "(x3)", "100g", "1/2 xícara" etc. -->
         <TextView
             android:id="@+id/txtQuantidade"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#64748B"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

@@ -7,12 +7,14 @@ public class ComprasItemLista {
 
     private int tipo;
     private String categoria;
+    private int count;
     private ComprasIngrediente ingrediente;
 
-    // HEADER
-    public ComprasItemLista(String categoria) {
+    // HEADER com total de itens da categoria
+    public ComprasItemLista(String categoria, int count) {
         this.tipo = TIPO_HEADER;
         this.categoria = categoria;
+        this.count = count;
     }
 
     // ITEM
@@ -23,5 +25,6 @@ public class ComprasItemLista {
 
     public int getTipo() { return tipo; }
     public String getCategoria() { return categoria; }
+    public int getCount() { return count; }
     public ComprasIngrediente getIngrediente() { return ingrediente; }
 }

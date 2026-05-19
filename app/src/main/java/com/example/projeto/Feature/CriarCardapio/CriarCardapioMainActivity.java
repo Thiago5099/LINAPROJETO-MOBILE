@@ -183,15 +183,15 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
                     }
                     onCatalogoCarregado(resultado);
                 });
-            } catch (IOException e) {
+            } catch (Exception e) {
+                // Captura erros inesperados de runtime (IOException já tratada no loop acima)
                 runOnUiThread(() -> {
                     String msg = e.getMessage() != null ? e.getMessage() : "erro desconhecido";
                     Toast.makeText(CriarCardapioMainActivity.this,
-                            "Sem conexão com o servidor. Verifique sua internet e tente novamente. (" + msg + ")",
+                            "Erro inesperado ao carregar refeições. (" + msg + ")",
                             Toast.LENGTH_LONG).show();
-                    // Não fecha — o usuário pode tentar novamente pela seta de voltar e re-abrir
                     setNavegacaoHabilitada(false);
-                    contador.setText("Sem conexão");
+                    contador.setText("Erro ao carregar");
                 });
             }
         });

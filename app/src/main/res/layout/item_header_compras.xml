@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Header de categoria → exibido pelo ComprasAdapter (TIPO_HEADER)     -->
+<!-- Campos:  iconCategoria ← ícone definido no Adapter por switch        -->
+<!--          txtCategoria  ← nome da categoria (ex: "Frutas e Vegetais") -->
+<!--          txtCount      ← total de itens desta categoria               -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
     android:gravity="center_vertical"
-    android:layout_marginTop="12dp">
+    android:paddingHorizontal="12dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="8dp">
 
-
+    <!-- Ícone da categoria -->
     <ImageView
         android:id="@+id/iconCategoria"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="Ícone da categoria" />
 
+    <!-- Nome da categoria (bold, preto) -->
     <TextView
         android:id="@+id/txtCategoria"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#0F172A"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Badge circular com o número de itens -->
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_badge_count"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
         android:textStyle="bold"
-        android:textSize="16sp"/>
+        android:text="0" />
 
 </LinearLayout>

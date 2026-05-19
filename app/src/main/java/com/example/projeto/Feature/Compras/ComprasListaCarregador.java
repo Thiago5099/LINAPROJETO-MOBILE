@@ -104,7 +104,7 @@ public final class ComprasListaCarregador {
                     List<IngredienteLinha> linhas = cacheRefeicao.get(chave);
                     if (linhas != null && !linhas.isEmpty()) {
                         for (IngredienteLinha linha : linhas) {
-                            mesclar(mapa, linha.nome, linha.quantidade, linha.unidade, linha.categoria);
+                            mesclar(mapa, linha.nome, 1d, "", linha.categoria);
                         }
                         adicionou = true;
                     }
@@ -142,10 +142,8 @@ public final class ComprasListaCarregador {
                 if (ing == null) continue;
                 String nome = nomeIngrediente(ing);
                 if (nome == null) continue;
-                double qtd = ing.quantidade != null ? ing.quantidade : 1d;
-                String unidade = normalizarUnidade(ing.unidade);
                 String categoria = CategoriaComprasMapeador.paraLabel(ing.categoria);
-                linhas.add(new IngredienteLinha(nome, qtd, unidade, categoria));
+                linhas.add(new IngredienteLinha(nome, 1d, "", categoria));
             }
         } else if (refeicao.ingredientes != null && !refeicao.ingredientes.isEmpty()) {
             for (String linha : refeicao.ingredientes) {
@@ -197,13 +195,13 @@ public final class ComprasListaCarregador {
                                 double qtd,
                                 String unidade,
                                 String categoria) {
-        String un = normalizarUnidade(unidade);
-        String chave = nome.trim().toLowerCase() + "|" + un.toLowerCase();
+        // Consolida apenas pelo nome do ingrediente (ignora unidade)
+        String chave = nome.trim().toLowerCase();
         ComprasIngrediente existente = mapa.get(chave);
         if (existente != null) {
             existente.setQuantidade(existente.getQuantidade() + qtd);
         } else {
-            mapa.put(chave, new ComprasIngrediente(nome.trim(), qtd, un, categoria));
+            mapa.put(chave, new ComprasIngrediente(nome.trim(), qtd, "", categoria));
         }
     }
 }

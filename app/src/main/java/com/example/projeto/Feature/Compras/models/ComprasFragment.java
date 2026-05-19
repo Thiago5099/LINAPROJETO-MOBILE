@@ -141,8 +141,9 @@ public class ComprasFragment extends Fragment {
         listaExibicao.clear();
 
         for (String categoria : categorias) {
-            listaExibicao.add(new ComprasItemLista(categoria));
-            for (ComprasIngrediente i : agrupado.get(categoria)) {
+            List<ComprasIngrediente> itens = agrupado.get(categoria);
+            listaExibicao.add(new ComprasItemLista(categoria, itens.size()));
+            for (ComprasIngrediente i : itens) {
                 listaExibicao.add(new ComprasItemLista(i));
             }
         }
