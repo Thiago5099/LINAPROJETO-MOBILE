@@ -89,61 +89,69 @@ public class ClaudeApiService {
 
     private static String getPratosJson() {
         return "[" +
-                "{\"nome\":\"Omelete de legumes\",\"periodo\":\"café da manhã\"," +
-                "\"ingredientes\":[\"ovos\",\"abobrinha\",\"cenoura\",\"sal\",\"azeite\"]," +
+                "{\"nome\":\"Omelete com Legumes\",\"periodo\":\"café da manhã\"," +
+                "\"ingredientes\":[\"ovos\",\"tomate\",\"cebola\",\"pimentão\",\"azeite\",\"sal\"]," +
                 "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
 
-                "{\"nome\":\"Panqueca de banana com aveia sem glúten\",\"periodo\":\"café da manhã\"," +
-                "\"ingredientes\":[\"banana\",\"aveia sem glúten\",\"ovos\",\"canela\"]," +
+                "{\"nome\":\"Iogurte com Frutas\",\"periodo\":\"café da manhã\"," +
+                "\"ingredientes\":[\"iogurte\",\"banana\",\"chia\"]," +
+                "\"semGluten\":true,\"semLactose\":false,\"semAcucar\":false}," +
+
+                "{\"nome\":\"Tapioca com Queijo\",\"periodo\":\"café da manhã\"," +
+                "\"ingredientes\":[\"tapioca\",\"queijo\"]," +
+                "\"semGluten\":true,\"semLactose\":false,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Vitamina de Banana\",\"periodo\":\"café da manhã\"," +
+                "\"ingredientes\":[\"banana\",\"leite\",\"aveia\"]," +
+                "\"semGluten\":true,\"semLactose\":false,\"semAcucar\":false}," +
+
+                "{\"nome\":\"Frango com Arroz\",\"periodo\":\"almoço\"," +
+                "\"ingredientes\":[\"frango\",\"arroz\",\"salada\",\"azeite\"]," +
                 "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
 
-                "{\"nome\":\"Iogurte de coco com frutas\",\"periodo\":\"café da manhã ou café da tarde\"," +
-                "\"ingredientes\":[\"iogurte de coco\",\"morango\",\"mirtilo\",\"granola sem glúten\"]," +
+                "{\"nome\":\"Carne com Batata Doce\",\"periodo\":\"almoço\"," +
+                "\"ingredientes\":[\"carne\",\"batata doce\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Peixe com Legumes\",\"periodo\":\"almoço\"," +
+                "\"ingredientes\":[\"filé de peixe\",\"legumes\",\"azeite\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Omelete Completo\",\"periodo\":\"almoço\"," +
+                "\"ingredientes\":[\"ovos\",\"legumes\",\"azeite\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Mix de Castanhas\",\"periodo\":\"lanche da tarde\"," +
+                "\"ingredientes\":[\"castanhas\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Maçã com Pasta\",\"periodo\":\"lanche da tarde\"," +
+                "\"ingredientes\":[\"maçã\",\"pasta de amendoim\"]," +
                 "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":false}," +
 
-                "{\"nome\":\"Tapioca com frango desfiado\",\"periodo\":\"café da manhã ou café da tarde\"," +
-                "\"ingredientes\":[\"tapioca\",\"frango\",\"tomate\",\"sal\",\"azeite\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Frango grelhado com quinoa e brócolis\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"frango\",\"quinoa\",\"brócolis\",\"alho\",\"azeite\",\"limão\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Peixe assado com batata-doce\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"tilápia\",\"batata-doce\",\"ervas\",\"azeite\",\"sal\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Arroz integral com lentilha e cenoura\",\"periodo\":\"almoço\"," +
-                "\"ingredientes\":[\"arroz integral\",\"lentilha\",\"cenoura\",\"cebola\",\"alho\",\"cúrcuma\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Salada de grão-de-bico com legumes\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"grão-de-bico\",\"pepino\",\"tomate\",\"cebola roxa\",\"salsinha\",\"limão\",\"azeite\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Macarrão de arroz com molho de tomate e carne\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"macarrão de arroz\",\"carne moída\",\"tomate\",\"cebola\",\"alho\",\"manjericão\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Sopa de abóbora com gengibre\",\"periodo\":\"janta\"," +
-                "\"ingredientes\":[\"abóbora\",\"gengibre\",\"cebola\",\"alho\",\"caldo de legumes\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Wrap de alface com atum e abacate\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"atum\",\"abacate\",\"alface\",\"tomate\",\"limão\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
-
-                "{\"nome\":\"Vitamina de morango com leite de amêndoas\",\"periodo\":\"café da manhã ou café da tarde\"," +
-                "\"ingredientes\":[\"morango\",\"leite de amêndoas\",\"banana\",\"chia\"]," +
+                "{\"nome\":\"Smoothie\",\"periodo\":\"lanche da tarde\"," +
+                "\"ingredientes\":[\"frutas\",\"líquido\"]," +
                 "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":false}," +
 
-                "{\"nome\":\"Bolinho de couve-flor com queijo sem lactose\",\"periodo\":\"café da tarde\"," +
-                "\"ingredientes\":[\"couve-flor\",\"queijo sem lactose\",\"ovos\",\"sal\"]," +
+                "{\"nome\":\"Iogurte com Granola\",\"periodo\":\"lanche da tarde\"," +
+                "\"ingredientes\":[\"iogurte\",\"granola\"]," +
+                "\"semGluten\":true,\"semLactose\":false,\"semAcucar\":false}," +
+
+                "{\"nome\":\"Sopa\",\"periodo\":\"janta\"," +
+                "\"ingredientes\":[\"frango\",\"legumes\",\"água\",\"sal\"]," +
                 "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
 
-                "{\"nome\":\"Frango ao curry com arroz de couve-flor\",\"periodo\":\"almoço ou janta\"," +
-                "\"ingredientes\":[\"frango\",\"couve-flor\",\"curry\",\"leite de coco\",\"cebola\",\"alho\"]," +
-                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}" +
+                "{\"nome\":\"Salada Proteica\",\"periodo\":\"janta\"," +
+                "\"ingredientes\":[\"folhas verdes\",\"frango\",\"ovos\",\"azeite\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Omelete Leve\",\"periodo\":\"janta\"," +
+                "\"ingredientes\":[\"ovos\",\"sal\"]," +
+                "\"semGluten\":true,\"semLactose\":true,\"semAcucar\":true}," +
+
+                "{\"nome\":\"Tapioca com Recheio\",\"periodo\":\"janta\"," +
+                "\"ingredientes\":[\"tapioca\",\"recheio a gosto\"]," +
+                "\"semGluten\":true,\"semLactose\":false,\"semAcucar\":true}" +
                 "]";
     }
 }
