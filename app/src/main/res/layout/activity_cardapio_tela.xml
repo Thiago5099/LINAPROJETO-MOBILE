@@ -34,14 +34,6 @@
             android:layout_height="wrap_content"/>
 
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#7E57C2"
-            android:text="Login"
-            android:textColor="#FFFFFF" />
-
         </LinearLayout>
 
     </LinearLayout>

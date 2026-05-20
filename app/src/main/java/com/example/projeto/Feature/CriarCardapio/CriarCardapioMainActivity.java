@@ -52,8 +52,6 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
         recycler = findViewById(R.id.recyclerRefeicoes);
         contador = findViewById(R.id.txtContador);
         txtDia = findViewById(R.id.txtDia);
-        btnProximo = findViewById(R.id.btnProximo);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

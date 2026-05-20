@@ -55,9 +55,6 @@ public class LoginCadastro extends AppCompatActivity {
             return insets;
         });
 
-        findViewById(R.id.btnCardapio)
-                .setOnClickListener(v -> startActivity(new Intent(this, com.example.projeto.Feature.Menu.Menu.class)));
-
         // Referências
         layoutLogin = findViewById(R.id.layoutLogin);
         layoutCadastro = findViewById(R.id.layoutCadastro);

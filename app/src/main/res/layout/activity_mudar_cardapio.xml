@@ -15,12 +15,17 @@
         android:background="#FFFFFF">
 
         <ImageButton
-            android:id="@+id/btnVoltar"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/ic_arrow_back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Voltar" />
+            android:id="@+id/buttonVoltarReceita"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg_btn_voltar_circulo"
+            android:backgroundTint="#119488"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/bg_btn_voltar_seta"
+            android:layout_marginStart="20dp"
+            />
 
         <TextView
             android:text="Mudar Cardápio"
@@ -28,7 +33,9 @@
             android:textStyle="bold"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 
     <!-- CARDÁPIO ATUAL -->

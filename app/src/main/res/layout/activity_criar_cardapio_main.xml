@@ -170,22 +170,25 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- SALVAR SEMANA -->
+
+    <!-- LISTA -->
+
     <Button
         android:id="@+id/btnSalvarCardapio"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:text="Salvar cardápio da semana"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"
-        android:backgroundTint="#1E8E7E"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/btnProximo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#1976D2"
+        android:text="Salvar cardápio da semana"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRefeicoes"
         android:layout_width="0dp"
@@ -197,17 +200,5 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- BOTÃO -->
-    <Button
-        android:id="@+id/btnProximo"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="Próximo dia"
-        android:textColor="@android:color/white"
-        android:textAllCaps="false"
-        android:backgroundTint="#1976D2"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

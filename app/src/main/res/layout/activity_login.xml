@@ -30,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-           android:text="Lina"
+            android:text="Lina"
             android:textColor="#0078FF"
 
-            android:textSize="48sp"/>
+            android:textSize="48sp" />
     </LinearLayout>
 
     <!-- Slogan -->
@@ -111,81 +111,82 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Layout de Login -->
+
+            <!-- Layout de Cadastro -->
             <LinearLayout
                 android:id="@+id/layoutLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:visibility="visible"
-                android:layout_marginTop="10dp">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:textColor="#475569"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextLoginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_email"
+                    android:drawablePadding="8dp"
                     android:hint="seu@email.com"
                     android:inputType="textEmailAddress"
                     android:padding="12dp"
                     android:textColor="#0F172A"
-                    android:textSize="16sp"
-                    android:background="@drawable/bg_login_edit_spinner"
-                    android:drawableStart="@drawable/ic_login_email"
-                    android:drawablePadding="8dp"
-                    android:layout_marginTop="4dp"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Senha"
                     android:textColor="#475569"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextLoginSenha"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_login_edit_spinner"
+                    android:drawableStart="@drawable/ic_login_senha"
+                    android:drawablePadding="8dp"
                     android:hint="••••••••"
                     android:inputType="textPassword"
                     android:padding="12dp"
                     android:textColor="#0F172A"
-                    android:textSize="16sp"
-                    android:background="@drawable/bg_login_edit_spinner"
-                    android:drawableStart="@drawable/ic_login_senha"
-                    android:drawablePadding="8dp"
-                    android:layout_marginTop="4dp"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textViewEsqueciSenha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:text="Esqueci minha senha"
                     android:textColor="#0078FF"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/buttonEntrar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#0078FF"
                     android:text="Entrar"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:backgroundTint="#0078FF"
-                    android:layout_marginTop="16dp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Layout de Cadastro -->
             <LinearLayout
                 android:id="@+id/layoutCadastro"
                 android:layout_width="match_parent"
@@ -425,17 +426,5 @@
         app:layout_constraintTop_toBottomOf="@+id/cardForm"
         app:layout_constraintVertical_bias="0.333" />
 
-
-    <Button
-        android:id="@+id/btnCardapio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.967"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
