@@ -29,7 +29,6 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
 
     RecyclerView recycler;
     TextView contador, txtDia;
-    Button btnProximo;
 
     int diaAtual = 0;
 
@@ -79,13 +78,6 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
         findViewById(R.id.chipSab).setOnClickListener(v -> trocar(5));
         findViewById(R.id.chipDom).setOnClickListener(v -> trocar(6));
 
-        btnProximo.setOnClickListener(v -> {
-            if (!catalogoCarregado) return;
-            diaAtual++;
-            if (diaAtual > 6) diaAtual = 0;
-            atualizarTela();
-        });
-
         findViewById(R.id.btnSalvarCardapio).setOnClickListener(v -> {
             if (!catalogoCarregado) return;
             salvarSemanaSeCompleta();
@@ -95,7 +87,6 @@ public class CriarCardapioMainActivity extends AppCompatActivity {
     }
 
     private void setNavegacaoHabilitada(boolean habilitada) {
-        btnProximo.setEnabled(habilitada);
         findViewById(R.id.btnSalvarCardapio).setEnabled(habilitada);
         int[] chips = {
                 R.id.chipSeg, R.id.chipTer, R.id.chipQua, R.id.chipQui,

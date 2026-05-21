@@ -53,7 +53,7 @@ public class MudarCardapioActivity extends AppCompatActivity {
         RecyclerView recycler = findViewById(R.id.recyclerOpcoes);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
+        findViewById(R.id.buttonVoltarReceita).setOnClickListener(v -> finish());
         findViewById(R.id.btnContinuarMesma).setOnClickListener(v -> finish());
 
         List<Prato> opcoes = new BancoHelper(this).listarPratosPorPeriodo(periodo, nomeAtual);

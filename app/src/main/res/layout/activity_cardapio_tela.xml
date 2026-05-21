@@ -1,80 +1,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <!-- TOPO -->
+
+
+    <!-- HEADER CONTAINER -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
 
-        <TextView
-            android:text="Meu Cardápio"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
+        <!-- TOPO -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <Button
-            android:id="@+id/btnCriarCadapio"
-            android:text="+ Criar"
-            android:backgroundTint="#1E8E7E"
-            android:textColor="#FFFFFF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Meu Cardápio"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                />
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <Button
+                android:id="@+id/btnCriarCadapio"
+                android:text="+ Criar"
+                android:backgroundTint="#1E8E7E"
+                android:textColor="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!-- STATUS -->
-    <TextView
-        android:id="@+id/txtStatus"
-        android:text="28/28 refeições planejadas"
-        android:background="#E8F5E9"
-        android:textColor="#2E7D32"
-        android:padding="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:text="Visualize suas refeições organizadas por dia"
-        android:textSize="12sp"
-        android:textColor="#666"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- DIAS -->
-    <HorizontalScrollView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/layoutDias"
-            android:orientation="horizontal"
+        <!-- STATUS -->
+        <TextView
+            android:id="@+id/txtStatus"
+            android:text="28/28 refeições planejadas"
+            android:background="#E8F5E9"
+            android:textColor="#2E7D32"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </HorizontalScrollView>
+
+        <TextView
+            android:text="Visualize suas refeições organizadas por dia"
+            android:textSize="12sp"
+            android:textColor="#666"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- DIAS -->
+        <HorizontalScrollView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layoutDias"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </HorizontalScrollView>
+
+    </LinearLayout>
 
     <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        />
 
 </LinearLayout>
